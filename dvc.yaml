@@ -1,0 +1,8 @@
+stages:
+  preprocess:
+    cmd: python .\src\preprocess.py
+    deps:
+    - .\data\raw\churn_predict.csv
+    - .\src\preprocess.py
+    outs:
+    - .\data\processed\processed.csv
