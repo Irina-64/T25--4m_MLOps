@@ -1,10 +1,12 @@
 # durka/agents.py
 import random
-from typing import Optional, Any, List, Tuple
+from typing import Any, List, Optional, Tuple
+
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
+
 
 # helper: lower value = слабее карта (ее удобнее сыграть)
 def _card_value(card, trump_suit):
@@ -14,7 +16,7 @@ def _card_value(card, trump_suit):
     затем по рангу: 0..8 (6..A).
     min() по этому ключу выберет "наименее ценную" карту, не жертвуя козырями.
     """
-    is_trump = (card.suit == trump_suit)
+    is_trump = card.suit == trump_suit
     return (is_trump, card.rank_index())
 
 
@@ -42,7 +44,9 @@ def rule_based_agent(game, pid):
     if attacks:
         non_trumps = [a for a in attacks if a[1].suit != game.trump_suit]
         if non_trumps:
-            return min(non_trumps, key=lambda x: game.deck.card_value(x[1], game.trump_suit))
+            return min(
+                non_trumps, key=lambda x: game.deck.card_value(x[1], game.trump_suit)
+            )
         return min(attacks, key=lambda x: game.deck.card_value(x[1], game.trump_suit))
 
     # Если подбрасываем — тоже минимальной картой
@@ -88,6 +92,7 @@ def heuristic_agent(game, pid: int):
     # fallback
     return random.choice(legal)
 
+
 class RLAgent:
     def __init__(self, pid: int, state_size: int, action_size: int, epsilon=0.1):
         self.pid = pid
@@ -95,34 +100,41 @@ class RLAgent:
         self.action_size = action_size
         self.epsilon = epsilon
         self.model = nn.Sequential(
-            nn.Linear(state_size, 128),
-            nn.ReLU(),
-            nn.Linear(128, action_size)
+            nn.Linear(state_size, 128), nn.ReLU(), nn.Linear(128, action_size)
         )
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
         self.loss_fn = nn.MSELoss()
 
     def state_to_tensor(self, state):
         vec = []
-        for pid in sorted(state['hand_sizes'].keys()):
-            vec.append(state['hand_sizes'][pid])
-        vec.append(state['deck_count'])
-        vec.append(state['discard_count'])
-        vec.append(len(state['table']))
-        vec.append(state['attacker'])
-        vec.append(state['defender'])
+        for pid in sorted(state["hand_sizes"].keys()):
+            vec.append(state["hand_sizes"][pid])
+        vec.append(state["deck_count"])
+        vec.append(state["discard_count"])
+        vec.append(len(state["table"]))
+        vec.append(state["attacker"])
+        vec.append(state["defender"])
         return vec
 
     def compute_reward(self, game, pid, action, state_before, state_after):
         reward = 0
-        if state_after['hand_sizes'][pid] > state_before['hand_sizes'][pid]:
-            reward -= (state_after['hand_sizes'][pid] - state_before['hand_sizes'][pid])
-        if action[0] == 'defend' and state_after['hand_sizes'][pid] == state_before['hand_sizes'][pid]:
+        if state_after["hand_sizes"][pid] > state_before["hand_sizes"][pid]:
+            reward -= state_after["hand_sizes"][pid] - state_before["hand_sizes"][pid]
+        if (
+            action[0] == "defend"
+            and state_after["hand_sizes"][pid] == state_before["hand_sizes"][pid]
+        ):
             reward += 1
-        if action[0] == 'attack':
-            defender = state_before['defender']
-            if state_after['hand_sizes'][defender] > state_before['hand_sizes'][defender]:
-                reward += (state_after['hand_sizes'][defender] - state_before['hand_sizes'][defender])
+        if action[0] == "attack":
+            defender = state_before["defender"]
+            if (
+                state_after["hand_sizes"][defender]
+                > state_before["hand_sizes"][defender]
+            ):
+                reward += (
+                    state_after["hand_sizes"][defender]
+                    - state_before["hand_sizes"][defender]
+                )
         if game.finished:
             if pid in game.winner_ids:
                 reward += 5
@@ -166,14 +178,15 @@ class RLAgent:
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
+
     def filter_illegal_actions(self, action, hand):
         # action = ('attack', card) или ('defend', n, card) или ('add', card)
-        if action[0] in ['attack', 'add']:
+        if action[0] in ["attack", "add"]:
             card = action[1]
             if card not in hand:
-                return ('pass',)
-        elif action[0] == 'defend':
+                return ("pass",)
+        elif action[0] == "defend":
             card = action[2]
             if card not in hand:
-                return ('pass',)
+                return ("pass",)
         return action

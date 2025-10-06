@@ -2,6 +2,7 @@ import json
 import os
 from datetime import datetime
 
+
 class ReplayLogger:
     def __init__(self, game, save_dir="replays"):
         self.game = game
@@ -14,20 +15,22 @@ class ReplayLogger:
             "initial_hands": {},  # заполнится в demo
             "steps": [],
             "winner": None,
-            "timestamp": datetime.now().isoformat(timespec="seconds")
+            "timestamp": datetime.now().isoformat(timespec="seconds"),
         }
 
     def log_step(self, player_id, action, state_before, state_after, hands_after):
         """
         hands_after: dict {player_name: [card1, card2, ...]} с пометкой козырей
         """
-        self.replay["steps"].append({
-            "player": player_id,
-            "action": self._serialize_action(action),
-            "state_before": state_before,
-            "state_after": state_after,
-            "hands_after": hands_after
-        })
+        self.replay["steps"].append(
+            {
+                "player": player_id,
+                "action": self._serialize_action(action),
+                "state_before": state_before,
+                "state_after": state_after,
+                "hands_after": hands_after,
+            }
+        )
 
     def finalize(self, path=None):
         self.replay["winner"] = self.game.winner_ids

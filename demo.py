@@ -1,16 +1,19 @@
 # demo.py
-from durka import DurakGame, ReplayLogger
-from durka.agents import random_agent, heuristic_agent, RLAgent
-import torch
-import random
 import os
+import random
 from datetime import datetime
 
+import torch
+from durka import DurakGame, ReplayLogger
+from durka.agents import RLAgent, heuristic_agent, random_agent
+
 MODEL_PATH = "rl_agent_model.pth"
+
 
 def format_hand(hand, trump_suit):
     """Возвращает список карт игрока, помечая козыри."""
     return [f"{card}{' (trump)' if card.suit == trump_suit else ''}" for card in hand]
+
 
 def play_demo_game(agents_list, names=None, epsilon=0.1):
     if names is None:
@@ -25,7 +28,9 @@ def play_demo_game(agents_list, names=None, epsilon=0.1):
             state_dict = g.get_state(i)
             state_size = len(RLAgent.state_to_tensor(None, state_dict))
             action_size = 50
-            agents[i] = agent(pid=i, state_size=state_size, action_size=action_size, epsilon=epsilon)
+            agents[i] = agent(
+                pid=i, state_size=state_size, action_size=action_size, epsilon=epsilon
+            )
             if os.path.exists(MODEL_PATH):
                 agents[i].model.load_state_dict(torch.load(MODEL_PATH))
                 print(f"RLAgent {i} модель загружена из {MODEL_PATH}")
@@ -36,7 +41,9 @@ def play_demo_game(agents_list, names=None, epsilon=0.1):
     print(f"Trump suit: {trump_suit}")
 
     # Логируем начальные руки
-    initial_hands = {player.name: format_hand(player.hand, trump_suit) for player in g.players}
+    initial_hands = {
+        player.name: format_hand(player.hand, trump_suit) for player in g.players
+    }
     logger.replay["initial_hands"] = initial_hands
 
     while not g.finished:
@@ -59,10 +66,19 @@ def play_demo_game(agents_list, names=None, epsilon=0.1):
 
             if isinstance(agent, RLAgent):
                 reward = agent.compute_reward(g, pid, action, state_before, state_after)
-                agent.learn(agent.state_to_tensor(state_before), 0, reward, agent.state_to_tensor(state_after), g.finished)
+                agent.learn(
+                    agent.state_to_tensor(state_before),
+                    0,
+                    reward,
+                    agent.state_to_tensor(state_after),
+                    g.finished,
+                )
 
             # Логи после хода с визуализацией рук
-            hands_after = {player.name: format_hand(player.hand, trump_suit) for player in g.players}
+            hands_after = {
+                player.name: format_hand(player.hand, trump_suit)
+                for player in g.players
+            }
             logger.log_step(pid, action, state_before, state_after, hands_after)
 
             # Консольная визуализация
@@ -76,7 +92,9 @@ def play_demo_game(agents_list, names=None, epsilon=0.1):
 
     print("Игра завершена!")
     winners = [g.players[i].name for i in g.winner_ids]
-    losers = [player.name for i, player in enumerate(g.players) if i not in g.winner_ids]
+    losers = [
+        player.name for i, player in enumerate(g.players) if i not in g.winner_ids
+    ]
     print(f"Победители: {winners}")
     print(f"Проигравшие: {losers}")
 
@@ -96,6 +114,5 @@ def play_demo_game(agents_list, names=None, epsilon=0.1):
 
 if __name__ == "__main__":
     play_demo_game(
-        [random_agent, heuristic_agent, RLAgent],
-        names=["Bot1", "Bot2", "RL"]
+        [random_agent, heuristic_agent, RLAgent], names=["Bot1", "Bot2", "RL"]
     )

@@ -21,15 +21,15 @@
 
 import random
 from collections import deque
-from typing import List, Tuple, Dict, Optional, Any
+from typing import Any, Dict, List, Optional, Tuple
 
-RANKS = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-SUITS = ['♣', '♦', '♥', '♠']  # или 'clubs','diamonds','hearts','spades'
+RANKS = ["6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+SUITS = ["♣", "♦", "♥", "♠"]  # или 'clubs','diamonds','hearts','spades'
 MAX_ATTACK_CARDS = 6  # макс карт в одной атаке на защитника
 
 
 class Card:
-    __slots__ = ('rank', 'suit')
+    __slots__ = ("rank", "suit")
 
     def __init__(self, rank: str, suit: str):
         self.rank = rank
@@ -42,7 +42,11 @@ class Card:
         return f"{self.rank}{self.suit}"
 
     def __eq__(self, other):
-        return isinstance(other, Card) and self.rank == other.rank and self.suit == other.suit
+        return (
+            isinstance(other, Card)
+            and self.rank == other.rank
+            and self.suit == other.suit
+        )
 
     def __hash__(self):
         return hash((self.rank, self.suit))
@@ -98,10 +102,12 @@ class Player:
         def key(c: Card):
             trump_key = 0 if (trump_suit and c.suit == trump_suit) else 1
             return (trump_key, c.suit, c.rank_index())
+
         self.hand.sort(key=key)
 
     def __repr__(self):
         return f"Player({self.name}, id={self.id}, hand={self.hand})"
+
 
 class DurakGame:
     def __init__(self, player_names: List[str]):
@@ -162,13 +168,17 @@ class DurakGame:
         self.defender = self.turn_order[1 % self.n]
 
     def _cards_on_table_count(self):
-        return sum(1 for a, d in self.table if a is not None) + sum(1 for a, d in self.table if d is not None)
+        return sum(1 for a, d in self.table if a is not None) + sum(
+            1 for a, d in self.table if d is not None
+        )
 
     def _ranks_on_table(self) -> List[str]:
         ranks = []
         for a, d in self.table:
-            if a: ranks.append(a.rank)
-            if d: ranks.append(d.rank)
+            if a:
+                ranks.append(a.rank)
+            if d:
+                ranks.append(d.rank)
         return ranks
 
     def _refill_hands(self):
@@ -202,7 +212,11 @@ class DurakGame:
         if self.finished:
             return []
         pid = int(pid)
-        if pid != self.attacker and pid != self.defender and pid not in self._other_attackers():
+        if (
+            pid != self.attacker
+            and pid != self.defender
+            and pid not in self._other_attackers()
+        ):
             # игрок может только подбрасывать в пределах очереди, иначе не участвует
             return []
         actions = []
@@ -213,7 +227,7 @@ class DurakGame:
             # если в таблице нет атакующих карт (начало раунда): он может положить любую карту
             if not self.table:
                 for c in player.hand:
-                    actions.append(('attack', c))
+                    actions.append(("attack", c))
             else:
                 # он может подбросить, но только карты с рангом, который уже есть на столе,
                 # и если лимит MAX_ATTACK_CARDS не превышен (исходя из количества атакующих карт)
@@ -221,9 +235,9 @@ class DurakGame:
                 if self._cards_on_table_count() < MAX_ATTACK_CARDS:
                     for c in player.hand:
                         if c.rank in ranks_present:
-                            actions.append(('add', c))
+                            actions.append(("add", c))
             # также может pass (закончить атаку) если он решил не добавлять
-            actions.append(('pass',))
+            actions.append(("pass",))
 
         # другие игроки (кроме защитника) могут подбрасывать после первой атаки,
         # но только если уже есть атаки и лимит не превышен
@@ -232,10 +246,10 @@ class DurakGame:
                 ranks_present = set(self._ranks_on_table())
                 for c in player.hand:
                     if c.rank in ranks_present:
-                        actions.append(('add', c))
-                actions.append(('pass',))
+                        actions.append(("add", c))
+                actions.append(("pass",))
             else:
-                actions.append(('pass',))
+                actions.append(("pass",))
 
         # защитник может:
         if pid == self.defender:
@@ -244,16 +258,22 @@ class DurakGame:
                 if d is None:
                     for c in player.hand:
                         if self.can_beat(a, c):
-                            actions.append(('defend', i, c))
+                            actions.append(("defend", i, c))
             # take всегда доступен (взять все)
-            actions.append(('take',))
+            actions.append(("take",))
         return actions
 
     def _other_attackers(self) -> List[int]:
         # игроки кроме attacker и defender, которые находятся в очереди между defender+1 ... attacker-1
         # На деле все остальные игроки могут подбрасывать, но очередность подбрасывания идет по кругу от атакующего.
         # Для упрощения: считаем, что все остальные игроки могут подбрасывать (они будут выбирать 'add' или 'pass').
-        return [pid for pid in range(self.n) if pid != self.attacker and pid != self.defender and len(self.players[pid].hand) > 0]
+        return [
+            pid
+            for pid in range(self.n)
+            if pid != self.attacker
+            and pid != self.defender
+            and len(self.players[pid].hand) > 0
+        ]
 
     def step(self, pid: int, action: Tuple) -> Dict[str, Any]:
         """
@@ -261,42 +281,50 @@ class DurakGame:
         Возвращает dict с info: {'ok':bool, 'message':str, 'state':...}
         """
         if self.finished:
-            return {'ok': False, 'message': 'Game finished', 'state': self.get_state(pid)}
+            return {
+                "ok": False,
+                "message": "Game finished",
+                "state": self.get_state(pid),
+            }
 
         legal = self.legal_actions(pid)
         # Сравнивать действия по структуре; карточки — объекты, поэтому проверяем равенство
         if action not in legal:
-            return {'ok': False, 'message': f'Illegal action {action}', 'state': self.get_state(pid)}
+            return {
+                "ok": False,
+                "message": f"Illegal action {action}",
+                "state": self.get_state(pid),
+            }
 
         # Обработка
         typ = action[0]
-        if typ == 'attack':
+        if typ == "attack":
             _, card = action
             self._do_attack(pid, card)
-            return {'ok': True, 'message': 'attack made', 'state': self.get_state(pid)}
-        if typ == 'add':
+            return {"ok": True, "message": "attack made", "state": self.get_state(pid)}
+        if typ == "add":
             _, card = action
             self._do_add(pid, card)
-            return {'ok': True, 'message': 'card added', 'state': self.get_state(pid)}
-        if typ == 'defend':
+            return {"ok": True, "message": "card added", "state": self.get_state(pid)}
+        if typ == "defend":
             _, attack_index, card = action
             self._do_defend(pid, attack_index, card)
-            return {'ok': True, 'message': 'defended', 'state': self.get_state(pid)}
-        if typ == 'take':
+            return {"ok": True, "message": "defended", "state": self.get_state(pid)}
+        if typ == "take":
             self._do_take(pid)
             # refill hands and check winners
             self._refill_hands()
             self._check_finishers()
-            return {'ok': True, 'message': 'took cards', 'state': self.get_state(pid)}
-        if typ == 'pass':
+            return {"ok": True, "message": "took cards", "state": self.get_state(pid)}
+        if typ == "pass":
             # "pass" — окончание подбрасывания атакующими: завершение раунда
             self._on_pass()
             # refill hands and check winners
             self._refill_hands()
             self._check_finishers()
-            return {'ok': True, 'message': 'pass', 'state': self.get_state(pid)}
+            return {"ok": True, "message": "pass", "state": self.get_state(pid)}
 
-        return {'ok': False, 'message': 'unknown action', 'state': self.get_state(pid)}
+        return {"ok": False, "message": "unknown action", "state": self.get_state(pid)}
 
     # ---------- Action implementations ----------
     def _do_attack(self, pid: int, card: Card):
@@ -337,8 +365,10 @@ class DurakGame:
         # defender получает все карты (attack and defense)
         taken_cards = []
         for a, d in self.table:
-            if a: taken_cards.append(a)
-            if d: taken_cards.append(d)
+            if a:
+                taken_cards.append(a)
+            if d:
+                taken_cards.append(d)
         self.table.clear()
         self.players[pid].receive(taken_cards)
         self.players[pid].sort_hand(self.trump_suit)
@@ -363,8 +393,10 @@ class DurakGame:
             return
         # все защищено — отправляем все карты в discard
         for a, d in self.table:
-            if a: self.discard_pile.append(a)
-            if d: self.discard_pile.append(d)
+            if a:
+                self.discard_pile.append(a)
+            if d:
+                self.discard_pile.append(d)
         self.table.clear()
         # next attacker: игрок слева от текущего атакующего
         # т. е. просто продвинем очередь, чтобы предыдущий атакующий ушёл в конец
@@ -384,27 +416,32 @@ class DurakGame:
     def get_state(self, pid: Optional[int] = None) -> Dict[str, Any]:
         """Возвращает представление состояния. Если pid указан, даёт инфо для этого игрока."""
         state = {}
-        state['trump_suit'] = self.trump_suit
-        state['deck_count'] = len(self.deck)
-        state['discard_count'] = len(self.discard_pile)
-        state['table'] = [(a.__repr__() if a else None, d.__repr__() if d else None) for a, d in self.table]
-        state['attacker'] = self.attacker
-        state['defender'] = self.defender
-        state['turn_order'] = list(self.turn_order)
-        state['finished'] = self.finished
-        state['winners'] = self.winner_ids
+        state["trump_suit"] = self.trump_suit
+        state["deck_count"] = len(self.deck)
+        state["discard_count"] = len(self.discard_pile)
+        state["table"] = [
+            (a.__repr__() if a else None, d.__repr__() if d else None)
+            for a, d in self.table
+        ]
+        state["attacker"] = self.attacker
+        state["defender"] = self.defender
+        state["turn_order"] = list(self.turn_order)
+        state["finished"] = self.finished
+        state["winners"] = self.winner_ids
         # hands sizes
-        state['hand_sizes'] = {p.id: len(p.hand) for p in self.players}
+        state["hand_sizes"] = {p.id: len(p.hand) for p in self.players}
         if pid is not None:
             p = self.players[pid]
-            state['your_hand'] = [c.__repr__() for c in p.hand]
+            state["your_hand"] = [c.__repr__() for c in p.hand]
         else:
-            state['your_hand'] = None
+            state["your_hand"] = None
         return state
 
     # ---------- Helpers for demo ----------
     def pretty_print(self):
-        print(f"Trump: {self.trump_suit} | Deck: {len(self.deck)} | Discard: {len(self.discard_pile)}")
+        print(
+            f"Trump: {self.trump_suit} | Deck: {len(self.deck)} | Discard: {len(self.discard_pile)}"
+        )
         for p in self.players:
             print(f"Player {p.id} {p.name}: {len(p.hand)} cards - {p.hand}")
         print("Table:")
@@ -414,7 +451,9 @@ class DurakGame:
         print("Attacker:", self.attacker, "Defender:", self.defender)
         print("---")
 
+
 # ----------------- Simple interactive demo / random-play bot -----------------
+
 
 def random_agent_actions(game: DurakGame, pid: int):
     """Простейший агент: выбирает случайное из legal_actions."""
@@ -422,11 +461,12 @@ def random_agent_actions(game: DurakGame, pid: int):
     if not legal:
         return None
     # prefer attacks/defends over pass/take
-    prefer = [a for a in legal if a[0] in ('attack', 'defend', 'add')]
+    prefer = [a for a in legal if a[0] in ("attack", "defend", "add")]
     choices = prefer if prefer else legal
     return random.choice(choices)
 
-def demo_random_play(names=["A","B","C","D"]):
+
+def demo_random_play(names=["A", "B", "C", "D"]):
     g = DurakGame(names)
     print("Start game")
     g.pretty_print()
@@ -457,10 +497,11 @@ def demo_random_play(names=["A","B","C","D"]):
         if not acted:
             # nobody сделал ход — этот раунд завершаем
             # вызываем pass от attacker
-            g.step(g.attacker, ('pass',))
+            g.step(g.attacker, ("pass",))
     print("Game finished:", g.finished, "Winners:", g.winner_ids)
     return g
 
+
 # ---------- If run as script, демонстрация ----------
 if __name__ == "__main__":
-    demo_random_play(["Иван","Оля","Петя","Маша"])
+    demo_random_play(["Иван", "Оля", "Петя", "Маша"])
