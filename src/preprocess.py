@@ -11,10 +11,10 @@ def preprocess_telco_data():
     print(f"Размер: {df.shape}")
     print(f"Пропуски: {df.isnull().sum().sum()}")
     
-    # 1. Анализ и очистка TotalCharges (там есть скрытые пробелы!)
+    # Анализ и очистка TotalCharges 
     df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
     
-    # 2. Заполнение пропусков в TotalCharges
+    # Заполнение пропусков в TotalCharges
     # Если tenure = 0, то TotalCharges должен быть 0 или MonthlyCharges
     mask = (df['tenure'] == 0) & (df['TotalCharges'].isna())
     df.loc[mask, 'TotalCharges'] = df.loc[mask, 'MonthlyCharges']
@@ -22,14 +22,14 @@ def preprocess_telco_data():
     # Остальные пропуски заполняем медианой
     df['TotalCharges'] = df['TotalCharges'].fillna(df['TotalCharges'].median())
     
-    # 3. Создание новых фич
+    # Создание новых фич
     df['avg_charge_per_month'] = df['TotalCharges'] / (df['tenure'] + 1)  # +1 чтобы избежать деления на 0
     df['charge_ratio'] = df['MonthlyCharges'] / df['avg_charge_per_month']
     df['tenure_group'] = pd.cut(df['tenure'], 
                                bins=[0, 12, 24, 36, 48, 60, np.inf],
                                labels=['0-1y', '1-2y', '2-3y', '3-4y', '4-5y', '5y+'])
     
-    # 4. Обработка категориальных переменных
+    # Обработка категориальных переменных
     categorical_cols = ['gender', 'Partner', 'Dependents', 'PhoneService', 'MultipleLines',
                        'InternetService', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection',
                        'TechSupport', 'StreamingTV', 'StreamingMovies', 'Contract',
@@ -47,17 +47,17 @@ def preprocess_telco_data():
     for col in service_cols:
         df[col] = df[col].map({'No': 0, 'Yes': 1, 'No internet service': 0})
     
-    # 5. One-Hot Encoding для остальных категориальных
+    # One-Hot Encoding для остальных категориальных
     ohe_cols = ['InternetService', 'Contract', 'PaymentMethod', 'tenure_group']
     df_encoded = pd.get_dummies(df[ohe_cols], prefix=ohe_cols)
     
-    # 6. Label Encoding для пола
+    # Label Encoding для пола
     df['gender'] = df['gender'].map({'Female': 0, 'Male': 1})
     
-    # 7. Целевая переменная
+    # Целевая переменная
     df['Churn'] = df['Churn'].map({'Yes': 1, 'No': 0})
     
-    # 8. Объединяем все фичи
+    # Объединяем все фичи
     numeric_cols = ['SeniorCitizen', 'tenure', 'MonthlyCharges', 'TotalCharges', 
                    'avg_charge_per_month', 'charge_ratio', 'gender']
     
@@ -68,7 +68,7 @@ def preprocess_telco_data():
     # Добавляем целевую переменную
     final_features['Churn'] = df['Churn']
     
-    # 9. Удаляем возможные NaN после преобразований
+    # Удаляем возможные NaN после преобразований
     final_features = final_features.dropna()
     
     print("\nПосле препроцессинга:")
