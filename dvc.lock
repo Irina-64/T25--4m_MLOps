@@ -1,0 +1,42 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/raw/Events.csv
+      hash: md5
+      md5: 8973f1546e1553e59f7c25f171d8eeea
+      size: 66635
+    - path: data/raw/Fighters.csv
+      hash: md5
+      md5: 98e122fa0f3510410a25661e3b023438
+      size: 271061
+    - path: data/raw/Fights.csv
+      hash: md5
+      md5: 1eabd11bef2303d3c7983b30782821b0
+      size: 2198247
+    - path: data/raw/Fstats.csv
+      hash: md5
+      md5: 816d13ccc2339e9025ba6a01fd23080f
+      size: 475038
+    - path: src/preprocess.py
+      hash: md5
+      md5: b213c06c251d8af11e3f8b72b57cc82d
+      size: 1093
+    outs:
+    - path: data/processed/events_processed.csv
+      hash: md5
+      md5: 67d25bbd211e7a0482c01453f5cee065
+      size: 68895
+    - path: data/processed/fighters_processed.csv
+      hash: md5
+      md5: 7dbc27680c099a7929c03a1cf4fc8e27
+      size: 153207
+    - path: data/processed/fights_processed.csv
+      hash: md5
+      md5: 3daf3259d3b4bc97d9e9a1c2a980f3b0
+      size: 2197010
+    - path: data/processed/fstats_processed.csv
+      hash: md5
+      md5: 504fc6d28015c5dba4a56d31cfed7ce9
+      size: 472370
