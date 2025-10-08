@@ -1,0 +1,36 @@
+data:
+  raw: "data/raw/dataset.csv"
+  processed: "data/processed/dataset.csv"
+
+preprocess:
+  handle_missing: true
+  remove_outliers: false
+  test_size: 0.2
+  random_state: 42
+
+encoding:
+  categorical_cols:
+    - region
+    - mark
+    - model
+    - complectation
+    - steering_wheel
+    - gear_type
+    - engine
+    - transmission
+    - characteristics
+    - color
+    - body_type_type
+    - body_type_name
+    - super_gen_name
+
+scaling:
+  numerical_cols:
+    - owners
+    - year
+    - price
+    - mileage
+    - power
+    - displacement
+    - super_gen_year_from
+    - super_gen_year_to

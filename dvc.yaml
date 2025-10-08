@@ -1,8 +1,30 @@
 stages:
   preprocess:
-    cmd: python src/preprocess.py
+    cmd: python src/preprocess.py --config params.yaml
     deps:
-    - data/raw/dataset.csv
-    - src/preprocess.py
+      - src/preprocess.py
+      - data/raw/dataset.csv
+      - params.yaml
     outs:
-    - data/processed/dataset.csv
+      - data/processed/dataset.csv
+      - models/encoders.pkl
+      - models/scaler.pkl
+    params:
+      - preprocess
+      - encoding
+      - scaling
+
+  split:
+    cmd: python src/split_data.py --config params.yaml
+    deps:
+      - src/split_data.py
+      - data/processed/dataset.csv
+      - params.yaml
+    outs:
+      - data/split/X_train.csv
+      - data/split/X_test.csv
+      - data/split/y_train.csv
+      - data/split/y_test.csv
+    params:
+      - preprocess.test_size
+      - preprocess.random_state
