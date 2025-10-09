@@ -1,0 +1,9 @@
+detoxify
+transformers
+torch
+datasets
+dvc
+pandas
+numpy
+scikit-learn
+mlflow

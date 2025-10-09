@@ -1,0 +1,5 @@
+outs:
+- md5: 9f6cc88db4fb109ae40479bef7e619b7
+  size: 13563
+  hash: md5
+  path: toxic_comments_sample.csv
