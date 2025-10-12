@@ -11,9 +11,9 @@ churn - ушел ли пользователь в бинарном виде - 0/
 # Мои результаты обучения
 
 ## График потерь (Loss)
-![Loss vs Epoch](interim_results\train_loss.png)
+![Loss vs Epoch](interim_results/train_loss.png)
 
 ## График точности (Accuracy)
-![Accuracy vs Epoch](interim_results\val_roc_auc.png)
+![Accuracy vs Epoch](interim_results/val_roc_auc.png)
 
 
