@@ -145,7 +145,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+dvc_remote/
 # Spyder project settings
 .spyderproject
 .spyproject
