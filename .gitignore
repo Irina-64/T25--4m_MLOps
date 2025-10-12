@@ -209,9 +209,8 @@ marimo/_lsp/
 __marimo__/
 
 # MLflow
-mlflow.db
 mlruns/
+mlflow.db
 *.dvc
 data/
-outputs/
-models/
+dvc_remote/
