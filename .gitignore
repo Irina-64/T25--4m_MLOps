@@ -145,7 +145,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-dvc_remote/
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -207,3 +207,11 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# MLflow
+mlflow.db
+mlruns/
+*.dvc
+data/
+outputs/
+models/
