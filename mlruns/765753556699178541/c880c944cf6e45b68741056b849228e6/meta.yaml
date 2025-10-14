@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/Projects/MLOps/team5/mlruns/765753556699178541/c880c944cf6e45b68741056b849228e6/artifacts
+end_time: 1760448681114
+entry_point_name: ''
+experiment_id: '765753556699178541'
+lifecycle_stage: active
+run_id: c880c944cf6e45b68741056b849228e6
+run_name: best_model_final
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760448680845
+status: 3
+tags: []
+user_id: Admin2022

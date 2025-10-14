@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/Projects/MLOps/team5/mlruns/765753556699178541/7ecc3870ec074aaa9995612622a14728/artifacts
+end_time: 1760448671791
+entry_point_name: ''
+experiment_id: '765753556699178541'
+lifecycle_stage: active
+run_id: 7ecc3870ec074aaa9995612622a14728
+run_name: RandomForest_1630
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760448650311
+status: 3
+tags: []
+user_id: Admin2022

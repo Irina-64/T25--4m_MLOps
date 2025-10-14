@@ -1,0 +1,6 @@
+artifact_location: file:///D:/Projects/MLOps/team5/mlruns/765753556699178541
+creation_time: 1760448649537
+experiment_id: '765753556699178541'
+last_update_time: 1760448649537
+lifecycle_stage: active
+name: telco_churn
