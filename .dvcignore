@@ -1,0 +1,11 @@
+# Temporary files
+*.tmp
+# Logs
+logs/
+*.log
+# Cache
+__pycache__/
+*.pyc
+# Notebooks
+.ipynb_checkpoints/
+

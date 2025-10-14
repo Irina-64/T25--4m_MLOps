@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/raw/cards_sample.csv
+      hash: md5
+      md5: efe516d2c67193bed478f0edeca9c4a6
+      size: 63
+    - path: src/preprocess.py
+      hash: md5
+      md5: 239de86a92e6a039b029b37831e72cb9
+      size: 1033
+    outs:
+    - path: data/processed/processed.csv
+      hash: md5
+      md5: b264233bfda1ce17d156764263d0eeeb
+      size: 139
