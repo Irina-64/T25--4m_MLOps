@@ -13,6 +13,12 @@ __pycache__/
 # C extensions
 *.so
 
+
+/models
+/mlruns
+/mlruns/0
+/mlruns/675495424805883378
+
 # Distribution / packaging
 .Python
 build/
