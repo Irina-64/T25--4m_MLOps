@@ -41,7 +41,7 @@ def encode_categorical(df, categorical_cols):
         if col in df.columns:
             encoder = LabelEncoder()
             df[col] = df[col].astype(str)
-            df[f"{col}_encoded"] = encoder.fit_transform(df[col])
+            df[col] = encoder.fit_transform(df[col])
             encoders[col] = encoder
     return df, encoders
 
@@ -64,6 +64,8 @@ if __name__ == "__main__":
     processed_path = config["data"]["processed"]
 
     df = pd.read_csv(raw_path)
+    print(config["encoding"]["categorical_cols"])
+    print(df.columns)
 
     # Очистка
     df = clean_data(df, config["preprocess"]["handle_missing"])

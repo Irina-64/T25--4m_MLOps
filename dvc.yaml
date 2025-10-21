@@ -28,3 +28,17 @@ stages:
     params:
       - preprocess.test_size
       - preprocess.random_state
+
+  train_baseline:
+    cmd: python src/train.py --config params.yaml
+    deps:
+      - src/train.py
+      - data/split/X_train.csv
+      - data/split/X_test.csv
+      - data/split/y_train.csv
+      - data/split/y_test.csv
+      - params.yaml
+    outs:
+      - models/xgboost_model.pkl
+    params:
+      - models
