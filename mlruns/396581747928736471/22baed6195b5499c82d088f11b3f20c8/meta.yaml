@@ -1,0 +1,14 @@
+artifact_uri: file:///workspace/mlruns/396581747928736471/22baed6195b5499c82d088f11b3f20c8/artifacts
+end_time: 1760623719149
+entry_point_name: ''
+experiment_id: '396581747928736471'
+lifecycle_stage: active
+run_id: 22baed6195b5499c82d088f11b3f20c8
+run_name: adventurous-worm-650
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760623711235
+status: 4
+tags: []
+user_id: root

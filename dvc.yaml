@@ -6,3 +6,10 @@ stages:
     - src/preprocess.py
     outs:
     - data/processed/processed.csv
+  train:
+    cmd: python src/train.py
+    deps:
+      - data/processed/processed.csv
+      - src/train.py
+    outs:
+      - models/lgb_model.joblib

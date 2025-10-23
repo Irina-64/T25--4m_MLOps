@@ -1,0 +1,43 @@
+artifact_path: file:///workspace/mlruns/396581747928736471/models/m-130aaa7ff5914d4da95fdfe9e2147804/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.18
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.4.2
+is_signature_from_type_hint: false
+mlflow_version: 3.4.0
+model_id: m-130aaa7ff5914d4da95fdfe9e2147804
+model_size_bytes: 5102260
+model_uuid: m-130aaa7ff5914d4da95fdfe9e2147804
+prompts: null
+run_id: aa52026618c44ce2b42ded693374fc91
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "all_sum", "required": true}, {"type": "double",
+    "name": "all_mean", "required": true}, {"type": "double", "name": "all_std", "required":
+    true}, {"type": "long", "name": "all_count", "required": true}, {"type": "double",
+    "name": "all_max", "required": true}, {"type": "double", "name": "all_min", "required":
+    true}, {"type": "long", "name": "active_days", "required": true}, {"type": "double",
+    "name": "avg_gap_days", "required": true}, {"type": "double", "name": "max_gap_days",
+    "required": true}, {"type": "long", "name": "days_since_last", "required": true},
+    {"type": "double", "name": "income_share", "required": true}, {"type": "double",
+    "name": "income_days", "required": true}, {"type": "double", "name": "outcome_days",
+    "required": true}, {"type": "long", "name": "has_gap_30d", "required": true},
+    {"type": "double", "name": "weekend_ratio", "required": true}]'
+  outputs: '[{"type": "long", "required": true}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-10-23 12:04:29.760292'

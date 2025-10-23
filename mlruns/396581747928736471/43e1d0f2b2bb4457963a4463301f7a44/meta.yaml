@@ -1,0 +1,14 @@
+artifact_uri: file:///workspace/mlruns/396581747928736471/43e1d0f2b2bb4457963a4463301f7a44/artifacts
+end_time: 1760622265132
+entry_point_name: ''
+experiment_id: '396581747928736471'
+lifecycle_stage: active
+run_id: 43e1d0f2b2bb4457963a4463301f7a44
+run_name: calm-jay-414
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760622235655
+status: 4
+tags: []
+user_id: root

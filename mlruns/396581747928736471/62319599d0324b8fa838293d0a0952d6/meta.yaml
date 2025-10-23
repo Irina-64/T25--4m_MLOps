@@ -1,0 +1,14 @@
+artifact_uri: file:///workspace/mlruns/396581747928736471/62319599d0324b8fa838293d0a0952d6/artifacts
+end_time: 1760622153596
+entry_point_name: ''
+experiment_id: '396581747928736471'
+lifecycle_stage: active
+run_id: 62319599d0324b8fa838293d0a0952d6
+run_name: nosy-turtle-879
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760622152616
+status: 4
+tags: []
+user_id: root
