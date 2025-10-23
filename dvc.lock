@@ -1,18 +1,177 @@
 schema: '2.0'
 stages:
   preprocess:
-    cmd: python src/preprocess.py
+    cmd: python src/preprocess.py --config params.yaml
     deps:
     - path: data/raw/dataset.csv
       hash: md5
       md5: d0d310956d576c09511ff7bf3b46144b
       size: 96412524
+    - path: params.yaml
+      hash: md5
+      md5: 5c9984f24d20bbebb82ef1ca5e735fa1
+      size: 940
     - path: src/preprocess.py
       hash: md5
-      md5: a4ffc995c6bf9cc14858d887d4dbb9b3
-      size: 958
+      md5: 190a60dc4a602593cf693a11e3db7dd8
+      size: 2453
+    params:
+      params.yaml:
+        encoding:
+          categorical_cols:
+          - region
+          - mark
+          - model
+          - complectation
+          - steering_wheel
+          - gear_type
+          - engine
+          - transmission
+          - characteristics
+          - color
+          - body_type_type
+          - body_type_name
+          - super_gen_name
+        preprocess:
+          handle_missing: true
+          remove_outliers: false
+          test_size: 0.2
+          random_state: 42
+        scaling:
+          numerical_cols:
+          - owners
+          - year
+          - price
+          - mileage
+          - power
+          - displacement
+          - super_gen_year_from
+          - super_gen_year_to
     outs:
     - path: data/processed/dataset.csv
       hash: md5
-      md5: 41a258cb5639d169491b282f1c27b6f9
-      size: 96373536
+      md5: f0e1a7fc230c7caf884fa7386fb93431
+      size: 85600287
+    - path: models/encoders.pkl
+      hash: md5
+      md5: 98fa8c7c4a7dfcae5a6e0a3355972adf
+      size: 391724
+    - path: models/scaler.pkl
+      hash: md5
+      md5: b8e42fff1d28efde133b8f266fa45dc2
+      size: 1159
+  split:
+    cmd: python src/split_data.py --config params.yaml
+    deps:
+    - path: data/processed/dataset.csv
+      hash: md5
+      md5: f0e1a7fc230c7caf884fa7386fb93431
+      size: 85600287
+    - path: params.yaml
+      hash: md5
+      md5: 5c9984f24d20bbebb82ef1ca5e735fa1
+      size: 940
+    - path: src/split_data.py
+      hash: md5
+      md5: 21a38c965e69a0d44002fd28a1c4018d
+      size: 1159
+    params:
+      params.yaml:
+        preprocess.random_state: 42
+        preprocess.test_size: 0.2
+    outs:
+    - path: data/split/X_test.csv
+      hash: md5
+      md5: 116df1c121778a3960446656d8721962
+      size: 15140358
+    - path: data/split/X_train.csv
+      hash: md5
+      md5: 7812652992c60ed18261df9e77858d12
+      size: 60565870
+    - path: data/split/y_test.csv
+      hash: md5
+      md5: d8c8a1f343412cf9d61e1f6e39813066
+      size: 1683157
+    - path: data/split/y_train.csv
+      hash: md5
+      md5: 6a74ae2669835b6e5556b6301b64e3f2
+      size: 6732794
+  train_baseline:
+    cmd: python src/train.py --config params.yaml
+    deps:
+    - path: data/split/X_test.csv
+      hash: md5
+      md5: 116df1c121778a3960446656d8721962
+      size: 15140358
+    - path: data/split/X_train.csv
+      hash: md5
+      md5: 7812652992c60ed18261df9e77858d12
+      size: 60565870
+    - path: data/split/y_test.csv
+      hash: md5
+      md5: d8c8a1f343412cf9d61e1f6e39813066
+      size: 1683157
+    - path: data/split/y_train.csv
+      hash: md5
+      md5: 6a74ae2669835b6e5556b6301b64e3f2
+      size: 6732794
+    - path: params.yaml
+      hash: md5
+      md5: 5c9984f24d20bbebb82ef1ca5e735fa1
+      size: 940
+    - path: src/train.py
+      hash: md5
+      md5: 709dc981bd21117873643a42100acdda
+      size: 6900
+    params:
+      params.yaml:
+        models:
+          xgboost:
+            n_estimators:
+            - 50
+            - 100
+            - 200
+            max_depth:
+            - 3
+            - 6
+            - 10
+            learning_rate:
+            - 0.01
+            - 0.1
+            - 0.2
+            random_state: 42
+    outs:
+    - path: models/xgboost_model.pkl
+      hash: md5
+      md5: dcda6f422d0ad3b998ce643cf80b5818
+      size: 63223
+  evaluate_baseline:
+    cmd: python src/evaluate.py --model_path models/xgboost_model.pkl
+      --test_data data/split/X_test.csv --target_data data/split/y_test.csv
+      --config params.yaml
+    deps:
+    - path: data/split/X_test.csv
+      hash: md5
+      md5: 116df1c121778a3960446656d8721962
+      size: 15140358
+    - path: data/split/y_test.csv
+      hash: md5
+      md5: d8c8a1f343412cf9d61e1f6e39813066
+      size: 1683157
+    - path: models/xgboost_model.pkl
+      hash: md5
+      md5: dcda6f422d0ad3b998ce643cf80b5818
+      size: 63223
+    - path: params.yaml
+      hash: md5
+      md5: 5c9984f24d20bbebb82ef1ca5e735fa1
+      size: 940
+    - path: src/evaluate.py
+      hash: md5
+      md5: 7769e035a92928e3d48f3d7d484f575b
+      size: 1771
+    outs:
+    - path: reports/eval.json
+      hash: md5
+      md5: 2aee5e10b48e68ee868fd7974a150115
+      size: 94
