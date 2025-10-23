@@ -1,0 +1,5 @@
+outs:
+- md5: efe516d2c67193bed478f0edeca9c4a6
+  size: 63
+  hash: md5
+  path: cards_sample.csv
