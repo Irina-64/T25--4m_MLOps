@@ -121,8 +121,8 @@ stages:
       size: 940
     - path: src/train.py
       hash: md5
-      md5: 01bca4d471f84a057dd50c709e329301
-      size: 7000
+      md5: 709dc981bd21117873643a42100acdda
+      size: 6900
     params:
       params.yaml:
         models:
@@ -143,5 +143,35 @@ stages:
     outs:
     - path: models/xgboost_model.pkl
       hash: md5
-      md5: 455d52b3a2a71bdc63f4164f54964535
+      md5: dcda6f422d0ad3b998ce643cf80b5818
       size: 63223
+  evaluate_baseline:
+    cmd: python src/evaluate.py --model_path models/xgboost_model.pkl
+      --test_data data/split/X_test.csv --target_data data/split/y_test.csv
+      --config params.yaml
+    deps:
+    - path: data/split/X_test.csv
+      hash: md5
+      md5: 116df1c121778a3960446656d8721962
+      size: 15140358
+    - path: data/split/y_test.csv
+      hash: md5
+      md5: d8c8a1f343412cf9d61e1f6e39813066
+      size: 1683157
+    - path: models/xgboost_model.pkl
+      hash: md5
+      md5: dcda6f422d0ad3b998ce643cf80b5818
+      size: 63223
+    - path: params.yaml
+      hash: md5
+      md5: 5c9984f24d20bbebb82ef1ca5e735fa1
+      size: 940
+    - path: src/evaluate.py
+      hash: md5
+      md5: 7769e035a92928e3d48f3d7d484f575b
+      size: 1771
+    outs:
+    - path: reports/eval.json
+      hash: md5
+      md5: 2aee5e10b48e68ee868fd7974a150115
+      size: 94

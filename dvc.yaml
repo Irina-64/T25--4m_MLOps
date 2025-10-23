@@ -42,3 +42,15 @@ stages:
       - models/xgboost_model.pkl
     params:
       - models
+
+  evaluate_baseline:
+    cmd: python src/evaluate.py --model_path models/xgboost_model.pkl --test_data data/split/X_test.csv --target_data data/split/y_test.csv --config params.yaml
+    deps:
+      - src/evaluate.py
+      - models/xgboost_model.pkl
+      - data/split/X_test.csv
+      - data/split/y_test.csv
+      - params.yaml
+    metrics:
+      - reports/eval.json:
+          cache: false
