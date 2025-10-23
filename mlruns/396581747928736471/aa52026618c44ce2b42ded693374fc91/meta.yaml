@@ -1,0 +1,14 @@
+artifact_uri: file:///workspace/mlruns/396581747928736471/aa52026618c44ce2b42ded693374fc91/artifacts
+end_time: 1761221073154
+entry_point_name: ''
+experiment_id: '396581747928736471'
+lifecycle_stage: active
+run_id: aa52026618c44ce2b42ded693374fc91
+run_name: angry-goose-712
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761221051744
+status: 3
+tags: []
+user_id: root
