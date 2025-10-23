@@ -3,16 +3,20 @@ stages:
   preprocess:
     cmd: python src/preprocess.py
     deps:
-    - path: data/raw/toxic_comments_sample.csv
+    - path: data/raw/paradetox.csv
       hash: md5
-      md5: 9f6cc88db4fb109ae40479bef7e619b7
-      size: 13563
+      md5: 412309e95b85a342a8777d6a09d03519
+      size: 2056356
     - path: src/preprocess.py
       hash: md5
-      md5: 6e991bb46a70c49a8fef4342bd59ca31
-      size: 1035
+      md5: 0d07a6ef05b384caf98c04f4042f6788
+      size: 879
     outs:
-    - path: data/processed/processed.csv
+    - path: data/processed/test.csv
       hash: md5
-      md5: ea7c0c005140efdaa13a6de97806fbf9
-      size: 14626
+      md5: 74cfc340454dc16fc7114c3265830580
+      size: 449325
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 899bc0076e9d855ffe96413bb6f773e4
+      size: 1803283

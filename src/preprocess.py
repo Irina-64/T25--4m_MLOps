@@ -1,24 +1,17 @@
-import os
 import pandas as pd
-import numpy as np
+from sklearn.model_selection import train_test_split
+import os
 
-# Read raw data
-raw_path = 'data/raw/toxic_comments_sample.csv'
-df = pd.read_csv(raw_path)
+# Create data/processed directory if it doesn't exist
+os.makedirs("data/processed", exist_ok=True)
 
-# Handle NaN: drop rows with NaN in 'Toxic Text' or 'Non-Toxic Analog'
-df = df.dropna(subset=['Toxic Text', 'Non-Toxic Analog'])
+# Чтение data/raw/paradetox.csv
+df = pd.read_csv("data/raw/data.csv")
 
-# Feature engineering (для детоксификации: фичи на основе текста и уровня)
-df['toxic_length'] = df['Toxic Text'].str.len()  # Длина токсичного текста
-df['non_toxic_length'] = df['Non-Toxic Analog'].str.len()  # Длина аналога
-df['toxicity_level'] = df['Toxicity Level'].astype(int)  # Лейбл как int
-df['is_high_toxicity'] = np.where(df['Toxicity Level'] > 3, 1, 0)  # Бинарный флаг: высокая токсичность
 
-# Save processed (добавляем все колонки)
-os.makedirs('data/processed', exist_ok=True)
-processed_path = 'data/processed/processed.csv'
-df.to_csv(processed_path, index=False)
+# Разделение train/test (80/20)
+train_df, test_df = train_test_split(df[["input_text", "target_text"]], test_size=0.2, random_state=42)
 
-print(f'Processed shape: {df.shape}')
-print(df.head())
+# Сохранить
+train_df.to_csv("data/processed/train.csv", index=False)
+test_df.to_csv("data/processed/test.csv", index=False)

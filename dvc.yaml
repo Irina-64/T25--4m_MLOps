@@ -2,7 +2,8 @@ stages:
   preprocess:
     cmd: python src/preprocess.py
     deps:
-    - data/raw/toxic_comments_sample.csv
+    - data/raw/paradetox.csv
     - src/preprocess.py
     outs:
-    - data/processed/processed.csv
+    - data/processed/test.csv
+    - data/processed/train.csv
