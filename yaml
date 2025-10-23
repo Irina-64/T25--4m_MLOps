@@ -1,0 +1,25 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+      - src/preprocess.py
+      - data/raw/flights_sample.csv
+    outs:
+      - data/processed/processed.csv
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/processed/processed.csv
+    outs:
+      - models/model.joblib
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - models/model.joblib
+      - data/processed/processed.csv
+    outs:
+      - reports/eval.json
