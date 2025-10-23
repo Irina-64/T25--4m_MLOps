@@ -1,9 +1,9 @@
 import pandas as pd
 from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, TrainingArguments
 from datasets import Dataset
+from evaluate import load
 import mlflow
 import mlflow.transformers
-from evaluate import load
 import torch
 
 # Загрузка данных
@@ -30,7 +30,7 @@ test_dataset = test_dataset.map(preprocess_function, batched=True, remove_column
 # Аргументы тренировки
 training_args = TrainingArguments(
     output_dir="./results",
-    num_train_epochs=3,
+    num_train_epochs=1,
     per_device_train_batch_size=16,
     per_device_eval_batch_size=16,
     evaluation_strategy="epoch",
@@ -59,7 +59,7 @@ trainer = Trainer(
     compute_metrics=compute_metrics,
 )
 
-# MLflow
+
 mlflow.set_experiment("text_detox")
 with mlflow.start_run():
     mlflow.log_params({"model": "t5-small", "epochs": 1, "batch_size": 256})
@@ -68,6 +68,5 @@ with mlflow.start_run():
     mlflow.log_metrics({"bleu": eval_results["eval_bleu"]})
     mlflow.transformers.log_model(model, "model")
 
-# Сохранение модели локально (опционально)
 model.save_pretrained("models/detox_model")
 tokenizer.save_pretrained("models/detox_model")
