@@ -4,6 +4,9 @@
 Проект по MLOps для прогнозирования курсов валют с использованием LSTM-моделей.
 
 ## Содержание датасета
-**USD_RUB** (Курс USD к RUB)  
-**EUR_RUB** (Курс EUR к RUB)  
-**GBP_RUB** (Курс GBP к RUB)
+USD_RUB (Курс USD к RUB)  
+EUR_RUB (Курс EUR к RUB)  
+GBP_RUB (Курс GBP к RUB)
+
+## Результаты обучения модели с использованием randomforestclassifier в MLflow:
+![Project Architecture](docs/images/mlflow.jpg)
