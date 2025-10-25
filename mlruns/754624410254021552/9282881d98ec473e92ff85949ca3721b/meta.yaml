@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/xxxxxxx/Documents/GitHub/T25--4m_MLOps/mlruns/754624410254021552/9282881d98ec473e92ff85949ca3721b/artifacts
+end_time: 1761072771970
+entry_point_name: ''
+experiment_id: '754624410254021552'
+lifecycle_stage: active
+run_id: 9282881d98ec473e92ff85949ca3721b
+run_name: learned-smelt-298
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761072769418
+status: 3
+tags: []
+user_id: xxxxxxx
