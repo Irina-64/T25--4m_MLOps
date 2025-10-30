@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/xxxxxxx/Documents/GitHub/T25--4m_MLOps/mlruns/754624410254021552/cd2e663176e84cd4893c18c7730072ba/artifacts
+end_time: 1761072769415
+entry_point_name: ''
+experiment_id: '754624410254021552'
+lifecycle_stage: active
+run_id: cd2e663176e84cd4893c18c7730072ba
+run_name: dashing-finch-935
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761072766004
+status: 3
+tags: []
+user_id: xxxxxxx

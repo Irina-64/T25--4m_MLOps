@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/xxxxxxx/Documents/GitHub/T25--4m_MLOps/mlruns/754624410254021552/6e0f980ccc6c47b4a88c911948beb252/artifacts
+end_time: 1761072783856
+entry_point_name: ''
+experiment_id: '754624410254021552'
+lifecycle_stage: active
+run_id: 6e0f980ccc6c47b4a88c911948beb252
+run_name: adventurous-fowl-502
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761072780422
+status: 3
+tags: []
+user_id: xxxxxxx
