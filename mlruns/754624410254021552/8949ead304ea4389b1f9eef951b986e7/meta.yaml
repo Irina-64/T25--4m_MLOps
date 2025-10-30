@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/xxxxxxx/Documents/GitHub/T25--4m_MLOps/mlruns/754624410254021552/8949ead304ea4389b1f9eef951b986e7/artifacts
+end_time: 1761072777393
+entry_point_name: ''
+experiment_id: '754624410254021552'
+lifecycle_stage: active
+run_id: 8949ead304ea4389b1f9eef951b986e7
+run_name: rogue-crab-334
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761072774607
+status: 3
+tags: []
+user_id: xxxxxxx
