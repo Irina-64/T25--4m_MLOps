@@ -20,6 +20,19 @@
 
 ## Запуск
 
+### Запуск API из Docker
+
+1. Сборка образа
+   ```bash
+   docker build . -t "car_price_predict"
+   ```
+2. Запуск
+    ```bash
+    docker run -d -p 8000:8000 car_price_predict:latest
+    ```
+
+### Локальный запуск
+
 1. Установите окружение:
 ```bash
 pip install -r requirements.txt
