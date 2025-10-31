@@ -13,8 +13,40 @@ def load_config(path):
         return yaml.safe_load(f)
 
 
-def clean_data(df, handle_missing):
+def clean_data(df: pd.DataFrame, handle_missing):
     """Очистка данных и приведение типов"""
+    df = df[
+        [
+            "price",
+            "owners",
+            "year",
+            "region",
+            "mileage",
+            "mark",
+            "model",
+            "complectation",
+            "steering_wheel",
+            "gear_type",
+            "engine",
+            "transmission",
+            "power",
+            "displacement",
+            "color",
+            "body_type_type",
+            "super_gen_name",
+        ]
+    ]
+    df["displacement"] = df["displacement"] / 1000
+    df["year"] = df["year"].astype("object")
+    df["owners"] = df["owners"].astype("object")
+    df["complectation"] = df.apply(
+        lambda row: (row["mark"] + row["model"] if pd.isna(row["complectation"]) else row["complectation"]),
+        axis=1,
+    )
+    df["super_gen_name"] = df.apply(
+        lambda row: (row["mark"] + row["model"] if pd.isna(row["super_gen_name"]) else row["super_gen_name"]),
+        axis=1,
+    )
     df.replace(["nan", "None", ""], np.nan, inplace=True)
     df.dropna(how="all", inplace=True)
 

@@ -13,8 +13,8 @@ stages:
       size: 940
     - path: src/preprocess.py
       hash: md5
-      md5: 190a60dc4a602593cf693a11e3db7dd8
-      size: 2453
+      md5: ce05e8ebbbcb6f9317abdd953dc76f40
+      size: 3493
     params:
       params.yaml:
         encoding:
@@ -50,23 +50,23 @@ stages:
     outs:
     - path: data/processed/dataset.csv
       hash: md5
-      md5: f0e1a7fc230c7caf884fa7386fb93431
-      size: 85600287
+      md5: 8a17f7950ef34fb1efdb759f1b4a1cc9
+      size: 65712520
     - path: models/encoders.pkl
       hash: md5
-      md5: 98fa8c7c4a7dfcae5a6e0a3355972adf
-      size: 391724
+      md5: 737ff522d7fac0959d2f169691cdb7ba
+      size: 187879
     - path: models/scaler.pkl
       hash: md5
-      md5: b8e42fff1d28efde133b8f266fa45dc2
-      size: 1159
+      md5: 2eba89a173d7a674116b39ff007b675b
+      size: 1063
   split:
     cmd: python src/split_data.py --config params.yaml
     deps:
     - path: data/processed/dataset.csv
       hash: md5
-      md5: f0e1a7fc230c7caf884fa7386fb93431
-      size: 85600287
+      md5: 8a17f7950ef34fb1efdb759f1b4a1cc9
+      size: 65712520
     - path: params.yaml
       hash: md5
       md5: 5c9984f24d20bbebb82ef1ca5e735fa1
@@ -82,12 +82,12 @@ stages:
     outs:
     - path: data/split/X_test.csv
       hash: md5
-      md5: 116df1c121778a3960446656d8721962
-      size: 15140358
+      md5: 0c84c8fb9a649418bd1bd3baf0d3fa4b
+      size: 11252565
     - path: data/split/X_train.csv
       hash: md5
-      md5: 7812652992c60ed18261df9e77858d12
-      size: 60565870
+      md5: b9f19ee9d4506801bd5552963155eb2c
+      size: 45013816
     - path: data/split/y_test.csv
       hash: md5
       md5: d8c8a1f343412cf9d61e1f6e39813066
@@ -101,12 +101,12 @@ stages:
     deps:
     - path: data/split/X_test.csv
       hash: md5
-      md5: 116df1c121778a3960446656d8721962
-      size: 15140358
+      md5: 0c84c8fb9a649418bd1bd3baf0d3fa4b
+      size: 11252565
     - path: data/split/X_train.csv
       hash: md5
-      md5: 7812652992c60ed18261df9e77858d12
-      size: 60565870
+      md5: b9f19ee9d4506801bd5552963155eb2c
+      size: 45013816
     - path: data/split/y_test.csv
       hash: md5
       md5: d8c8a1f343412cf9d61e1f6e39813066
@@ -143,8 +143,8 @@ stages:
     outs:
     - path: models/xgboost_model.pkl
       hash: md5
-      md5: dcda6f422d0ad3b998ce643cf80b5818
-      size: 63223
+      md5: a4bc1f80955b1b10cbf24558cc0153df
+      size: 63062
   evaluate_baseline:
     cmd: python src/evaluate.py --model_path models/xgboost_model.pkl
       --test_data data/split/X_test.csv --target_data data/split/y_test.csv
@@ -152,26 +152,26 @@ stages:
     deps:
     - path: data/split/X_test.csv
       hash: md5
-      md5: 116df1c121778a3960446656d8721962
-      size: 15140358
+      md5: 0c84c8fb9a649418bd1bd3baf0d3fa4b
+      size: 11252565
     - path: data/split/y_test.csv
       hash: md5
       md5: d8c8a1f343412cf9d61e1f6e39813066
       size: 1683157
     - path: models/xgboost_model.pkl
       hash: md5
-      md5: dcda6f422d0ad3b998ce643cf80b5818
-      size: 63223
+      md5: a4bc1f80955b1b10cbf24558cc0153df
+      size: 63062
     - path: params.yaml
       hash: md5
       md5: 5c9984f24d20bbebb82ef1ca5e735fa1
       size: 940
     - path: src/evaluate.py
       hash: md5
-      md5: 7769e035a92928e3d48f3d7d484f575b
-      size: 1771
+      md5: f2e56a3624a1dd668239a0eac58b7eb9
+      size: 1821
     outs:
     - path: reports/eval.json
       hash: md5
-      md5: 2aee5e10b48e68ee868fd7974a150115
-      size: 94
+      md5: 8505868abb1c7ca13fdd6aec9622a33d
+      size: 96
