@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/xxxxxxx/Documents/GitHub/T25--4m_MLOps/mlruns/754624410254021552/6c209be1ecbb43e088101596c52e306f/artifacts
+end_time: 1762361286324
+entry_point_name: ''
+experiment_id: '754624410254021552'
+lifecycle_stage: active
+run_id: 6c209be1ecbb43e088101596c52e306f
+run_name: suave-skunk-268
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1762361282262
+status: 3
+tags: []
+user_id: xxxxxxx

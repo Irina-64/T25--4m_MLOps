@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/xxxxxxx/Documents/GitHub/T25--4m_MLOps/mlruns/754624410254021552/0d5bcc3788ec4b0d8f57fd8e190f598e/artifacts
+end_time: 1762362636678
+entry_point_name: ''
+experiment_id: '754624410254021552'
+lifecycle_stage: active
+run_id: 0d5bcc3788ec4b0d8f57fd8e190f598e
+run_name: rogue-panda-978
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1762362634138
+status: 3
+tags: []
+user_id: xxxxxxx

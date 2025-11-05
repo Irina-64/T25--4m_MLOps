@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/xxxxxxx/Documents/GitHub/T25--4m_MLOps/mlruns/754624410254021552/4e6066eef43c4990bcad5434149b9b1d/artifacts
+end_time: 1762361915638
+entry_point_name: ''
+experiment_id: '754624410254021552'
+lifecycle_stage: active
+run_id: 4e6066eef43c4990bcad5434149b9b1d
+run_name: delicate-carp-473
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1762361912514
+status: 3
+tags: []
+user_id: xxxxxxx

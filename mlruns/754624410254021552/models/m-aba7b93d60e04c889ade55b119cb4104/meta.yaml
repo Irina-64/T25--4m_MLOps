@@ -1,0 +1,10 @@
+artifact_location: file:///Users/xxxxxxx/Documents/GitHub/T25--4m_MLOps/mlruns/754624410254021552/models/m-aba7b93d60e04c889ade55b119cb4104/artifacts
+creation_timestamp: 1762362634160
+experiment_id: '754624410254021552'
+last_updated_timestamp: 1762362636674
+model_id: m-aba7b93d60e04c889ade55b119cb4104
+model_type: null
+name: model
+source_run_id: 0d5bcc3788ec4b0d8f57fd8e190f598e
+status: 2
+status_message: null
