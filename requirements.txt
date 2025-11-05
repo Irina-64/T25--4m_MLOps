@@ -1,7 +1,6 @@
+fastapi
+uvicorn
 pandas
 numpy
 scikit-learn
-mlflow
-pytest
-dvc
-joblib 
+joblib
