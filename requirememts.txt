@@ -9,3 +9,5 @@ pytest
 joblib
 prometheus-client
 lightgbm
+requests
+httpx
