@@ -8,3 +8,6 @@ dvc
 pytest
 joblib
 prometheus-client
+lightgbm
+requests
+httpx
