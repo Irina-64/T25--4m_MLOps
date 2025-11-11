@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/xxxxxxx/Documents/GitHub/T25--4m_MLOps/mlruns/754624410254021552/e8f8a3be72b14eda89ad50f93c141947/artifacts
+deleted_time: 1761373217569
+end_time: 1761372434243
+entry_point_name: ''
+experiment_id: '754624410254021552'
+lifecycle_stage: deleted
+run_id: e8f8a3be72b14eda89ad50f93c141947
+run_name: model_evaluation
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761372434215
+status: 3
+tags: []
+user_id: xxxxxxx
