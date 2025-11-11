@@ -7,6 +7,8 @@ import mlflow
 import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
+mlflow.set_tracking_uri("http://localhost:5000")
+
 
 def evaluate_model(model_path, X_test_path, y_test_path, output_dir="reports"):
     # Загружаем данные

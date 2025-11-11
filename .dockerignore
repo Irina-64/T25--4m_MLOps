@@ -1,0 +1,46 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.env
+.venv
+venv/
+.envrc
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- DVC ---
+.dvc/cache/
+.dvc/tmp/
+.dvc/locks/
+.dvc/plots/
+.dvc_updater/
+dvc_remote/
+
+# --- Data ---
+data/raw/
+data/processed/
+data/split/
+
+# --- MLflow ---
+mlruns/
+mlartifacts/
+
+
+# --- Experiments / Reports ---
+experiments/
+reports/*.png
+reports/*.html
+reports/*.csv
+
+# --- Logs / Temporary files ---
+logs/
+*.log
+tmp/
+temp/
