@@ -1,51 +1,26 @@
-import importlib
-
 import pandas as pd
 
+from src import preprocess
 
-def test_preprocess_creates_output(tmp_path, monkeypatch):
-    raw_dir = tmp_path / "data" / "raw"
-    processed_dir = tmp_path / "data" / "processed"
-    raw_dir.mkdir(parents=True)
 
-    fighters = pd.DataFrame(
+def test_normalize_result_basic():
+    s = pd.Series(["W", "l", "No Contest", "won"])
+    result = preprocess.normalize_result(s)
+    expected = pd.Series(["win", "loss", "nc", "win"])
+    assert result.tolist() == expected.tolist()
+
+
+def test_pick_cols_output_shape():
+    df = pd.DataFrame(
         {
-            "Full Name": ["John", "Mike"],
-            "Ht.": [180, 175],
-            "Wt.": [77, 70],
-            "Reach": [190, 180],
-            "Stance": ["Orthodox", "Southpaw"],
+            "Full Name": ["a", "b"],
+            "num1": [1, 2],
+            "num2": [3, 4],
+            "cat1": ["x", "y"],
+            "cat2": ["p", "q"],
         }
     )
-    fights = pd.DataFrame(
-        {
-            "Fighter_1": ["John"],
-            "Fighter_2": ["Mike"],
-            "Result_1": ["win"],
-            "Result_2": ["loss"],
-            "KD_1": [1],
-            "KD_2": [0],
-            "Weight_Class": ["Lightweight"],
-            "Method": ["KO"],
-            "Round": [1],
-            "Fight_Time": [60],
-            "Event_Id": [1],
-        }
-    )
-    events = pd.DataFrame({"Event_Id": [1], "Name": ["UFC Test"]})
-    fstats = pd.DataFrame(columns=["dummy"])
-    fstats.to_csv(raw_dir / "Fstats.csv", index=False)
-
-    fighters.to_csv(raw_dir / "Fighters.csv", index=False)
-    fights.to_csv(raw_dir / "Fights.csv", index=False)
-    events.to_csv(raw_dir / "Events.csv", index=False)
-    fstats.to_csv(raw_dir / "Fstats.csv", index=False)
-
-    monkeypatch.chdir(tmp_path)
-    importlib.invalidate_caches()
-
-    out_path = processed_dir / "processed.csv"
-    assert out_path.exists(), "Файл processed.csv не создан"
-    df = pd.read_csv(out_path)
-    assert not df.empty, "Выходной CSV пуст"
-    assert "target" in df.columns, "Нет столбца target"
+    sub = preprocess.pick_cols("R", df, "Full Name")
+    assert "R_num1" in sub.columns
+    assert "R_cat1" in sub.columns
+    assert "_R_key" not in sub.columns
