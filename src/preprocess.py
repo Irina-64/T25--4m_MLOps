@@ -1,14 +1,17 @@
-import os
+import sys
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
-os.makedirs("data/processed", exist_ok=True)
+raw_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("data/raw")
+processed_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("data/processed")
+processed_dir.mkdir(parents=True, exist_ok=True)
 
-fighters = pd.read_csv("data/raw/Fighters.csv")
-fights = pd.read_csv("data/raw/Fights.csv")
-events = pd.read_csv("data/raw/Events.csv")
-fstats = pd.read_csv("data/raw/Fstats.csv")
+fighters = pd.read_csv(raw_dir / "Fighters.csv")
+fights = pd.read_csv(raw_dir / "Fights.csv")
+events = pd.read_csv(raw_dir / "Events.csv")
+fstats = pd.read_csv(raw_dir / "Fstats.csv")
 
 
 def normalize_result(s):
@@ -58,7 +61,6 @@ B = B.rename(columns={"Full Name": "_B_key"})
 df = fights.merge(R, on="_R_key", how="left").merge(B, on="_B_key", how="left")
 df = df.drop(columns=["_R_key", "_B_key"], errors="ignore")
 
-
 important_cols = [
     "KD_1",
     "KD_2",
@@ -92,7 +94,6 @@ important_cols = [
 
 df = df[[c for c in df.columns if c in important_cols]]
 
-
 num_cols = [c for c in df.select_dtypes(include=["number"]).columns if c != "target"]
 for c in num_cols:
     df[c] = df[c].fillna(df[c].median())
@@ -103,6 +104,6 @@ for c in cat_cols:
 
 df = pd.get_dummies(df, drop_first=True)
 
-out_path = "data/processed/processed.csv"
+out_path = processed_dir / "processed.csv"
 df.to_csv(out_path, index=False)
 print(f"✅ Финальный датасет сохранён: {df.shape}")
