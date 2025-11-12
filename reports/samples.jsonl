@@ -1,0 +1,20 @@
+{"input": "You are so stupid!!!", "reference": "You are not very smart.", "prediction": "You are not too bright."}
+{"input": "I hate this awful movie!", "reference": "I really dislike this movie.", "prediction": "I don't like this movie."}
+{"input": "This game is trash.", "reference": "This game is not very good.", "prediction": "This game isn't great."}
+{"input": "You're the worst friend ever.", "reference": "You're not a good friend.", "prediction": "You're not being nice."}
+{"input": "Shut up, idiot!", "reference": "Please stop talking like that.", "prediction": "Please be quiet."}
+{"input": "I can't stand your stupid face.", "reference": "I don't like looking at you.", "prediction": "I find it hard to look at you."}
+{"input": "What a dumb comment.", "reference": "That comment wasn't helpful.", "prediction": "That comment was not very thoughtful."}
+{"input": "You're so annoying!", "reference": "You're bothering me.", "prediction": "You're kind of irritating me."}
+{"input": "This is the worst idea ever.", "reference": "This idea is not good.", "prediction": "This idea could be better."}
+{"input": "I hate everyone here.", "reference": "I don't feel comfortable around people here.", "prediction": "I don't like being around everyone here."}
+{"input": "You suck at this game.", "reference": "You're not very good at this game.", "prediction": "You could improve at this game."}
+{"input": "That's a terrible song.", "reference": "That song isn't very good.", "prediction": "That song could be improved."}
+{"input": "This place is disgusting.", "reference": "This place isn't clean.", "prediction": "This place could be tidier."}
+{"input": "You're such a loser.", "reference": "You're not very successful.", "prediction": "You're not doing great."}
+{"input": "I hate your stupid opinion.", "reference": "I don't agree with your opinion.", "prediction": "I don't share your opinion."}
+{"input": "That was pathetic.", "reference": "That wasn't impressive.", "prediction": "That could have been better."}
+{"input": "You're useless.", "reference": "You're not being helpful.", "prediction": "You're not helping much."}
+{"input": "This food tastes horrible.", "reference": "This food doesn't taste good.", "prediction": "This food isn't tasty."}
+{"input": "I despise this class.", "reference": "I don't like this class.", "prediction": "I'm not fond of this class."}
+{"input": "You're a complete idiot.", "reference": "You're not very smart.", "prediction": "You made a silly mistake."}
