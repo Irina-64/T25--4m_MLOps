@@ -1,0 +1,5 @@
+{
+  "request": {"text": "You are so stupid!!!", "max_length": 64, "num_beams": 2},
+  "response": {"detox_text": "You are not very smart."},
+  "note": "Пример ответа от /predict на t5-small (fallback)."
+}
