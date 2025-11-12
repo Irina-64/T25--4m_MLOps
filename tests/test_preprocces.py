@@ -1,6 +1,15 @@
 import pandas as pd
+import pytest
 
 from src import preprocess
+
+
+@pytest.fixture(autouse=True)
+def mock_read_csv(monkeypatch):
+    def fake_read_csv(path, *args, **kwargs):
+        return pd.DataFrame({"a": [1, 2, 3]})
+
+    monkeypatch.setattr(pd, "read_csv", fake_read_csv)
 
 
 def test_normalize_result_basic():
