@@ -6,3 +6,12 @@ stages:
     - src/preprocess.py
     outs:
     - data/processed/processed.csv
+  train_rl:
+    cmd: python src/train.py
+    deps:
+    - Core/agents.py
+    - Core/demo.py
+    - src/train.py
+    outs:
+    - replays
+    - rl_agent_model.pth
