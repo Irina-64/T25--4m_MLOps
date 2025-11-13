@@ -16,3 +16,28 @@ stages:
       hash: md5
       md5: b264233bfda1ce17d156764263d0eeeb
       size: 139
+  train_rl:
+    cmd: python src/train.py
+    deps:
+    - path: Core/agents.py
+      hash: md5
+      md5: 34d6e3b97d47676062d67a283ccacfdc
+      size: 7615
+    - path: Core/demo.py
+      hash: md5
+      md5: ecc2e825f552b5416b7b22bd593ae50c
+      size: 4231
+    - path: src/train.py
+      hash: md5
+      md5: 875c70e68ee9435fb9766b3c7a1c9cb3
+      size: 4196
+    outs:
+    - path: replays
+      hash: md5
+      md5: 136c13e9941f7a61e5d798540014e81c.dir
+      size: 685835
+      nfiles: 2
+    - path: rl_agent_model.pth
+      hash: md5
+      md5: dd59be646d8ba14696336d6dcc980519
+      size: 32931
