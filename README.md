@@ -44,3 +44,24 @@ AI_Detox — это open-source проект для автоматическог
 ## Лицензия
 
 Проект распространяется под лицензией MIT.
+
+
+
+### ЛР-6
+Локальный запуск:
+
+```
+
+uvicorn src.api:app --host 0.0.0.0 --port 8080
+curl -s -X POST http://localhost:8080/predict -H "Content-Type: application/json" -d '{"text":"You are so stupid!!!","max_length":64}'
+
+```
+
+Docker:
+
+```
+docker build -t detox-api:lab6 .
+docker run -p 8080:8080 detox-api:lab6
+
+
+```
