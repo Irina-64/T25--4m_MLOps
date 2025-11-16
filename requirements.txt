@@ -3,3 +3,7 @@ numpy
 tensorflow
 scikit-learn
 matplotlib
+mlflow
+joblib
+chardet
+DateTime

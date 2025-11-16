@@ -6,3 +6,14 @@ stages:
     - src/preprocess.py
     outs:
     - data/processed/processed.csv
+  train:
+    cmd: python src/train.py
+    deps:
+    - data/processed/processed.csv
+    - src/train.py
+    outs:
+    - models/best_model.joblib
+    - models/feature_names.joblib
+    - models/logisticregression_model.joblib
+    - models/random_forest_model.joblib
+    - models/scaler.joblib
