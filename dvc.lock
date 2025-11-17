@@ -13,3 +13,25 @@ stages:
     - path: data/processed/processed.csv
       md5: 56685479a001fdc9445a4d66bce62c45
       size: 384105
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/processed.csv
+      md5: 56685479a001fdc9445a4d66bce62c45
+      size: 384105
+    - path: src/train.py
+      md5: a055b8e0ef580e7d0d4c283091f3f398
+      size: 11159
+    outs:
+    - path: models/best_model.joblib
+      md5: c4a11f17cfe212161327bf6a271101ee
+      size: 1119
+    - path: models/feature_names.joblib
+      md5: 14773e99bad1e6e1a7e922485f32b518
+      size: 486
+    - path: models/random_forest_model.joblib
+      md5: add85632262e96ee978e5d17d103913c
+      size: 400457
+    - path: models/scaler.joblib
+      md5: 9e6cf8ddb432d36764de18e16a859959
+      size: 2063
