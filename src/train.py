@@ -13,9 +13,9 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
 
-def prepare_classification_data(data):
+def prepare_features(data):
     """
-    Подготовка данных для задачи классификации БЕЗ утечки данных
+    Создание признаков для временных рядов валют
     """
     data = data.copy()
     
@@ -47,6 +47,27 @@ def prepare_classification_data(data):
     
     return data
 
+def get_feature_names():
+    """
+    Возвращает список всех признаков, используемых в модели
+    """
+    base_features = ['USD_RUB', 'EUR_RUB', 'GBP_RUB', 'day_of_week', 'is_weekend']
+    
+    lag_features = []
+    for lag in [1, 2, 3, 5, 7]:
+        for currency in ['USD_RUB', 'EUR_RUB', 'GBP_RUB']:
+            lag_features.append(f'{currency}_lag_{lag}')
+    
+    ma_features = []
+    for window in [3, 5, 7]:
+        for currency in ['USD_RUB', 'EUR_RUB', 'GBP_RUB']:
+            ma_features.append(f'{currency}_MA_{window}')
+    
+    change_features = ['USD_RUB_change_1', 'USD_RUB_change_3']
+    
+    all_features = base_features + lag_features + ma_features + change_features
+    return [f for f in all_features if f not in ['date', 'USD_RUB_target']]
+
 def main():
     # Создаем директорию для моделей если нет
     os.makedirs('models', exist_ok=True)
@@ -59,24 +80,11 @@ def main():
     
     # Подготавливаем данные для классификации
     print("Подготовка данных для классификации...")
-    data = prepare_classification_data(data)
+    data = prepare_features(data)
     print(f"После подготовки: {len(data)} строк")
     
-    # Определяем числовые признаки
-    numeric_features = [
-        'USD_RUB', 'EUR_RUB', 'GBP_RUB', 
-        'USD_RUB_lag_1', 'USD_RUB_lag_2', 'USD_RUB_lag_3', 'USD_RUB_lag_5', 'USD_RUB_lag_7',
-        'EUR_RUB_lag_1', 'EUR_RUB_lag_2', 'EUR_RUB_lag_3', 'EUR_RUB_lag_5', 'EUR_RUB_lag_7',
-        'GBP_RUB_lag_1', 'GBP_RUB_lag_2', 'GBP_RUB_lag_3', 'GBP_RUB_lag_5', 'GBP_RUB_lag_7',
-        'USD_RUB_MA_3', 'USD_RUB_MA_5', 'USD_RUB_MA_7',
-        'EUR_RUB_MA_3', 'EUR_RUB_MA_5', 'EUR_RUB_MA_7',
-        'GBP_RUB_MA_3', 'GBP_RUB_MA_5', 'GBP_RUB_MA_7',
-        'USD_RUB_change_1', 'USD_RUB_change_3',
-        'day_of_week', 'is_weekend'
-    ]
-    
-    # Оставляем только существующие колонки
-    numeric_features = [col for col in numeric_features if col in data.columns]
+    # Получаем имена признаков
+    feature_columns = get_feature_names()
     
     # Проверяем наличие целевой колонки
     target_column = 'USD_RUB_target'
@@ -85,10 +93,10 @@ def main():
         return
     
     # Подготавливаем данные
-    X = data[numeric_features]
+    X = data[feature_columns]
     y = data[target_column]
     
-    print(f"Используется {len(numeric_features)} числовых признаков")
+    print(f"Используется {len(feature_columns)} числовых признаков")
     print(f"Распределение классов: {y.value_counts().to_dict()}")
     
     # Для временных рядов используем специальное разделение
@@ -166,7 +174,7 @@ def main():
             
             # Логируем параметры и метрики в MLflow
             mlflow.log_param("model", model_name)
-            mlflow.log_param("n_features", len(numeric_features))
+            mlflow.log_param("n_features", len(feature_columns))
             
             mlflow.log_metric("accuracy", accuracy)
             mlflow.log_metric("roc_auc", roc_auc)
@@ -175,7 +183,7 @@ def main():
             mlflow.log_metric("train_size", len(X_train))
             mlflow.log_metric("test_size", len(X_test))
             
-            # ВАЖНО: Логируем модель в MLflow правильно
+            # Логируем модель в MLflow
             mlflow.sklearn.log_model(
                 sk_model=model,
                 artifact_path="model",
@@ -209,7 +217,7 @@ def main():
     if best_model is not None:
         joblib.dump(best_model, "models/best_model.joblib")
         joblib.dump(scaler, "models/scaler.joblib")
-        joblib.dump(numeric_features, "models/feature_names.joblib")
+        joblib.dump(feature_columns, "models/feature_names.joblib")
         
         # Логируем лучшую модель как отдельный артефакт
         with mlflow.start_run(run_name="best_model"):

@@ -209,3 +209,4 @@ __marimo__/
 dvc_remote/
 mlruns/
 models/
+reports/
