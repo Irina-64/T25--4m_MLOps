@@ -1,0 +1,12 @@
+.mlruns
+mlruns
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+.git
+.venv
+data/
+results/
+reports/
