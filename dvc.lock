@@ -35,3 +35,31 @@ stages:
     - path: models/scaler.joblib
       md5: 9e6cf8ddb432d36764de18e16a859959
       size: 2063
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/processed/processed.csv
+      md5: 56685479a001fdc9445a4d66bce62c45
+      size: 384105
+    - path: models/best_model.joblib
+      md5: c4a11f17cfe212161327bf6a271101ee
+      size: 1119
+    - path: models/feature_names.joblib
+      md5: 14773e99bad1e6e1a7e922485f32b518
+      size: 486
+    - path: models/scaler.joblib
+      md5: 9e6cf8ddb432d36764de18e16a859959
+      size: 2063
+    - path: src/evaluate.py
+      md5: 72aac59bc66c0d9e0bd1db5333640610
+      size: 13570
+    outs:
+    - path: reports/eval.html
+      md5: 639fe1c6f9334a989645d137ef2ecb5d
+      size: 2696
+    - path: reports/eval.json
+      md5: cd77defa41b54a0f94d6b195b5b2f05f
+      size: 1365
+    - path: reports/eval_plots.png
+      md5: 630d30a30984a33438f183fabc31ac31
+      size: 277927
