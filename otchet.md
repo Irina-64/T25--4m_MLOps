@@ -49,16 +49,7 @@
 - **F1-Score**: 0.571
 
  Статус проекта:
-- Модель зарегистрирована: light_delay_model v1. Имеет описание
+- Модель зарегистрирована:  flight_delay_model  v1. Имеет описание
 - DVC пайплайн воспроизводится 
 - MLflow отслеживает настроено
 
-Воспроизведение:
-`ash
-Полное воспроизведение
-dvc repro
-
-Отдельные этапы
-dvc repro preprocess
-dvc repro train
-dvc repro evaluate.py
