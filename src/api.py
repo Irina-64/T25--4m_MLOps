@@ -1,25 +1,67 @@
 from fastapi import FastAPI, UploadFile, File
+from fastapi.responses import JSONResponse
 import torch
 import numpy as np
 from pathlib import Path
 import pandas as pd
 import os
 import tempfile
+import logging
+from contextlib import asynccontextmanager
 from src.inference import prepare_sequences, LSTMChurnModel, HIDDEN_SIZE, main
-
-app = FastAPI(title="Churn Prediction Service")
-
-# Загрузка модели и скейлера 
-checkpoint = torch.load("model.pt", map_location=torch.device("cpu"))
-model = LSTMChurnModel(input_size=2, hidden_size=HIDDEN_SIZE)
-model.load_state_dict(checkpoint["model"])
-model.eval()
-
-# Воссоздаем скейлер
 from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-scaler.mean_ = checkpoint["scaler_mean"]
-scaler.scale_ = checkpoint["scaler_scale"]
+
+# Globals to be populated on startup
+model = None
+scaler = None
+device = torch.device("cpu")
+MODEL_PATH = os.getenv("MODEL_PATH", "model.pt")
+SKIP_MODEL_LOAD = os.getenv("SKIP_MODEL_LOAD", "0")
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan handler: load model and scaler on startup, cleanup on shutdown."""
+    logging.basicConfig()
+    logger = logging.getLogger("api")
+    global model, scaler, device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    if SKIP_MODEL_LOAD == "1":
+        logger.info("SKIP_MODEL_LOAD=1, skipping model load (useful for tests)")
+        yield
+        return
+
+    if not os.path.exists(MODEL_PATH):
+        logger.warning(f"Model file not found at {MODEL_PATH}, inference endpoints will return 503")
+        yield
+        return
+
+    try:
+        checkpoint = torch.load(MODEL_PATH, map_location=device)
+
+        scaler = StandardScaler()
+        scaler.mean_ = checkpoint.get("scaler_mean")
+        scaler.scale_ = checkpoint.get("scaler_scale")
+
+        model = LSTMChurnModel(input_size=2, hidden_size=HIDDEN_SIZE)
+        model.load_state_dict(checkpoint["model"])
+        model.to(device)
+        model.eval()
+        logger.info(f"Model loaded from {MODEL_PATH} on device {device}")
+    except Exception:
+        logger.exception("Failed to load model:")
+        model = None
+        scaler = None
+
+    try:
+        yield
+    finally:
+        # Optional cleanup if needed
+        pass
+
+
+app = FastAPI(title="Churn Prediction Service", lifespan=lifespan)
 
 @app.post("/predict")
 async def predict(payload: dict):

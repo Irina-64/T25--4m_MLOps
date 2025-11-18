@@ -11,3 +11,5 @@ prometheus-client
 torch 
 torchvision
 mlflow
+httpx
+python-multipart
