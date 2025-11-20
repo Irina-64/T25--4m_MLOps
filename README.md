@@ -10,6 +10,7 @@ GBP_RUB - курс фунта стерлингов относительно ру
 
 Графики из MLflow UI:  
 
-![График 1](https://raw.githubusercontent.com/darkgoolder/T25--4m_MLOps/6fde65d363bf0e5feae017e79bf0f789910989d7/11.jpg)  
+![График 1](https://github.com/darkgoolder/T25--4m_MLOps/blob/main/images/11.png)  
 
-![График 2](https://raw.githubusercontent.com/darkgoolder/T25--4m_MLOps/6fde65d363bf0e5feae017e79bf0f789910989d7/12.jpg)  
+![График 2](https://github.com/darkgoolder/T25--4m_MLOps/blob/main/images/12.png)  
+
