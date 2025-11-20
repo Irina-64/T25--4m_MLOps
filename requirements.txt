@@ -8,3 +8,6 @@ joblib
 chardet
 DateTime
 seaborn
+fastapi
+uvicorn
+pydantic
