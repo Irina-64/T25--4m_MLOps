@@ -25,7 +25,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 mlflow.set_experiment("ufc_winner_prediction")
 
-# === Обучение модели ===
 print("🚀 Training RandomForest pipeline")
 model = RandomForestClassifier(n_estimators=200, max_depth=8, random_state=42)
 model.fit(X_train, y_train)
