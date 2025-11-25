@@ -1,0 +1,12 @@
+{
+  "episodes": 5,
+  "opponent": "random",
+  "epsilon": 0.1,
+  "win_rate": 0.6,
+  "avg_length": 114.4,
+  "avg_reward": -16.4,
+  "model_hash_before": "a10e524126abbdfba06a0e25bc99dac27226ba3a",
+  "model_hash_after": "f681fc6d60a1021464705a231607f1774b0138dd",
+  "replays_logged": 5,
+  "run_id": "b1cc984c359a4c80b0d68fd2f0654f84"
+}

@@ -1,12 +1,13 @@
-# durka/agents.py
+# Core/agents.py
 import random
-from typing import Any, List, Optional, Tuple
-
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
+import numpy as np
+from src.preprocess import state_to_tensor, decode_card, RANKS, SUITS
+from Core.reward_system import RewardSystem
+from collections import deque
+import os
 
 # helper: lower value = слабее карта (ее удобнее сыграть)
 def _card_value(card, trump_suit):
@@ -92,101 +93,138 @@ def heuristic_agent(game, pid: int):
     # fallback
     return random.choice(legal)
 
-
 class RLAgent:
-    def __init__(self, pid: int, state_size: int, action_size: int, epsilon=0.1):
+    def __init__(self, pid, state_size=None, action_size=50, epsilon=0.1,
+                 buffer_size=5000, batch_size=32, gamma=0.99, lr=0.001,
+                 weights_path="rl_weights.pth"):
         self.pid = pid
-        self.state_size = state_size
         self.action_size = action_size
         self.epsilon = epsilon
+        self.gamma = gamma
+        self.batch_size = batch_size
+        self.weights_path = weights_path
+
+        # устройство
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+        # replay buffer
+        self.memory = deque(maxlen=buffer_size)
+
+        # reward system
+        self.reward_system = RewardSystem()
+
+        if state_size is None:
+            raise ValueError("state_size must be provided or calculated before creating RLAgent")
+
+        # модель
         self.model = nn.Sequential(
-            nn.Linear(state_size, 128), nn.ReLU(), nn.Linear(128, action_size)
-        )
-        self.optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
+            nn.Linear(state_size, 128),
+            nn.ReLU(),
+            nn.Linear(128, action_size)
+        ).to(self.device)
+        self.optimizer = optim.Adam(self.model.parameters(), lr=lr)
         self.loss_fn = nn.MSELoss()
 
-    def state_to_tensor(self, state):
-        vec = []
-        for pid in sorted(state["hand_sizes"].keys()):
-            vec.append(state["hand_sizes"][pid])
-        vec.append(state["deck_count"])
-        vec.append(state["discard_count"])
-        vec.append(len(state["table"]))
-        vec.append(state["attacker"])
-        vec.append(state["defender"])
-        return vec
-
-    def compute_reward(self, game, pid, action, state_before, state_after):
-        reward = 0
-        if state_after["hand_sizes"][pid] > state_before["hand_sizes"][pid]:
-            reward -= state_after["hand_sizes"][pid] - state_before["hand_sizes"][pid]
-        if (
-            action[0] == "defend"
-            and state_after["hand_sizes"][pid] == state_before["hand_sizes"][pid]
-        ):
-            reward += 1
-        if action[0] == "attack":
-            defender = state_before["defender"]
-            if (
-                state_after["hand_sizes"][defender]
-                > state_before["hand_sizes"][defender]
-            ):
-                reward += (
-                    state_after["hand_sizes"][defender]
-                    - state_before["hand_sizes"][defender]
-                )
-        if game.finished:
-            if pid in game.winner_ids:
-                reward += 5
+        # загружаем веса, если они есть и совпадает размер
+        if os.path.exists(self.weights_path):
+            loaded_state_dict = torch.load(self.weights_path, map_location=self.device)
+            first_layer_weight = loaded_state_dict[list(loaded_state_dict.keys())[0]]
+            if first_layer_weight.shape[1] == state_size:
+                self.model.load_state_dict(loaded_state_dict)
+                print(f"[INFO] Loaded RL weights from {self.weights_path}")
             else:
-                reward -= 5
-        return reward
+                print("[INFO] Weight size mismatch, starting fresh.")
+        else:
+            print("[INFO] No pre-existing weights found, starting fresh.")
 
-    def act(self, game, pid):
-        legal_actions = game.legal_actions(pid)
-        if not legal_actions:
-            return None
+    def state_to_tensor(self, state):
+        return state_to_tensor(state).float()
 
-        state_dict = game.get_state(pid)
-        state_vector = self.state_to_tensor(state_dict)
-        state_tensor = torch.tensor(state_vector, dtype=torch.float32).unsqueeze(0)
-
+    def act(self, state, legal_actions):
+        # explore
         if random.random() < self.epsilon:
             return random.choice(legal_actions)
 
+        # exploit
         with torch.no_grad():
-            q_values = self.model(state_tensor).squeeze(0).numpy()
+            s = self.state_to_tensor(state).unsqueeze(0).to(self.device)
+            q_values = self.model(s)[0].cpu().numpy()
 
-        # выбираем индекс наилучшего легального действия
-        q_legal = [q_values[i % self.action_size] for i in range(len(legal_actions))]
-        max_idx = int(np.argmax(q_legal))
-        return legal_actions[max_idx]
+        legal_q = []
+        for action in legal_actions:
+            idx = self.action_to_index(action)
+            legal_q.append(q_values[idx] if idx < len(q_values) else -1e9)
 
-    def learn(self, state, action_idx, reward, next_state, done, gamma=0.99):
-        state_tensor = torch.tensor(state, dtype=torch.float32).unsqueeze(0)
-        next_tensor = torch.tensor(next_state, dtype=torch.float32).unsqueeze(0)
+        best_idx = int(np.argmax(legal_q))
+        return legal_actions[best_idx]
 
-        with torch.no_grad():
+    def learn(self, state, action, next_state, game, done):
+        self.memory.append((state, action, next_state, game, done))
+
+        if len(self.memory) < self.batch_size:
+            return
+
+        batch = random.sample(self.memory, self.batch_size)
+        states, actions, next_states, games, dones = zip(*batch)
+
+        state_tensor = torch.stack([self.state_to_tensor(s) for s in states]).to(self.device)
+        next_tensor = torch.stack([self.state_to_tensor(ns) for ns in next_states]).to(self.device)
+
+        q_pred = self.model(state_tensor)
+        q_target = q_pred.clone().detach()
+
+        for i, (s, a, ns, g, d) in enumerate(batch):
+            idx = self.action_to_index(a)
+            reward = self.reward_system.compute_reward(g, self.pid, a, s, ns)
             target = reward
-            if not done:
-                target += gamma * torch.max(self.model(next_tensor)).item()
+            if not d:
+                ns_tensor = self.state_to_tensor(ns).unsqueeze(0).to(self.device)
+                target += self.gamma * torch.max(self.model(ns_tensor)).item()
+            q_target[i, idx % self.action_size] = target
 
-        pred = self.model(state_tensor)[0, action_idx % self.action_size]
-        target_tensor = torch.tensor(target, dtype=torch.float32)
-        loss = self.loss_fn(pred, target_tensor)
-
+        loss = self.loss_fn(q_pred, q_target)
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
 
-    def filter_illegal_actions(self, action, hand):
-        # action = ('attack', card) или ('defend', n, card) или ('add', card)
-        if action[0] in ["attack", "add"]:
+    def save_weights(self):
+        torch.save(self.model.state_dict(), self.weights_path)
+        print(f"[INFO] RL weights saved to {self.weights_path}")
+
+    def action_to_index(self, action):
+        if action[0] == "pass":
+            return 0
+        if action[0] == "attack":
             card = action[1]
-            if card not in hand:
+            card_id = self.card_to_id(card)
+            return 1 + card_id
+        if action[0] == "defend":
+            attack_card, defend_card = action[1], action[2]
+            a = self.card_to_id(attack_card)
+            d = self.card_to_id(defend_card)
+            return 1 + 52 + a * 52 + d
+        return 0
+
+    def filter_illegal_actions(self, action, hand):
+        if action[0] in ["attack", "add"]:
+            cards = action[1] if isinstance(action[1], list) else [action[1]]
+            if not all(c in hand for c in cards):
                 return ("pass",)
         elif action[0] == "defend":
-            card = action[2]
-            if card not in hand:
+            if action[2] not in hand:
                 return ("pass",)
         return action
+
+    def card_to_id(self, card):
+        if hasattr(card, "rank") and hasattr(card, "suit"):
+            rank = str(card.rank)
+            suit = str(card.suit)
+        elif isinstance(card, tuple):
+            rank, suit = card
+        elif isinstance(card, str):
+            rank, suit = decode_card(card)
+        else:
+            return 0
+        r = RANKS.index(rank)
+        s = SUITS.index(suit)
+        return s * len(RANKS) + r

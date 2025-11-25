@@ -1,0 +1,10517 @@
+{
+  "players": [
+    "RL",
+    "OPP"
+  ],
+  "trump": "♥",
+  "initial_hands": {
+    "RL": [
+      "7♥ (trump)",
+      "A♥ (trump)",
+      "6♠",
+      "Q♠",
+      "Q♣",
+      "10♦"
+    ],
+    "OPP": [
+      "9♥ (trump)",
+      "Q♥ (trump)",
+      "10♠",
+      "K♠",
+      "10♣",
+      "A♦"
+    ]
+  },
+  "steps": [
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 24,
+        "discard_count": 0,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "7♥",
+          "A♥",
+          "6♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 24,
+        "discard_count": 0,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "7♥",
+          "A♥",
+          "6♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "7♥ (trump)",
+          "A♥ (trump)",
+          "6♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "10♠",
+          "K♠",
+          "10♣",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "10♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 24,
+        "discard_count": 0,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "10♠",
+          "K♠",
+          "10♣",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 24,
+        "discard_count": 0,
+        "table": [
+          [
+            "10♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "K♠",
+          "10♣",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "7♥ (trump)",
+          "A♥ (trump)",
+          "6♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "K♠",
+          "10♣",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "add",
+        "10♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 24,
+        "discard_count": 0,
+        "table": [
+          [
+            "10♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "K♠",
+          "10♣",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 24,
+        "discard_count": 0,
+        "table": [
+          [
+            "10♠",
+            null
+          ],
+          [
+            "10♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 4
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "K♠",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "7♥ (trump)",
+          "A♥ (trump)",
+          "6♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "K♠",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 24,
+        "discard_count": 0,
+        "table": [
+          [
+            "10♠",
+            null
+          ],
+          [
+            "10♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 4
+        },
+        "your_hand": [
+          "7♥",
+          "A♥",
+          "6♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 22,
+        "discard_count": 0,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 6
+        },
+        "your_hand": [
+          "7♥",
+          "A♥",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "10♣",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "7♥ (trump)",
+          "A♥ (trump)",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "10♣",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "K♠",
+          "6♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "K♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 22,
+        "discard_count": 0,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "K♠",
+          "6♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 22,
+        "discard_count": 0,
+        "table": [
+          [
+            "K♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "6♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "7♥ (trump)",
+          "A♥ (trump)",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "10♣",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "6♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "7♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 22,
+        "discard_count": 0,
+        "table": [
+          [
+            "K♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 5
+        },
+        "your_hand": [
+          "7♥",
+          "A♥",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "10♣",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 22,
+        "discard_count": 0,
+        "table": [
+          [
+            "K♠",
+            "7♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "10♣",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "10♣",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "6♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 22,
+        "discard_count": 0,
+        "table": [
+          [
+            "K♠",
+            "7♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "6♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "10♣",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "attack",
+        "10♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "10♣",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "add",
+        "10♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "10♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            null
+          ],
+          [
+            "10♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 6
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "defend",
+        "0",
+        "Q♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            null
+          ],
+          [
+            "10♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "10♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "add",
+        "Q♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "10♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 5
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "Q♠",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "10♠",
+            null
+          ],
+          [
+            "Q♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 5
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "defend",
+        "2",
+        "9♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "10♠",
+            null
+          ],
+          [
+            "Q♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "10♠",
+            null
+          ],
+          [
+            "Q♠",
+            "9♥"
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 4
+        },
+        "your_hand": [
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "Q♣",
+          "10♦"
+        ],
+        "OPP": [
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "add",
+        "Q♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "10♠",
+            null
+          ],
+          [
+            "Q♠",
+            "9♥"
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 4
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "Q♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "10♠",
+            null
+          ],
+          [
+            "Q♠",
+            "9♥"
+          ],
+          [
+            "Q♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 3,
+          "1": 4
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "10♦"
+        ],
+        "OPP": [
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 21,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "10♠",
+            null
+          ],
+          [
+            "Q♠",
+            "9♥"
+          ],
+          [
+            "Q♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 3,
+          "1": 4
+        },
+        "your_hand": [
+          "6♣",
+          "7♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 10
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "Q♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "8♦",
+          "10♦",
+          "K♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "Q♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 10
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "J♠",
+          "8♦",
+          "10♦",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 10
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "J♠",
+          "8♦",
+          "10♦",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "8♦",
+          "10♦",
+          "K♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "Q♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "Q♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 10
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "Q♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "Q♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 9
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "8♦",
+          "10♦",
+          "K♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "Q♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 9
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 9
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 9
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 9
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "Q♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "Q♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 9
+        },
+        "your_hand": [
+          "9♥",
+          "Q♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "Q♥",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 8
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "A♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "Q♥",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 8
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "Q♥",
+            "A♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "add",
+        "A♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "Q♥",
+            "A♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "Q♥",
+            "A♥"
+          ],
+          [
+            "A♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 7
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "Q♥",
+            "A♥"
+          ],
+          [
+            "A♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 7
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 9,
+          "1": 7
+        },
+        "your_hand": [
+          "Q♥",
+          "A♥",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "Q♥ (trump)",
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "6♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 9,
+          "1": 7
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣",
+          "6♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "6♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 9,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "Q♥ (trump)",
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "6♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 9,
+          "1": 6
+        },
+        "your_hand": [
+          "Q♥",
+          "A♥",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 6
+        },
+        "your_hand": [
+          "Q♥",
+          "A♥",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "Q♥ (trump)",
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "10♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣",
+          "10♣"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "Q♥ (trump)",
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "Q♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 5
+        },
+        "your_hand": [
+          "Q♥",
+          "A♥",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 9,
+          "1": 5
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "add",
+        "Q♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 9,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "Q♠",
+          "6♣",
+          "7♣"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "Q♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 9,
+          "1": 4
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♥ (trump)",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "1",
+        "A♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "Q♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 9,
+          "1": 4
+        },
+        "your_hand": [
+          "A♥",
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "Q♠",
+            "A♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 4
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 18,
+        "discard_count": 2,
+        "table": [
+          [
+            "10♣",
+            "Q♥"
+          ],
+          [
+            "Q♠",
+            "A♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 4
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "attack",
+        "K♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [
+          [
+            "K♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [
+          [
+            "K♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "attack",
+        "A♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [
+          [
+            "A♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 7
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [
+          [
+            "A♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 7
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦",
+          "A♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "A♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [
+          [
+            "A♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 7
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [
+          [
+            "A♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 7
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "6♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "6♣",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [
+          [
+            "6♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "Q♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [
+          [
+            "6♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "Q♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [
+          [
+            "6♣",
+            "Q♣"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 6,
+        "table": [
+          [
+            "6♣",
+            "Q♣"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 8,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 8,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 8,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "J♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 8,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "7♣",
+          "9♣",
+          "J♣",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 8,
+        "table": [
+          [
+            "J♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "7♣",
+          "9♣",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "7♣",
+          "9♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 16,
+        "discard_count": 8,
+        "table": [
+          [
+            "J♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 15,
+        "discard_count": 8,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "10♠",
+          "7♣",
+          "9♣",
+          "K♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "10♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 15,
+        "discard_count": 8,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "10♠",
+          "7♣",
+          "9♣",
+          "K♣",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 15,
+        "discard_count": 8,
+        "table": [
+          [
+            "10♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "7♣",
+          "9♣",
+          "K♣",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "7♣",
+          "9♣",
+          "K♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "J♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 15,
+        "discard_count": 8,
+        "table": [
+          [
+            "10♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "6♠",
+          "J♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 15,
+        "discard_count": 8,
+        "table": [
+          [
+            "10♠",
+            "J♠"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "6♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "7♣",
+          "9♣",
+          "K♣",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 15,
+        "discard_count": 8,
+        "table": [
+          [
+            "10♠",
+            "J♠"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "7♣",
+          "9♣",
+          "K♣",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 14,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "7♣",
+          "9♣",
+          "K♣",
+          "7♦",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "7♣",
+          "9♣",
+          "K♣",
+          "7♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 14,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 14,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "7♣",
+          "9♣",
+          "K♣",
+          "7♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "K♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 14,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "7♣",
+          "9♣",
+          "K♣",
+          "7♦",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 14,
+        "discard_count": 10,
+        "table": [
+          [
+            "K♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "7♣",
+          "9♣",
+          "7♦",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "7♣",
+          "9♣",
+          "7♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 14,
+        "discard_count": 10,
+        "table": [
+          [
+            "K♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "6♠",
+          "J♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 13,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♥ (trump)",
+          "9♠",
+          "7♣",
+          "9♣",
+          "7♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "9♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 13,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "9♠",
+          "7♣",
+          "9♣",
+          "7♦",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 13,
+        "discard_count": 10,
+        "table": [
+          [
+            "9♥",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "9♠",
+          "7♣",
+          "9♣",
+          "7♦",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♠",
+          "7♣",
+          "9♣",
+          "7♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 13,
+        "discard_count": 10,
+        "table": [
+          [
+            "9♥",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 12,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♥ (trump)",
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♠",
+          "7♣",
+          "9♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "9♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 12,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 6
+        },
+        "your_hand": [
+          "9♠",
+          "7♣",
+          "9♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 12,
+        "discard_count": 10,
+        "table": [
+          [
+            "9♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 5
+        },
+        "your_hand": [
+          "9♠",
+          "7♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♥ (trump)",
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♠",
+          "7♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "9♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 12,
+        "discard_count": 10,
+        "table": [
+          [
+            "9♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 12,
+        "discard_count": 10,
+        "table": [
+          [
+            "9♣",
+            "9♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "9♠",
+          "7♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "add",
+        "9♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 12,
+        "discard_count": 10,
+        "table": [
+          [
+            "9♣",
+            "9♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "9♠",
+          "7♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 12,
+        "discard_count": 10,
+        "table": [
+          [
+            "9♣",
+            "9♥"
+          ],
+          [
+            "9♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 4
+        },
+        "your_hand": [
+          "7♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "7♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 12,
+        "discard_count": 10,
+        "table": [
+          [
+            "9♣",
+            "9♥"
+          ],
+          [
+            "9♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 4
+        },
+        "your_hand": [
+          "6♠",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 10,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♥ (trump)",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "K♥ (trump)",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "K♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 10,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 6
+        },
+        "your_hand": [
+          "K♥",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 10,
+        "discard_count": 10,
+        "table": [
+          [
+            "K♥",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 5
+        },
+        "your_hand": [
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♥ (trump)",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 10,
+        "discard_count": 10,
+        "table": [
+          [
+            "K♥",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 9,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 11,
+          "1": 6
+        },
+        "your_hand": [
+          "9♥",
+          "K♥",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♥ (trump)",
+          "K♥ (trump)",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "K♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 9,
+        "discard_count": 10,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 11,
+          "1": 6
+        },
+        "your_hand": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦",
+          "K♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 9,
+        "discard_count": 10,
+        "table": [
+          [
+            "K♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 11,
+          "1": 5
+        },
+        "your_hand": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♥ (trump)",
+          "K♥ (trump)",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "9♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 9,
+        "discard_count": 10,
+        "table": [
+          [
+            "K♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 11,
+          "1": 5
+        },
+        "your_hand": [
+          "9♥",
+          "K♥",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 9,
+        "discard_count": 10,
+        "table": [
+          [
+            "K♦",
+            "9♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 5
+        },
+        "your_hand": [
+          "K♥",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 9,
+        "discard_count": 10,
+        "table": [
+          [
+            "K♦",
+            "9♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 5
+        },
+        "your_hand": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 6
+        },
+        "your_hand": [
+          "8♥",
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "8♥ (trump)",
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "attack",
+        "6♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 10,
+          "1": 6
+        },
+        "your_hand": [
+          "K♥",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "6♦",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "6♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 9,
+          "1": 6
+        },
+        "your_hand": [
+          "K♥",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "8♥ (trump)",
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "add",
+        "6♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "6♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 9,
+          "1": 6
+        },
+        "your_hand": [
+          "K♥",
+          "6♠",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "6♦",
+            null
+          ],
+          [
+            "6♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 6
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "8♥ (trump)",
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "defend",
+        "0",
+        "8♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "6♦",
+            null
+          ],
+          [
+            "6♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 6
+        },
+        "your_hand": [
+          "8♥",
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "6♦",
+            "8♥"
+          ],
+          [
+            "6♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 5
+        },
+        "your_hand": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "8♦",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "add",
+        "8♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "6♦",
+            "8♥"
+          ],
+          [
+            "6♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 8,
+          "1": 5
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "8♦",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "6♦",
+            "8♥"
+          ],
+          [
+            "6♠",
+            null
+          ],
+          [
+            "8♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "defend",
+        "1",
+        "7♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "6♦",
+            "8♥"
+          ],
+          [
+            "6♠",
+            null
+          ],
+          [
+            "8♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "6♦",
+            "8♥"
+          ],
+          [
+            "6♠",
+            "7♠"
+          ],
+          [
+            "8♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 4
+        },
+        "your_hand": [
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "7♣",
+          "A♣",
+          "7♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "6♦",
+            "8♥"
+          ],
+          [
+            "6♠",
+            "7♠"
+          ],
+          [
+            "8♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 4
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 9
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "8♥ (trump)",
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 9
+        },
+        "your_hand": [
+          "8♥",
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦",
+          "9♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 9
+        },
+        "your_hand": [
+          "8♥",
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦",
+          "9♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦",
+          "A♦"
+        ],
+        "OPP": [
+          "8♥ (trump)",
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "attack",
+        "A♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 9
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦",
+          "A♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "A♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 9
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♥ (trump)",
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "defend",
+        "0",
+        "8♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "A♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 9
+        },
+        "your_hand": [
+          "8♥",
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦",
+          "9♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "A♦",
+            "8♥"
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦",
+          "9♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 12,
+        "table": [
+          [
+            "A♦",
+            "8♥"
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦",
+          "9♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "9♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 8
+        },
+        "your_hand": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦",
+          "9♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [
+          [
+            "9♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 7
+        },
+        "your_hand": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [
+          [
+            "9♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 7
+        },
+        "your_hand": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ],
+        "OPP": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ],
+        "OPP": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "6♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 7
+        },
+        "your_hand": [
+          "6♠",
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [
+          [
+            "6♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♥ (trump)",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ],
+        "OPP": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "K♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [
+          [
+            "6♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "K♥",
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [
+          [
+            "6♠",
+            "K♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ],
+        "OPP": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 14,
+        "table": [
+          [
+            "6♠",
+            "K♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 16,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ],
+        "OPP": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 16,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 16,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ],
+        "OPP": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "A♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 16,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "7♠",
+          "7♣",
+          "A♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 16,
+        "table": [
+          [
+            "A♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "7♠",
+          "7♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ],
+        "OPP": [
+          "7♠",
+          "7♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 8,
+        "discard_count": 16,
+        "table": [
+          [
+            "A♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "9♦",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 7,
+        "discard_count": 16,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "9♦",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "9♦",
+          "10♦"
+        ],
+        "OPP": [
+          "7♠",
+          "8♠",
+          "7♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "6♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 7,
+        "discard_count": 16,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "7♠",
+          "8♠",
+          "7♣",
+          "6♦",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 7,
+        "discard_count": 16,
+        "table": [
+          [
+            "6♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "7♠",
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "9♦",
+          "10♦"
+        ],
+        "OPP": [
+          "7♠",
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "9♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 7,
+        "discard_count": 16,
+        "table": [
+          [
+            "6♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "9♦",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 7,
+        "discard_count": 16,
+        "table": [
+          [
+            "6♦",
+            "9♦"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "7♠",
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 7,
+        "discard_count": 16,
+        "table": [
+          [
+            "6♦",
+            "9♦"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "7♠",
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "7♠",
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "7♠",
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "7♠",
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "7♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "7♠",
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [
+          [
+            "7♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "9♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [
+          [
+            "7♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "9♠",
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [
+          [
+            "7♠",
+            "9♠"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 5
+        },
+        "your_hand": [
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "add",
+        "7♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [
+          [
+            "7♠",
+            "9♠"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 5
+        },
+        "your_hand": [
+          "8♠",
+          "7♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [
+          [
+            "7♠",
+            "9♠"
+          ],
+          [
+            "7♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 4
+        },
+        "your_hand": [
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "1",
+        "9♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [
+          [
+            "7♠",
+            "9♠"
+          ],
+          [
+            "7♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 4
+        },
+        "your_hand": [
+          "9♣",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [
+          [
+            "7♠",
+            "9♠"
+          ],
+          [
+            "7♣",
+            "9♣"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 4
+        },
+        "your_hand": [
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 6,
+        "discard_count": 18,
+        "table": [
+          [
+            "7♠",
+            "9♠"
+          ],
+          [
+            "7♣",
+            "9♣"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 4
+        },
+        "your_hand": [
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 2,
+        "discard_count": 22,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "10♥",
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♥ (trump)",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "10♥ (trump)",
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 2,
+        "discard_count": 22,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "6♥",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 2,
+        "discard_count": 22,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "6♥",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♥ (trump)",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "10♥ (trump)",
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "10♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 2,
+        "discard_count": 22,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "10♥",
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 2,
+        "discard_count": 22,
+        "table": [
+          [
+            "10♥",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♥ (trump)",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 2,
+        "discard_count": 22,
+        "table": [
+          [
+            "10♥",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "6♥",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 1,
+        "discard_count": 22,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "6♥",
+          "10♥",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♥ (trump)",
+          "10♥ (trump)",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦",
+          "Q♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "Q♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 1,
+        "discard_count": 22,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 6
+        },
+        "your_hand": [
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦",
+          "Q♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 1,
+        "discard_count": 22,
+        "table": [
+          [
+            "Q♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "6♥ (trump)",
+          "10♥ (trump)",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "6♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 1,
+        "discard_count": 22,
+        "table": [
+          [
+            "Q♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 7,
+          "1": 5
+        },
+        "your_hand": [
+          "6♥",
+          "10♥",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 1,
+        "discard_count": 22,
+        "table": [
+          [
+            "Q♦",
+            "6♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "10♥",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "10♥ (trump)",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 1,
+        "discard_count": 22,
+        "table": [
+          [
+            "Q♦",
+            "6♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 24,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "10♥ (trump)",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 24,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "10♥",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 24,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "10♥",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "10♥ (trump)",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "8♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 24,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 6
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "8♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 24,
+        "table": [
+          [
+            "8♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "10♥ (trump)",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "10♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 24,
+        "table": [
+          [
+            "8♣",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 6,
+          "1": 5
+        },
+        "your_hand": [
+          "10♥",
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 24,
+        "table": [
+          [
+            "8♣",
+            "10♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 5
+        },
+        "your_hand": [
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 24,
+        "table": [
+          [
+            "8♣",
+            "10♥"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "attack",
+        "A♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 5,
+          "1": 5
+        },
+        "your_hand": [
+          "A♠",
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "A♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 5
+        },
+        "your_hand": [
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "add",
+        "A♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "A♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 5
+        },
+        "your_hand": [
+          "J♣",
+          "K♣",
+          "A♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "A♠",
+            null
+          ],
+          [
+            "A♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 3,
+          "1": 5
+        },
+        "your_hand": [
+          "J♣",
+          "K♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "J♣",
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "defend",
+        "0",
+        "J♥"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "A♠",
+            null
+          ],
+          [
+            "A♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 3,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "A♠",
+            "J♥"
+          ],
+          [
+            "A♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 3,
+          "1": 4
+        },
+        "your_hand": [
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "J♣",
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "add",
+        "J♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "A♠",
+            "J♥"
+          ],
+          [
+            "A♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 3,
+          "1": 4
+        },
+        "your_hand": [
+          "J♣",
+          "K♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "A♠",
+            "J♥"
+          ],
+          [
+            "A♣",
+            null
+          ],
+          [
+            "J♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 4
+        },
+        "your_hand": [
+          "K♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "A♠",
+            "J♥"
+          ],
+          [
+            "A♣",
+            null
+          ],
+          [
+            "J♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 4
+        },
+        "your_hand": [
+          "8♠",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 8
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 8
+        },
+        "your_hand": [
+          "K♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 8
+        },
+        "your_hand": [
+          "K♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "8♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 8
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "8♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 7
+        },
+        "your_hand": [
+          "J♥",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "add",
+        "8♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "8♠",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 7
+        },
+        "your_hand": [
+          "J♥",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "8♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "8♠",
+            null
+          ],
+          [
+            "8♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 6
+        },
+        "your_hand": [
+          "J♥",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "1",
+        "10♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "8♠",
+            null
+          ],
+          [
+            "8♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 6
+        },
+        "your_hand": [
+          "K♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "8♠",
+            null
+          ],
+          [
+            "8♦",
+            "10♦"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 1,
+          "1": 6
+        },
+        "your_hand": [
+          "K♣"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♣"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "8♠",
+            null
+          ],
+          [
+            "8♦",
+            "10♦"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 1,
+          "1": 6
+        },
+        "your_hand": [
+          "J♥",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 6
+        },
+        "your_hand": [
+          "J♥",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "8♠",
+          "K♣",
+          "8♦",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 6
+        },
+        "your_hand": [
+          "8♠",
+          "K♣",
+          "8♦",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 6
+        },
+        "your_hand": [
+          "8♠",
+          "K♣",
+          "8♦",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "8♠",
+          "K♣",
+          "8♦",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "attack",
+        "7♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 6
+        },
+        "your_hand": [
+          "J♥",
+          "A♠",
+          "J♣",
+          "A♣",
+          "7♦",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "7♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "8♠",
+          "K♣",
+          "8♦",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "defend",
+        "0",
+        "8♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "7♦",
+            null
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 4,
+          "1": 5
+        },
+        "your_hand": [
+          "8♠",
+          "K♣",
+          "8♦",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "7♦",
+            "8♦"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 3,
+          "1": 5
+        },
+        "your_hand": [
+          "8♠",
+          "K♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "8♠",
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 26,
+        "table": [
+          [
+            "7♦",
+            "8♦"
+          ]
+        ],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 3,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 3,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "8♠",
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "attack",
+        "8♠"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 3,
+          "1": 5
+        },
+        "your_hand": [
+          "8♠",
+          "K♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [
+          [
+            "8♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 5
+        },
+        "your_hand": [
+          "K♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [
+          [
+            "8♠",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 5
+        },
+        "your_hand": [
+          "K♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 6
+        },
+        "your_hand": [
+          "K♣",
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "take"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 6
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 6
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "K♣",
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "attack",
+        "K♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 2,
+          "1": 6
+        },
+        "your_hand": [
+          "K♣",
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [
+          [
+            "K♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 1,
+          "1": 6
+        },
+        "your_hand": [
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "defend",
+        "0",
+        "A♣"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [
+          [
+            "K♣",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 1,
+          "1": 6
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "A♠",
+          "J♣",
+          "A♣",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [
+          [
+            "K♣",
+            "A♣"
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 1,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "A♠",
+          "J♣",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 28,
+        "table": [
+          [
+            "K♣",
+            "A♣"
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 1,
+          "1": 5
+        },
+        "your_hand": [
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 30,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 1,
+          "1": 5
+        },
+        "your_hand": [
+          "10♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 30,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 1,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "A♠",
+          "J♣",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 30,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 1,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "A♠",
+          "J♣",
+          "J♦"
+        ]
+      },
+      "hands_after": {
+        "RL": [
+          "10♦"
+        ],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "attack",
+        "10♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 30,
+        "table": [],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 1,
+          "1": 5
+        },
+        "your_hand": [
+          "10♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 30,
+        "table": [
+          [
+            "10♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 0,
+          "1": 5
+        },
+        "your_hand": []
+      },
+      "hands_after": {
+        "RL": [],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣",
+          "J♦"
+        ]
+      }
+    },
+    {
+      "player": 1,
+      "action": [
+        "defend",
+        "0",
+        "J♦"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 30,
+        "table": [
+          [
+            "10♦",
+            null
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 0,
+          "1": 5
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "A♠",
+          "J♣",
+          "J♦"
+        ]
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 30,
+        "table": [
+          [
+            "10♦",
+            "J♦"
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 0,
+          "1": 4
+        },
+        "your_hand": [
+          "J♥",
+          "8♠",
+          "A♠",
+          "J♣"
+        ]
+      },
+      "hands_after": {
+        "RL": [],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣"
+        ]
+      }
+    },
+    {
+      "player": 0,
+      "action": [
+        "pass"
+      ],
+      "state_before": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 30,
+        "table": [
+          [
+            "10♦",
+            "J♦"
+          ]
+        ],
+        "attacker": 0,
+        "defender": 1,
+        "turn_order": [
+          0,
+          1
+        ],
+        "finished": false,
+        "winners": [],
+        "hand_sizes": {
+          "0": 0,
+          "1": 4
+        },
+        "your_hand": []
+      },
+      "state_after": {
+        "trump_suit": "♥",
+        "deck_count": 0,
+        "discard_count": 32,
+        "table": [],
+        "attacker": 1,
+        "defender": 0,
+        "turn_order": [
+          1,
+          0
+        ],
+        "finished": true,
+        "winners": [
+          0
+        ],
+        "hand_sizes": {
+          "0": 0,
+          "1": 4
+        },
+        "your_hand": []
+      },
+      "hands_after": {
+        "RL": [],
+        "OPP": [
+          "J♥ (trump)",
+          "8♠",
+          "A♠",
+          "J♣"
+        ]
+      }
+    }
+  ],
+  "winner": [
+    0
+  ],
+  "timestamp": "2025-11-17T13:55:42"
+}
