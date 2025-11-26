@@ -1,147 +1,121 @@
-# src\evaluate.py
-import sys, os
-
-# Добавляет корневую директорию проекта в PYTHONPATH
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+# src/evaluate.py
+import sys
+import os
 import json
-import argparse
-import mlflow
-import numpy as np
 import torch
-from sklearn.metrics import (
-    roc_auc_score,
-    precision_score,
-    recall_score,
-    f1_score,
-    confusion_matrix,
-)
+import random
+import numpy as np
+repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # T25--4m_MLOps
+if repo_root not in sys.path:
+    sys.path.insert(0, repo_root)
+import mlflow
+from sklearn.metrics import roc_auc_score, precision_score, recall_score, confusion_matrix
 
-from Core.agents import RLAgent
+from Core.core import DurakGame
+from Core.agents import RLAgent, heuristic_agent
+from src.preprocess import state_to_tensor
 
+WEIGHTS_PATH = "rl_weights.pth"
+REPORTS_DIR = "reports"
+os.makedirs(REPORTS_DIR, exist_ok=True)
+REPORT_PATH = os.path.join(REPORTS_DIR, "eval.json")
+TOTAL_GAMES = 100
 
-MODEL_PATH = "rl_agent_model.pth"
-REPORT_DIR = "reports/eval.json"
+def play_rl_vs_heuristic(rl_agent):
+    """Запуск одной игры без трассировки ходов"""
+    game = DurakGame(["RL", "HEUR"])
+    pid_rl = 0
+    total_reward = 0
 
+    while not game.finished:
+        pid = game.turn_order[0]
+        state_before = game.get_state(pid)
+        legal = game.legal_actions(pid)
 
-def load_test_data(path="replays/test_replays.json"):
-    """
-    Загружает тестовый датасет реплеев.
-    Ожидается формат:
-    [
-        {"state": [...], "action": int, "reward": float, "done": bool},
-        ...
-    ]
-    """
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        if pid == pid_rl:
+            if not legal:
+                action = ("pass",)
+            else:
+                action = rl_agent.act(state_before, legal)
+                action = rl_agent.filter_illegal_actions(action, game.players[pid].hand)
 
+            state_after = game.get_state(pid)
+            reward = rl_agent.reward_system.compute_reward(game, pid, action, state_before, state_after)
+            total_reward += reward
 
-def evaluate_model(model, test_data):
-    """
-    Прогоняет модель через тестовые состояния и возвращает метрики.
-    """
+            rl_agent.learn(state_before, action, state_after, game, done=game.finished)
+        else:
+            action = heuristic_agent(game, pid)
 
-    y_true = []
-    y_pred = []
+        game.step(pid, action)
 
-    for sample in test_data:
-        state = torch.tensor(sample["state"], dtype=torch.float32).unsqueeze(0)
-        true_label = sample["label"]
-
-        with torch.no_grad():
-            logits = model(state)
-            prob = torch.sigmoid(logits).item()
-
-        y_pred.append(prob)
-        y_true.append(true_label)
-
-    y_true = np.array(y_true)
-    y_pred = np.array(y_pred)
-
-    # Бинаризация прогнозов
-    y_bin = (y_pred > 0.5).astype(int)
-
-    # Метрики
-    return {
-        "roc_auc": float(roc_auc_score(y_true, y_pred)),
-        "precision": float(precision_score(y_true, y_bin)),
-        "recall": float(recall_score(y_true, y_bin)),
-        "f1": float(f1_score(y_true, y_bin)),
-        "confusion_matrix": confusion_matrix(y_true, y_bin).tolist(),
-    }
-
-
-def save_report(report: dict, path=REPORT_DIR):
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=4, ensure_ascii=False)
-    print(f"[INFO] Report saved to {path}")
-
-
-def register_model_mlflow(run_id, name="durak_rl_model"):
-    """
-    Регистрирует модель в MLflow Model Registry.
-    """
-    model_uri = f"runs:/{run_id}/model"
-    print(f"[MLFLOW] Registering model: {model_uri}")
-
-    result = mlflow.register_model(model_uri, name)
-    print(f"[MLFLOW] Registered as version: {result.version}")
-
+    rl_agent.save_weights()
+    return total_reward, game.winner_ids
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--test", default="replays/test_replays.json",
-                        help="Путь к тестовому датасету")
-    parser.add_argument("--register", action="store_true",
-                        help="Зарегистрировать модель в MLflow Registry")
-    args = parser.parse_args()
+    temp_game = DurakGame(["RL", "HEUR"])
+    state0 = state_to_tensor(temp_game.get_state(0))
+    state_size = len(state0)
 
-    # MLflow
-    mlflow.set_experiment("durak-evaluation")
+    rl_agent = RLAgent(pid=0, state_size=state_size, action_size=50,
+                       epsilon=0.1, weights_path=WEIGHTS_PATH)
+
+    rewards = []
+    y_true = []
+    y_scores = []
 
     with mlflow.start_run() as run:
-        run_id = run.info.run_id
-        print(f"[MLFLOW] Run ID: {run_id}")
+        for g in range(TOTAL_GAMES):
+            reward, winners = play_rl_vs_heuristic(rl_agent)
+            rewards.append(reward)
+            # true = 1 если RL победил
+            y_true.append(1 if 0 in winners else 0)
+            # score = средний reward за игру
+            y_scores.append(reward)
 
-        # Загружаем тестовые данные
-        test_data = load_test_data(args.test)
-        print(f"[INFO] Loaded {len(test_data)} test samples")
+        # метрики
+        try:
+            roc = roc_auc_score(y_true, y_scores)
+        except ValueError:
+            roc = 0.0
+        precision = precision_score(y_true, [1 if s > 0 else 0 for s in y_scores], zero_division=0)
+        recall = recall_score(y_true, [1 if s > 0 else 0 for s in y_scores], zero_division=0)
+        cm = confusion_matrix(y_true, [1 if s > 0 else 0 for s in y_scores]).tolist()
+        win_rate = sum(y_true) / TOTAL_GAMES
+        avg_reward = sum(rewards) / TOTAL_GAMES
 
-        # Загружаем модель
-        agent = RLAgent(pid=0, state_size=len(test_data[0]["state"]), action_size=50)
-        agent.model.load_state_dict(torch.load(MODEL_PATH))
-        model = agent.model
-        print(f"[INFO] RL model loaded")
+        report = {
+            "roc_auc": roc,
+            "precision": precision,
+            "recall": recall,
+            "confusion_matrix": cm,
+            "average_reward": avg_reward,
+            "win_rate": win_rate,
+            "total_games": TOTAL_GAMES
+        }
 
-        # ОЦЕНКА
-        metrics = evaluate_model(model, test_data)
+        # сохраняем локально
+        with open(REPORT_PATH, "w") as f:
+            json.dump(report, f, indent=4)
 
-        # ЛОГИРУЕМ В MLflow
-        for k, v in metrics.items():
-            if k == "confusion_matrix":
-                mlflow.log_dict({k: v}, f"confmat.json")
-            else:
-                mlflow.log_metric(k, v)
+        print("=== Evaluation Report ===")
+        print(json.dumps(report, indent=4))
 
-        # СОХРАНЯЕМ ОТЧЁТ
-        save_report(metrics)
+        # логируем веса как артефакт
+        if os.path.exists(WEIGHTS_PATH):
+            mlflow.log_artifact(WEIGHTS_PATH, artifact_path="weights")
+        # логируем eval.json как артефакт
+        mlflow.log_artifact(REPORT_PATH, artifact_path="eval_reports")
 
-        # Логируем отчёт как артефакт
-        mlflow.log_artifact(REPORT_DIR)
+        # регистрация модели в MLflow Model Registry
+        model_name = "durak_rl"
+        try:
+            mlflow.register_model(f"runs:/{run.info.run_id}/model", model_name)
+        except Exception as e:
+            print(f"[WARNING] Модель не зарегистрирована: {e}")
 
-        # Регистрируем модель
-        if args.register:
-            mlflow.pytorch.log_model(model, "model")
-            register_model_mlflow(run_id)
-
-        print("\n=== Evaluation finished ===")
-        print(json.dumps(metrics, indent=2))
-
+        print(f"=== MODEL REGISTERED: {model_name} ===")
+        print(f"Run ID: {run.info.run_id}")
 
 if __name__ == "__main__":
     main()
-
-
-
-# python src/evaluate.py --test replays/replay_20251113_145258 copy.json
