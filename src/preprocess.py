@@ -149,5 +149,60 @@ def preprocess_data():
     
     return data
 
+def prepare_features(data):
+    """
+    Создание признаков для временных рядов валют
+    (перенесено из train.py для устранения дублирования)
+    """
+    data = data.copy()
+    
+    # Сортируем по дате
+    data = data.sort_values('date').reset_index(drop=True)
+    
+    # Создаем целевую переменную - направление изменения USD_RUB на следующий день
+    data['USD_RUB_target'] = (data['USD_RUB'].shift(-1) > data['USD_RUB']).astype(int)
+    
+    # Создаем признаки БЕЗ утечки данных
+    for lag in [1, 2, 3, 5, 7]:
+        data[f'USD_RUB_lag_{lag}'] = data['USD_RUB'].shift(lag)
+        data[f'EUR_RUB_lag_{lag}'] = data['EUR_RUB'].shift(lag)
+        data[f'GBP_RUB_lag_{lag}'] = data['GBP_RUB'].shift(lag)
+    
+    for window in [3, 5, 7]:
+        data[f'USD_RUB_MA_{window}'] = data['USD_RUB'].shift(1).rolling(window=window, min_periods=1).mean()
+        data[f'EUR_RUB_MA_{window}'] = data['EUR_RUB'].shift(1).rolling(window=window, min_periods=1).mean()
+        data[f'GBP_RUB_MA_{window}'] = data['GBP_RUB'].shift(1).rolling(window=window, min_periods=1).mean()
+    
+    data['USD_RUB_change_1'] = data['USD_RUB'] - data['USD_RUB'].shift(1)
+    data['USD_RUB_change_3'] = data['USD_RUB'] - data['USD_RUB'].shift(3)
+    
+    # Удаляем строки с пропусками
+    data = data.dropna()
+    
+    return data
+
+def get_feature_names():
+    """
+    Возвращает список всех признаков, используемых в модели
+    (перенесено из train.py для устранения дублирования)
+    """
+    base_features = ['USD_RUB', 'EUR_RUB', 'GBP_RUB', 'day_of_week', 'is_weekend']
+    
+    lag_features = []
+    for lag in [1, 2, 3, 5, 7]:
+        for currency in ['USD_RUB', 'EUR_RUB', 'GBP_RUB']:
+            lag_features.append(f'{currency}_lag_{lag}')
+    
+    ma_features = []
+    for window in [3, 5, 7]:
+        for currency in ['USD_RUB', 'EUR_RUB', 'GBP_RUB']:
+            ma_features.append(f'{currency}_MA_{window}')
+    
+    change_features = ['USD_RUB_change_1', 'USD_RUB_change_3']
+    
+    all_features = base_features + lag_features + ma_features + change_features
+    return [f for f in all_features if f not in ['date', 'USD_RUB_target']]
+
 if __name__ == "__main__":
     preprocess_data()
+

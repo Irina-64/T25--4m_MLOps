@@ -1,0 +1,56 @@
+﻿import pytest
+from fastapi.testclient import TestClient
+import sys
+import os
+
+# Добавляем корневую директорию в путь для импортов
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.api import app
+
+@pytest.fixture
+def client():
+    """
+    Фикстура для тестового клиента FastAPI
+    """
+    with TestClient(app) as test_client:
+        yield test_client
+
+@pytest.fixture
+def sample_input_data():
+    """
+    Фикстура с тестовыми данными для предсказания
+    """
+    return {
+        "USD_RUB": 90.5,
+        "EUR_RUB": 98.2,
+        "GBP_RUB": 115.1,
+        "day_of_week": 2,
+        "is_weekend": 0,
+        "USD_RUB_lag_1": 90.3,
+        "USD_RUB_lag_2": 90.1,
+        "USD_RUB_lag_3": 89.8,
+        "USD_RUB_lag_5": 89.5,
+        "USD_RUB_lag_7": 89.2,
+        "EUR_RUB_lag_1": 98.0,
+        "EUR_RUB_lag_2": 97.8,
+        "EUR_RUB_lag_3": 97.5,
+        "EUR_RUB_lag_5": 97.2,
+        "EUR_RUB_lag_7": 96.9,
+        "GBP_RUB_lag_1": 114.8,
+        "GBP_RUB_lag_2": 114.5,
+        "GBP_RUB_lag_3": 114.2,
+        "GBP_RUB_lag_5": 113.9,
+        "GBP_RUB_lag_7": 113.6,
+        "USD_RUB_MA_3": 90.1,
+        "USD_RUB_MA_5": 89.9,
+        "USD_RUB_MA_7": 89.7,
+        "EUR_RUB_MA_3": 97.8,
+        "EUR_RUB_MA_5": 97.6,
+        "EUR_RUB_MA_7": 97.4,
+        "GBP_RUB_MA_3": 114.5,
+        "GBP_RUB_MA_5": 114.3,
+        "GBP_RUB_MA_7": 114.1,
+        "USD_RUB_change_1": 0.2,
+        "USD_RUB_change_3": 0.7
+    }
