@@ -4,6 +4,7 @@ import os
 import joblib
 import mlflow
 import pandas as pd
+from mlflow.tracking import MlflowClient
 from sklearn.metrics import (
     accuracy_score,
     confusion_matrix,
@@ -33,7 +34,7 @@ model = joblib.load(model_path)
 y_pred = model.predict(X_test)
 y_proba = (
     model.predict_proba(X_test)[:, 1] if hasattr(model, "predict_proba") else y_pred
-)  # noqa: E501
+)
 
 metrics = {
     "roc_auc": float(roc_auc_score(y_test, y_proba)),
@@ -52,9 +53,18 @@ print(json.dumps(metrics, indent=4))
 
 mlflow.set_experiment("ufc_winner_prediction")
 
-with mlflow.start_run(run_name="model_evaluation"):
+with mlflow.start_run(run_name="model_evaluation") as run:
     for key, val in metrics.items():
         if isinstance(val, (int, float)):
             mlflow.log_metric(key, val)
+
     mlflow.log_artifact(report_path)
-    mlflow.sklearn.log_model(model, "model")
+
+    mlflow.sklearn.log_model(
+        model, artifact_path="model", registered_model_name="ufc_winner_model"
+    )
+
+client = MlflowClient()
+latest = client.get_latest_versions("ufc_winner_model", stages=["None"])[0]
+
+print(f"🎯 Модель успешно зарегистрирована! Версия: {latest.version}")
