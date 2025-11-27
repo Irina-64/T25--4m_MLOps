@@ -214,3 +214,30 @@ mlflow.db
 *.dvc
 data/
 dvc_remote/
+# Airflow logs
+logs/
+airflow/logs/
+
+# Airflow PID files
+*.pid
+airflow-webserver.pid
+airflow-scheduler.pid
+airflow-worker.pid
+
+# Airflow database
+airflow.db
+
+# Airflow configuration
+airflow.cfg
+
+# Airflow DAG serialization files
+unittests.cfg
+
+# Airflow temporary files
+airflow/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

@@ -29,7 +29,8 @@ BATCH_SIZE = 64
 EPOCHS = 50
 HIDDEN_SIZE = 64
 
-df = pd.read_csv("C:/Users/Lenovo/go/RailScan/T25--4m_MLOps/data/processed/processed.csv")
+def main(processed_path: str = 'data/processed/processed.csv', model_path: str = 'model.pt'):
+    df = pd.read_csv(processed_path)
 
 # Агрегируем по пользователю и дню
 agg = df.groupby(["user_id", "day"]).agg(
@@ -123,6 +124,18 @@ with mlflow.start_run():
         "model": model.state_dict(),
         "scaler_mean": scaler.mean_,
         "scaler_scale": scaler.scale_
-    }, "model.pt")
-    mlflow.log_artifact("model.pt")
-    mlflow.log_artifact("C:/Users/Lenovo/go/RailScan/T25--4m_MLOps/data/processed/processed.csv")
+    }, model_path)
+    mlflow.log_artifact(model_path)
+    try:
+        mlflow.log_artifact(processed_path)
+    except Exception:
+        pass
+
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--processed-path', dest='processed_path', default='data/processed/processed.csv')
+    parser.add_argument('--model-path', dest='model_path', default='model.pt')
+    args, _ = parser.parse_known_args()
+    main(args.processed_path, args.model_path)
