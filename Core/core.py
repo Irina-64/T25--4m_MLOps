@@ -1,4 +1,4 @@
-# durak.py
+# Core/durak.py
 # Реализация Подкидного дурака (минимально необходимая логика) в процедурно-ООП стиле.
 # Поддерживает:
 # - 36-карточную колоду: 6,7,8,9,10,J,Q,K,A
@@ -84,6 +84,7 @@ class Player:
         self.name = name
         self.id = pid
         self.hand: List[Card] = []
+        self.hand_history: List[Card] = [] 
 
     def receive(self, cards: List[Card]):
         self.hand.extend(cards)
@@ -91,7 +92,9 @@ class Player:
     def remove(self, card: Card):
         for i, c in enumerate(self.hand):
             if c == card:
-                return self.hand.pop(i)
+                removed = self.hand.pop(i)
+                self.hand_history.append(removed)  # <-- сохраняем в историю
+                return removed
         raise ValueError("card not in hand")
 
     def has_card(self, card: Card) -> bool:
@@ -414,7 +417,6 @@ class DurakGame:
 
     # ---------- Observability for ML ----------
     def get_state(self, pid: Optional[int] = None) -> Dict[str, Any]:
-        """Возвращает представление состояния. Если pid указан, даёт инфо для этого игрока."""
         state = {}
         state["trump_suit"] = self.trump_suit
         state["deck_count"] = len(self.deck)
@@ -428,8 +430,11 @@ class DurakGame:
         state["turn_order"] = list(self.turn_order)
         state["finished"] = self.finished
         state["winners"] = self.winner_ids
-        # hands sizes
         state["hand_sizes"] = {p.id: len(p.hand) for p in self.players}
+        
+        # hand_history для RewardSystem
+        state["hand_history"] = {p.id: p.hand_history for p in self.players}
+        
         if pid is not None:
             p = self.players[pid]
             state["your_hand"] = [c.__repr__() for c in p.hand]

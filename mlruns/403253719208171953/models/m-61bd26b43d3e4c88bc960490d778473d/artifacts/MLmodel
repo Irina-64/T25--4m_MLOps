@@ -1,0 +1,23 @@
+artifact_path: file:///C:/Users/ilua2/OneDrive/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9_%D1%81%D1%82%D0%BE%D0%BB/%D0%A5%D0%9B%D0%90%D0%9C/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/T25--4m_MLOps/mlruns/403253719208171953/models/m-61bd26b43d3e4c88bc960490d778473d/artifacts
+flavors:
+  python_function:
+    config:
+      device: null
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.12.2
+  pytorch:
+    code: null
+    model_data: data
+    pytorch_version: 2.9.0+cpu
+mlflow_version: 3.6.0
+model_id: m-61bd26b43d3e4c88bc960490d778473d
+model_size_bytes: 355365
+model_uuid: m-61bd26b43d3e4c88bc960490d778473d
+prompts: null
+run_id: 5f44b39f82a14917ad3a753077841469
+utc_time_created: '2025-11-26 18:23:11.583905'

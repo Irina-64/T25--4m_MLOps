@@ -1,4 +1,4 @@
-
+# src\train.py
 """
 src/train.py — обучение RL-агента для игры в дурака с полным логированием через MLflow.
 Использует play_demo_game() из Core/demo.py без изменений.
@@ -8,6 +8,10 @@ src/train.py — обучение RL-агента для игры в дурак�
 - модель RL
 - реплеи
 """
+import sys, os
+
+# Добавляет корневую директорию проекта в PYTHONPATH
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import sys
 from pathlib import Path
