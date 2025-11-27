@@ -1,4 +1,5 @@
 import pandas as pd
+from feast import FeatureStore
 from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, TrainingArguments
 from datasets import Dataset
 from nltk.translate.bleu_score import corpus_bleu, SmoothingFunction
@@ -6,9 +7,28 @@ import mlflow
 import mlflow.transformers
 import torch
 
-# Загрузка данных
-train_df = pd.read_csv("data/processed/train.csv")
-test_df = pd.read_csv("data/processed/test.csv")
+
+def load_from_feast():
+    # Забираем фичи из оффлайн хранилища Feast и возвращаем train/test сплиты
+    store = FeatureStore(repo_path="feature_repo")
+    entity_df = pd.read_csv("data/features/detox_features.csv")[["sample_id", "event_timestamp"]]
+    full_df = store.get_historical_features(
+        entity_df=entity_df,
+        features=[
+            "detox_features:split",
+            "detox_features:input_text",
+            "detox_features:target_text",
+        ],
+    ).to_df()
+    full_df = full_df.sort_values("sample_id").reset_index(drop=True)
+    train_df = full_df[full_df["split"] == "train"][["input_text", "target_text"]].reset_index(drop=True)
+    test_df = full_df[full_df["split"] == "test"][["input_text", "target_text"]].reset_index(drop=True)
+    if train_df.empty or test_df.empty:
+        raise ValueError("Feast вернул пустые данные. Проверьте, что materialize выполнен и split заполнен.")
+    return train_df, test_df
+
+
+train_df, test_df = load_from_feast()
 train_dataset = Dataset.from_pandas(train_df)
 test_dataset = Dataset.from_pandas(test_df)
 

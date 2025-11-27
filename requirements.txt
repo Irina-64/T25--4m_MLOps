@@ -13,3 +13,6 @@ evaluate==0.4.3
 fastapi
 uvicorn
 pydantic
+pytest
+httpx
+feast
