@@ -13,3 +13,4 @@ torchvision
 mlflow
 httpx
 python-multipart
+apache-airflow
