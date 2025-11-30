@@ -1,8 +1,5 @@
 import pandas as pd
-from pathlib import Path
 import os
-import numpy as np
-from sklearn.preprocessing import StandardScaler
 import argparse
 
 SEQ_LEN = 335

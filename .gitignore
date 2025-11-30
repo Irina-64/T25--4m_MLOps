@@ -241,3 +241,12 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+.github/workflows/ci.yml
+
+# Feast
+feature_store.db      # SQLite онлайн/регистрационный стор
+registry.db           # если используется Feast registry в sqlite
+*.parquet             # если создаёшь локальные parquet файлы (можно исключить, если нужны для репо)
+*.csv                 # raw csv-файлы больших данных (если не нужны в репо)
+feast_log
