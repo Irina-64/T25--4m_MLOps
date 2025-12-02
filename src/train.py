@@ -12,18 +12,48 @@ from sklearn.metrics import (
 import mlflow
 import mlflow.sklearn
 import numpy as np
+from datetime import datetime
+from feast import FeatureStore
 
 warnings.filterwarnings("ignore")
 
+# Инициализация Feast Feature Store
+fs = FeatureStore(repo_path="feature_repo")
 
+# Загружаем user_id для создания entity dataframe
 PROCESSED_DATA_PATH = "/workspace/data/processed/processed.csv"
-
 if not os.path.exists(PROCESSED_DATA_PATH):
-    raise FileNotFoundError(f"Файл не найден: {PROCESSED_DATA_PATH}")
+    PROCESSED_DATA_PATH = "data/processed/processed.csv"
 
-features = pd.read_csv(PROCESSED_DATA_PATH)
+df_meta = pd.read_csv(PROCESSED_DATA_PATH)[["user_id", "churn"]]
 
-X = features.drop(columns=["user_id", "churn"])
+# Создаем entity dataframe с timestamp
+entity_df = df_meta[["user_id"]].copy()
+entity_df["event_timestamp"] = datetime(2024, 12, 1)
+
+# Получаем признаки из Feast offline store
+features_df = fs.get_historical_features(
+    entity_df=entity_df,
+    features=["user_features:all_sum", "user_features:all_mean", "user_features:all_std",
+              "user_features:all_count", "user_features:all_max", "user_features:all_min",
+              "user_features:last3m_sum", "user_features:last3m_mean", "user_features:last3m_std",
+              "user_features:last3m_count", "user_features:last3m_max", "user_features:last3m_min",
+              "user_features:last1m_sum", "user_features:last1m_mean", "user_features:last1m_std",
+              "user_features:last1m_count", "user_features:last1m_max", "user_features:last1m_min",
+              "user_features:active_days", "user_features:avg_gap_days", "user_features:max_gap_days",
+              "user_features:days_since_last", "user_features:income_share", "user_features:income_days",
+              "user_features:outcome_days", "user_features:has_gap_30d", "user_features:weekend_ratio",
+              "user_features:activity_trend_sep_nov"]
+).to_df()
+
+# Убираем префикс из названий колонок
+features_df.columns = [col.replace("user_features:", "") for col in features_df.columns]
+
+# Объединяем с целевой переменной
+features = features_df.merge(df_meta[["user_id", "churn"]], on="user_id", how="left")
+
+# Подготовка данных для обучения
+X = features.drop(columns=["user_id", "event_timestamp", "churn"], errors="ignore")
 y = features["churn"]
 
 X_train, X_test, y_train, y_test = train_test_split(
