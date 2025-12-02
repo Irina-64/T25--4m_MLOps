@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1-runtime-ubuntu22.04
+FROM ubuntu:22.04
 
 # Создаем виртуальное окружение и устанавливаем Python
 ENV DEBIAN_FRONTEND=noninteractive
@@ -22,8 +22,8 @@ WORKDIR /app
 # Устанавливаем зависимости для src
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir \
-    torch==2.1.0 \
-    torchvision==0.16.0 \
+    torch==2.1.0+cpu \
+    torchvision==0.16.0+cpu \
     pandas==2.1.1 \
     numpy==1.26.0 \
     scikit-learn==1.3.1 \
@@ -41,4 +41,4 @@ COPY src/ ./src
 COPY mlruns/2/f251cdb0d19648d59601ca4ad5bafc57/artifacts/model.pt ./model.pt
 
 # Запускаем inference с переменными окружения для входного и выходного путей
-CMD ["python", "src/inference.py", "--input-path", "$INPUT_PATH", "--output-path", "$OUTPUT_PATH"]
+CMD ["uvicorn","src/api.py","--host","0.0.0.0","--port","8000"]

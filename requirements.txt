@@ -8,9 +8,10 @@ dvc
 pytest
 joblib
 prometheus-client
-torch 
+torch
 torchvision
-mlflow
 httpx
 python-multipart
 apache-airflow
+feast
+pyarrow
