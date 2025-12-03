@@ -1,38 +1,38 @@
 Проект по разработке и обучению игрового ии (оппонента) на основе ml в карточной игре дурак.
 
-├── Core/ # Ядро игры и RL
-│ ├── core.py # Логика игры в Дурака
-│ ├── agents.py # RLAgent, эвристический и случайный агенты
-│ ├── demo.py # Демонстрационная игра с человеком
-│ ├── replay_logger.py # Логирование реплеев
-│ └── reward_system.py # Система наград для RL
-│
-├── env/
-│ └── durak_env.py # Gym-среда для RL с человеческим игроком
-│
-├── src/
-│ ├── Api.py # FastAPI для игры через HTTP-запросы
-│ ├── preprocess.py # Кодирование состояния и карт в тензоры
-│ ├── train.py # Скрипт обучения RL-агента с MLflow
-│ ├── evaluate.py # Скрипт оценки агента vs эвристика
-│ └── register_model.py # Регистрация модели в MLflow Model Registry
-│
-├── Test_RL/ # Юнит-тесты и тестовые сессии
-│ ├── test_one_game.py
-│ ├── test_rl_agent.py
-│ ├── test_rl_vs_heuristic.py
-│ └── test_rl_vs_random.py
-│
-├── data/
-│ ├── raw/
-│ └── processed/
-├── .dvc/
-├── mlruns/ # MLflow эксперименты и модели
-├── rl_weights.pth # Сохранённые веса RL-агента
-├── environment.yml # Conda environment
-├── requirements.txt # pip зависимости
-├── Dockerfile # Для контейнеризации проекта
-└── README.md
+|- Core/ # Ядро игры и RL
+| |- core.py # Логика игры в Дурака
+| |- agents.py # RLAgent, эвристический и случайный агенты
+| |- demo.py # Демонстрационная игра с человеком
+| |- replay_logger.py # Логирование реплеев
+| |- reward_system.py # Система наград для RL
+|
+|- env/
+| |- durak_env.py # Gym-среда для RL с человеческим игроком
+|
+|- src/
+| |- Api.py # FastAPI для игры через HTTP-запросы
+| |- preprocess.py # Кодирование состояния и карт в тензоры
+| |- train.py # Скрипт обучения RL-агента с MLflow
+| |- evaluate.py # Скрипт оценки агента vs эвристика
+| |- register_model.py # Регистрация модели в MLflow Model Registry
+|
+|- Test_RL/ # Юнит-тесты и тестовые сессии
+| |- test_one_game.py
+| |- test_rl_agent.py
+| |- test_rl_vs_heuristic.py
+| |- test_rl_vs_random.py
+|
+|- data/
+| |- raw/
+| |- processed/
+|- .dvc/
+|- mlruns/ # MLflow эксперименты и модели
+|- rl_weights.pth # Сохранённые веса RL-агента
+|- environment.yml # Conda environment
+|- requirements.txt # pip зависимости
+|- Dockerfile # Для контейнеризации проекта
+|- README.md
 
 Демонстрационная игра
 
