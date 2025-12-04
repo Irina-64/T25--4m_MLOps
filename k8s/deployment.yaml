@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-delay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flight-delay
+  template:
+    metadata:
+      labels:
+        app: flight-delay
+    spec:
+      containers:
+        - name: api
+          image: flight-delay-api:lab10
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          # resources:
+          #   requests:
+          #     cpu: "500m"
+          #     memory: "1Gi"
+          #   limits:
+          #     cpu: "1"
+          #     memory: "2Gi"
