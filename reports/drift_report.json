@@ -1,0 +1,30 @@
+{
+  "psi": {
+    "input_length": 0.35,
+    "input_word_count": 0.31,
+    "target_length": 0.28,
+    "target_word_count": 0.26
+  },
+  "ks_pvalue": {
+    "input_length": 0.001,
+    "input_word_count": 0.002,
+    "target_length": 0.015,
+    "target_word_count": 0.020
+  },
+  "metric_baseline": 0.18,
+  "metric_current": 0.11,
+  "metric_drop": 0.3888888888888889,
+  "drift_reasons": [
+    "PSI(input_length)=0.350 > 0.2",
+    "PSI(input_word_count)=0.310 > 0.2",
+    "KS(input_length) p=0.0010 < 0.05",
+    "Metric drop 38.89% > 10.00%"
+  ],
+  "drift_detected": true,
+  "triggered_retrain": false,
+  "thresholds": {
+    "psi": 0.2,
+    "ks_pvalue": 0.05,
+    "metric_drop": 0.1
+  }
+}
