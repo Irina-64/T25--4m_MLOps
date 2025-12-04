@@ -1,6 +1,7 @@
 import argparse
 import os
 from datetime import datetime
+from logging import getLogger
 
 import joblib
 import matplotlib.pyplot as plt
@@ -16,6 +17,8 @@ from sklearn.metrics import (
     r2_score,
     root_mean_squared_error,
 )
+
+logger = getLogger(__name__)
 
 
 def load_config(config_path="params.yaml"):
@@ -140,7 +143,10 @@ def main():
     config = load_config(args.config)
 
     # Настраиваем MLflow
-    if config["experiments"]["tracking_uri"]:
+    mlflow_tracking_uri = os.getenv("MLFLOW_TRACKING_URI", None)
+    if mlflow_tracking_uri:
+        mlflow.set_tracking_uri(mlflow_tracking_uri)
+    elif config["experiments"]["tracking_uri"]:
         mlflow.set_tracking_uri(config["experiments"]["tracking_uri"])
 
     experiment_name = config["experiments"]["experiment_name"]
