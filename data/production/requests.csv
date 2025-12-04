@@ -1,0 +1,7 @@
+input_text,target_text
+"detoxify: THIS IS A VERY LONG AND ANGRY RANT WITH MULTIPLE SHOUTED SENTENCES THAT DOES NOT MATCH TRAINING","this is a long angry rant rewritten"
+"detoxify: BUY CHEAP PILLS AT HTTP://SPAM.EXAMPLE NOW AND SHARE WITH YOUR FRIENDS!!!","buy cheap pills now"
+"detoxify: Politicians are absolutely the worst liars I've ever seen in my entire life and I can't stand them.","Politicians are bad and I dislike them."
+"detoxify: I hate everything about this stupid broken service, it wasted my entire week and all of my efforts.","I hate this service, it wasted my week."
+"detoxify: Another ALL CAPS OUTBURST WITH TONS OF WORDS AND RANDOM !!! AND ??? TO DEGRADE QUALITY","another long outburst rewritten"
+"detoxify: obscene words and excessive length are present in this new batch to simulate drift in production inputs compared to training.","obscene words and length simulate drift."
