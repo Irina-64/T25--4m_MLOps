@@ -110,3 +110,10 @@ for ($i = 0; $i -lt 100; $i++) {
     p95 latency достигает ~450–500 ms (ожидаемо при T5-small)
     Prediction length показывает стабильную длину текста ~30 токенов
     Dashboard визуализирует все ключевые показатели, соответствующие требованиям лабораторной.
+    Dashboard визуализирует все ключевые показатели, соответствующие требованиям лабораторной.
+
+Провков Иван — Инструментация API: добавление метрик detox_request_total, detox_request_latency_seconds, detox_prediction_length, монтирование /metrics.
+Власюк Данил — Конфигурация Prometheus: prometheus.yml, alert.rules.yml, проверка таргетов и правил.
+Беспалый Максим — Docker Compose для мониторинга: сервисы API/Prometheus/Grafana, тома, healthcheck.
+Скрыпник Михаил — Grafana: провиженинг datasource/dashboards, дашборд с rps, p50/p90/p95, длиной предсказаний.
+Яковенко Максим — Тестирование и демонстрация: генерация нагрузки (быстрая/медленная), проверка /metrics, Prometheus targets, алертов и дашборда.
