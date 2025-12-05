@@ -4,7 +4,7 @@ apache-airflow==3.1.3
     # via t25-4m-mlops (pyproject.toml)
 dvc==3.63.0
     # via t25-4m-mlops (pyproject.toml)
-fastapi==0.118.0
+fastapi==0.117.1
     # via t25-4m-mlops (pyproject.toml)
 hyperopt==0.2.7
     # via t25-4m-mlops (pyproject.toml)
