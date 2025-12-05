@@ -5,16 +5,16 @@ stages:
     deps:
     - path: data/raw/dataset.csv
       hash: md5
-      md5: d0d310956d576c09511ff7bf3b46144b
-      size: 96412524
+      md5: c486b92548a9e416f3a34d8075023404
+      size: 11119211
     - path: params.yaml
       hash: md5
       md5: 5c9984f24d20bbebb82ef1ca5e735fa1
       size: 940
     - path: src/preprocess.py
       hash: md5
-      md5: ce05e8ebbbcb6f9317abdd953dc76f40
-      size: 3493
+      md5: 691d8dc5134c3a4549e3ac51bc7908ff
+      size: 3637
     params:
       params.yaml:
         encoding:
@@ -50,23 +50,23 @@ stages:
     outs:
     - path: data/processed/dataset.csv
       hash: md5
-      md5: 8a17f7950ef34fb1efdb759f1b4a1cc9
-      size: 65712520
+      md5: 50076a0b7db200d8b80c9276746104e9
+      size: 8358604
     - path: models/encoders.pkl
       hash: md5
-      md5: 737ff522d7fac0959d2f169691cdb7ba
-      size: 187879
+      md5: b08b8ef8418ba05ed1340acdf02ac432
+      size: 114323
     - path: models/scaler.pkl
       hash: md5
-      md5: 2eba89a173d7a674116b39ff007b675b
+      md5: 9674ef390d8fc18e994120d0ccc8e76b
       size: 1063
   split:
     cmd: python src/split_data.py --config params.yaml
     deps:
     - path: data/processed/dataset.csv
       hash: md5
-      md5: 8a17f7950ef34fb1efdb759f1b4a1cc9
-      size: 65712520
+      md5: 50076a0b7db200d8b80c9276746104e9
+      size: 8358604
     - path: params.yaml
       hash: md5
       md5: 5c9984f24d20bbebb82ef1ca5e735fa1
@@ -82,20 +82,20 @@ stages:
     outs:
     - path: data/split/X_test.csv
       hash: md5
-      md5: 0c84c8fb9a649418bd1bd3baf0d3fa4b
-      size: 11252565
+      md5: b47b2426556893870a4026d94bd7399e
+      size: 1455552
     - path: data/split/X_train.csv
       hash: md5
-      md5: b9f19ee9d4506801bd5552963155eb2c
-      size: 45013816
+      md5: d1f56c202de3a55e37e57c2c43780ea8
+      size: 5822055
     - path: data/split/y_test.csv
       hash: md5
-      md5: d8c8a1f343412cf9d61e1f6e39813066
-      size: 1683157
+      md5: 77e6a1735df9369225c6014b6fd58d4d
+      size: 194640
     - path: data/split/y_train.csv
       hash: md5
-      md5: 6a74ae2669835b6e5556b6301b64e3f2
-      size: 6732794
+      md5: db5f19e3835557158918ecf3aee09370
+      size: 778324
   train_baseline:
     cmd: python src/train.py --config params.yaml
     deps:
