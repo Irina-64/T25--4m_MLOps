@@ -1,9 +1,12 @@
 import os
 import time
 from pathlib import Path
+from typing import Optional
 
 import torch
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from prometheus_client import Counter, Histogram, make_asgi_app
 from pydantic import BaseModel
 from transformers import T5ForConditionalGeneration, T5Tokenizer
@@ -14,8 +17,8 @@ FALLBACK_MODEL = "t5-small"
 
 class TextIn(BaseModel):
     text: str
-    max_length: int | None = 96
-    num_beams: int | None = 2
+    max_length: Optional[int] = 96
+    num_beams: Optional[int] = 2
 
 
 class TextOut(BaseModel):
@@ -23,6 +26,33 @@ class TextOut(BaseModel):
 
 
 app = FastAPI(title="Detox T5 API", version="1.0.0")
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Mount static files for frontend (React build)
+frontend_build_path = Path(__file__).parent.parent / "frontend-build"
+frontend_react_path = Path(__file__).parent.parent / "frontend-react"
+
+# Try React build first, then fallback to old frontend
+if frontend_build_path.exists():
+    # Mount assets directory for React build
+    assets_path = frontend_build_path / "assets"
+    if assets_path.exists():
+        app.mount("/assets", StaticFiles(directory=str(assets_path)), name="assets")
+else:
+    # Fallback to old frontend
+    frontend_path = Path(__file__).parent.parent / "frontend"
+    if frontend_path.exists():
+        static_files = StaticFiles(directory=str(frontend_path))
+        app.mount("/static", static_files, name="static")
+
 metrics_app = make_asgi_app()
 app.mount("/metrics", metrics_app)
 
@@ -110,3 +140,21 @@ def predict(payload: TextIn):
         elapsed = time.perf_counter() - started
         REQUEST_LATENCY.labels("/predict", "POST").observe(elapsed)
         REQUEST_COUNT.labels("/predict", "POST", status_code).inc()
+
+
+@app.get("/")
+async def root():
+    """Serve the frontend index page"""
+    # Try React build first
+    frontend_build_path = Path(__file__).parent.parent / "frontend-build" / "index.html"
+    if frontend_build_path.exists():
+        from fastapi.responses import FileResponse
+        return FileResponse(str(frontend_build_path))
+    
+    # Fallback to old frontend
+    frontend_path = Path(__file__).parent.parent / "frontend" / "index.html"
+    if frontend_path.exists():
+        from fastapi.responses import FileResponse
+        return FileResponse(str(frontend_path))
+    
+    return {"message": "Detox API is running. Frontend not found. Please build React app first."}
