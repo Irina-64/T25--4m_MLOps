@@ -1,0 +1,65 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/raw/flights_sample.csv
+      md5: d481a09e0d92554e262354e14674ee39
+      size: 264728
+    - path: src/preprocess.py
+      md5: dd54f97dd5bac8d3d67492502633bbff
+      size: 10163
+    outs:
+    - path: data/processed/processed.csv
+      md5: 56685479a001fdc9445a4d66bce62c45
+      size: 384105
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/processed.csv
+      md5: 56685479a001fdc9445a4d66bce62c45
+      size: 384105
+    - path: src/train.py
+      md5: 2c25309e8f82195b074a81fcb008cfa8
+      size: 8721
+    outs:
+    - path: models/best_model.joblib
+      md5: c4a11f17cfe212161327bf6a271101ee
+      size: 1119
+    - path: models/feature_names.joblib
+      md5: 14773e99bad1e6e1a7e922485f32b518
+      size: 486
+    - path: models/random_forest_model.joblib
+      md5: add85632262e96ee978e5d17d103913c
+      size: 400457
+    - path: models/scaler.joblib
+      md5: 9e6cf8ddb432d36764de18e16a859959
+      size: 2063
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/processed/processed.csv
+      md5: 56685479a001fdc9445a4d66bce62c45
+      size: 384105
+    - path: models/best_model.joblib
+      md5: c4a11f17cfe212161327bf6a271101ee
+      size: 1119
+    - path: models/feature_names.joblib
+      md5: 14773e99bad1e6e1a7e922485f32b518
+      size: 486
+    - path: models/scaler.joblib
+      md5: 9e6cf8ddb432d36764de18e16a859959
+      size: 2063
+    - path: src/evaluate.py
+      md5: fd7d865d5a8c9b77d0a69afcdbe60d56
+      size: 11028
+    outs:
+    - path: reports/eval.html
+      md5: 05820590818f13f980ee4f01518ff665
+      size: 2696
+    - path: reports/eval.json
+      md5: e0b1a360dcad43a45c3b8a6e11ae0b20
+      size: 1365
+    - path: reports/eval_plots.png
+      md5: 630d30a30984a33438f183fabc31ac31
+      size: 277927
