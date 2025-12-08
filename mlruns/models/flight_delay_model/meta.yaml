@@ -1,0 +1,8 @@
+aliases: {}
+creation_timestamp: 1763403976743
+deployment_job_id: null
+deployment_job_state: null
+description: Лучшая модель для прогнозирования направления движения валюты с ROC AUC
+  0.654
+last_updated_timestamp: 1763406247007
+name: flight_delay_model

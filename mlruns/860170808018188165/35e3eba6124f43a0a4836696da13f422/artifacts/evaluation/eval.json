@@ -1,0 +1,51 @@
+{
+  "model_name": "LogisticRegression",
+  "evaluation_date": "2025-11-17T20:08:44.877704",
+  "test_set_size": 1044,
+  "metrics": {
+    "accuracy": 0.5699233716475096,
+    "roc_auc": 0.6540072138996815,
+    "precision": 0.4462686567164179,
+    "recall": 0.7931034482758621,
+    "f1_score": 0.5711556829035339
+  },
+  "class_distribution": {
+    "class_0_count": 667,
+    "class_1_count": 377,
+    "class_0_ratio": 0.6388888888888888,
+    "class_1_ratio": 0.3611111111111111
+  },
+  "confusion_matrix": {
+    "true_negative": 296,
+    "false_positive": 371,
+    "false_negative": 78,
+    "true_positive": 299
+  },
+  "classification_report": {
+    "0": {
+      "precision": 0.7914438502673797,
+      "recall": 0.44377811094452774,
+      "f1-score": 0.5686839577329491,
+      "support": 667.0
+    },
+    "1": {
+      "precision": 0.4462686567164179,
+      "recall": 0.7931034482758621,
+      "f1-score": 0.5711556829035339,
+      "support": 377.0
+    },
+    "accuracy": 0.5699233716475096,
+    "macro avg": {
+      "precision": 0.6188562534918989,
+      "recall": 0.618440779610195,
+      "f1-score": 0.5699198203182415,
+      "support": 1044.0
+    },
+    "weighted avg": {
+      "precision": 0.666797252596199,
+      "recall": 0.5699233716475096,
+      "f1-score": 0.5695765251556603,
+      "support": 1044.0
+    }
+  }
+}

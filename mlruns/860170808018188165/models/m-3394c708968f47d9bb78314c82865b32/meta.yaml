@@ -1,0 +1,10 @@
+artifact_location: file:///D:/zagr/VSCode/project/pop1/T25--4m_MLOps/mlruns/860170808018188165/models/m-3394c708968f47d9bb78314c82865b32/artifacts
+creation_timestamp: 1764181425124
+experiment_id: '860170808018188165'
+last_updated_timestamp: 1764181427343
+model_id: m-3394c708968f47d9bb78314c82865b32
+model_type: null
+name: model
+source_run_id: 18517062317d40608a4880eb5518246d
+status: 2
+status_message: null

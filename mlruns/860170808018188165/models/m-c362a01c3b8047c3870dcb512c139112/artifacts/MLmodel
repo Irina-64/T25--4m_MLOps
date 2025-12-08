@@ -1,0 +1,22 @@
+artifact_path: file:///D:/zagr/VSCode/project/pop1/T25--4m_MLOps/mlruns/860170808018188165/models/m-c362a01c3b8047c3870dcb512c139112/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.19
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+mlflow_version: 3.6.0
+model_id: m-c362a01c3b8047c3870dcb512c139112
+model_size_bytes: 390898
+model_uuid: m-c362a01c3b8047c3870dcb512c139112
+prompts: null
+run_id: 58c44a5de15d4cb39c85f82cdd91e8e6
+utc_time_created: '2025-11-17 16:21:45.692925'

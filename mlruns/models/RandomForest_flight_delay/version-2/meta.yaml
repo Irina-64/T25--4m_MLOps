@@ -1,0 +1,15 @@
+creation_timestamp: 1763399158426
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1763399158426
+model_id: m-f7c8b9b027564788ae230af19c8f5eb6
+name: RandomForest_flight_delay
+run_id: fddb3c6eb3c9421a99a7e6af67852167
+run_link: null
+source: models:/m-f7c8b9b027564788ae230af19c8f5eb6
+status: READY
+status_message: null
+storage_location: file:///D:/zagr/VSCode/project/pop1/T25--4m_MLOps/mlruns/860170808018188165/models/m-f7c8b9b027564788ae230af19c8f5eb6/artifacts
+user_id: null
+version: 2

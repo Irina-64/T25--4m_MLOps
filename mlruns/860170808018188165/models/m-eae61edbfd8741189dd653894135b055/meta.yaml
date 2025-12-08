@@ -1,0 +1,10 @@
+artifact_location: file:///D:/zagr/VSCode/project/pop1/T25--4m_MLOps/mlruns/860170808018188165/models/m-eae61edbfd8741189dd653894135b055/artifacts
+creation_timestamp: 1763396513749
+experiment_id: '860170808018188165'
+last_updated_timestamp: 1763396515929
+model_id: m-eae61edbfd8741189dd653894135b055
+model_type: null
+name: best_model
+source_run_id: e94b8e7ef88148da8188cca2a239812a
+status: 2
+status_message: null

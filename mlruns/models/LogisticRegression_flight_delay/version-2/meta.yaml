@@ -1,0 +1,15 @@
+creation_timestamp: 1763399160993
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1763399160993
+model_id: m-1ecc7cdf3e654c68a243d524054b036e
+name: LogisticRegression_flight_delay
+run_id: 9a2eb28c97b849a1b7fab865360bdc0f
+run_link: null
+source: models:/m-1ecc7cdf3e654c68a243d524054b036e
+status: READY
+status_message: null
+storage_location: file:///D:/zagr/VSCode/project/pop1/T25--4m_MLOps/mlruns/860170808018188165/models/m-1ecc7cdf3e654c68a243d524054b036e/artifacts
+user_id: null
+version: 2

@@ -1,0 +1,15 @@
+creation_timestamp: 1763396515942
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1763396515942
+model_id: m-eae61edbfd8741189dd653894135b055
+name: best_flight_delay_model
+run_id: e94b8e7ef88148da8188cca2a239812a
+run_link: null
+source: models:/m-eae61edbfd8741189dd653894135b055
+status: READY
+status_message: null
+storage_location: file:///D:/zagr/VSCode/project/pop1/T25--4m_MLOps/mlruns/860170808018188165/models/m-eae61edbfd8741189dd653894135b055/artifacts
+user_id: null
+version: 1

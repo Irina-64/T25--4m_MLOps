@@ -1,0 +1,15 @@
+creation_timestamp: 1763404797056
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1763404797056
+model_id: m-a38f540b3009493d90fc6c1a0ad043b4
+name: flight_delay_model
+run_id: 665f8d9109624bed9758459958958742
+run_link: null
+source: models:/m-a38f540b3009493d90fc6c1a0ad043b4
+status: READY
+status_message: null
+storage_location: file:///D:/zagr/VSCode/project/pop1/T25--4m_MLOps/mlruns/860170808018188165/models/m-a38f540b3009493d90fc6c1a0ad043b4/artifacts
+user_id: null
+version: 1

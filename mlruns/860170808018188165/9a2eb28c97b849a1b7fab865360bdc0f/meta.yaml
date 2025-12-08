@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/zagr/VSCode/project/pop1/T25--4m_MLOps/mlruns/860170808018188165/9a2eb28c97b849a1b7fab865360bdc0f/artifacts
+end_time: 1763399161073
+entry_point_name: ''
+experiment_id: '860170808018188165'
+lifecycle_stage: active
+run_id: 9a2eb28c97b849a1b7fab865360bdc0f
+run_name: LogisticRegression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763399158604
+status: 3
+tags: []
+user_id: Пользователь

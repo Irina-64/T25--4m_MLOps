@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/zagr/VSCode/project/pop1/T25--4m_MLOps/mlruns/860170808018188165/e94b8e7ef88148da8188cca2a239812a/artifacts
+end_time: 1763396516004
+entry_point_name: ''
+experiment_id: '860170808018188165'
+lifecycle_stage: active
+run_id: e94b8e7ef88148da8188cca2a239812a
+run_name: best_model
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763396513698
+status: 3
+tags: []
+user_id: Пользователь

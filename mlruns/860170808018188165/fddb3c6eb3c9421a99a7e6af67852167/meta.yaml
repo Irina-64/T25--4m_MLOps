@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/zagr/VSCode/project/pop1/T25--4m_MLOps/mlruns/860170808018188165/fddb3c6eb3c9421a99a7e6af67852167/artifacts
+end_time: 1763399158599
+entry_point_name: ''
+experiment_id: '860170808018188165'
+lifecycle_stage: active
+run_id: fddb3c6eb3c9421a99a7e6af67852167
+run_name: RandomForest
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763399152512
+status: 3
+tags: []
+user_id: Пользователь
