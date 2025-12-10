@@ -3,7 +3,8 @@ from fastapi.testclient import TestClient
 import src.api as api
 import sys, os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, ROOT)
 
 class DummyModel:
     """Фейковая модель, которая заменяет настоящую при тестах."""
