@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import numpy as np
-from preprocess import preprocess_telco_data
+from src.preprocess import preprocess_telco_data
 
 
 @pytest.fixture
