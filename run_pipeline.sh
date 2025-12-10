@@ -82,3 +82,10 @@ echo "3. Check registered models:"
 echo "   python src/promote_model.py --list --model-name flight_delay_model"
 echo ""
 echo "======================================================================"
+
+echo ""
+echo -e "${BLUE}🧪 Step 1.5: Running tests...${NC}"
+python -m pytest tests/ -q
+if [ $? -ne 0 ]; then
+    echo -e "${YELLOW}⚠ Tests failed, but continuing pipeline${NC}"
+fi
