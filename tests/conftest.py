@@ -1,10 +1,11 @@
 import pytest
 from fastapi.testclient import TestClient
-import src.api as api
 import sys, os
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, ROOT)
+
+import src.api as api
 
 class DummyModel:
     """Фейковая модель, которая заменяет настоящую при тестах."""

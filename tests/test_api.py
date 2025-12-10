@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from api import app
+import src.api as api
 
 
 class DummyModel:
@@ -19,7 +19,7 @@ def client(monkeypatch):
     """
     from api import model
     monkeypatch.setattr("api.model", DummyModel())
-    return TestClient(app)
+    return TestClient(api.app)
 
 
 def test_predict_ok(client):
