@@ -13,12 +13,9 @@ class DummyModel:
 
 @pytest.fixture
 def client(monkeypatch):
-    """
-    Подменяем реальную модель в api.py на фейковую,
-    чтобы не зависеть от models/*.joblib.
-    """
-    from api import model
-    monkeypatch.setattr("api.model", DummyModel())
+    # Подменяем реальную модель в src.api
+    monkeypatch.setattr("src.api.model", DummyModel())
+
     return TestClient(api.app)
 
 
