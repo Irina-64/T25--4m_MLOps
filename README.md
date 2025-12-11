@@ -14,6 +14,7 @@ AI_Detox — это open-source проект для автоматическог
 ## Структура репозитория
 
 - `src/` — исходный код моделей и скриптов обработки данных.
+- `frontend/` — веб-интерфейс для взаимодействия с API.
 - `data/raw/` — сырые датасеты для обучения и тестирования.
 - `.dvc/`, `dvc.yaml`, `dvc.lock` — управление версиями данных с помощью DVC.
 - `requirements.txt` — зависимости проекта.
@@ -51,10 +52,8 @@ AI_Detox — это open-source проект для автоматическог
 Локальный запуск:
 
 ```
-
-uvicorn src.api:app --host 0.0.0.0 --port 8080
+python3 -m uvicorn src.api:app --host 0.0.0.0 --port 8080
 curl -s -X POST http://localhost:8080/predict -H "Content-Type: application/json" -d '{"text":"You are so stupid!!!","max_length":64}'
-
 ```
 
 Docker:
@@ -62,6 +61,30 @@ Docker:
 ```
 docker build -t detox-api:lab6 .
 docker run -p 8080:8080 detox-api:lab6
+```
 
+### Запуск с фронтендом
+
+Локальный запуск (API + фронтенд):
 
 ```
+python3 -m uvicorn src.api:app --host 0.0.0.0 --port 8080
+```
+
+Затем откройте в браузере: `http://localhost:8080`
+
+Docker Compose:
+
+```
+docker-compose -f docker-compose.api.yaml up --build
+```
+
+Затем откройте в браузере: `http://localhost:8080`
+
+### Веб-интерфейс
+
+Фронтенд доступен по адресу `http://localhost:8080` после запуска API. Веб-интерфейс позволяет:
+- Вводить текст для детоксификации
+- Настраивать параметры модели (max_length, num_beams)
+- Просматривать результат детоксификации
+- Сравнивать исходный и детоксифицированный текст
