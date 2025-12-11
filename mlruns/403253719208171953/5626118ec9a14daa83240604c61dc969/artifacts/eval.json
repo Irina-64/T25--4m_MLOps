@@ -1,9 +1,0 @@
-{
-    "episodes": 1000,
-    "winrate": 0.219,
-    "avg_reward": -40.719,
-    "std_reward": 42.7375951475981,
-    "avg_steps": 60.166,
-    "min_reward": -90.0,
-    "max_reward": 0.0
-}
