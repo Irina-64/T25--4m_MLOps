@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-torch
-gymnasium
-numpy
-pydantic
-mlflow
