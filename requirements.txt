@@ -6,7 +6,7 @@ dvc==3.63.0
     # via t25-4m-mlops (pyproject.toml)
 fastapi==0.117.1
     # via t25-4m-mlops (pyproject.toml)
-feast==0.57.0
+feast==0.47.0
     # via t25-4m-mlops (pyproject.toml)
 hyperopt==0.2.7
     # via t25-4m-mlops (pyproject.toml)
@@ -16,7 +16,7 @@ matplotlib==3.10.7
     # via t25-4m-mlops (pyproject.toml)
 mlflow==3.4.0
     # via t25-4m-mlops (pyproject.toml)
-numpy==2.3.3
+numpy==1.26.4
     # via t25-4m-mlops (pyproject.toml)
 pandas==2.3.3
     # via t25-4m-mlops (pyproject.toml)
