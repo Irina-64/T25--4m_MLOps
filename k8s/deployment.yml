@@ -13,8 +13,8 @@ spec:
         app: car-prices
     spec:
       containers:
-        - name: car-prices-api
-          image: car_prices:lab10
+        - name: car-prices
+          image: car_prices
           ports:
             - containerPort: 8000
           resources:
