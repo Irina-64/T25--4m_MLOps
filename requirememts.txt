@@ -8,4 +8,3 @@ dvc
 pytest
 joblib
 prometheus-client
-f
