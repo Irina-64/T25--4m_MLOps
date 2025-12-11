@@ -10,7 +10,7 @@
 1. Клонировать репозиторий: 
    ```
    git clone git@github.com:LeeDef18/Team9.git
-   cd Team9
+   cd team-9_mlops
    ```
 2. Создать виртуальное окружение: `conda create -n mlops python=3.10 -y`
 3. Активировать: `conda activate mlops`
