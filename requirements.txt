@@ -197,4 +197,9 @@ zipp==3.23.0
 
 # API dependencies
 fastapi
-uvicorn[standard]
+uvicorn
+pytest-cov==4.1.0
+httpx
+black
+flake8==7.1.1
+pre-commit==3.7.1
