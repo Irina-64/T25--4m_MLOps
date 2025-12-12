@@ -52,7 +52,6 @@ def main():
         save_data(df_clean, output_path)
         
     except Exception as e:
-        print(f"Ошибка: {e}")
         raise
 
 
