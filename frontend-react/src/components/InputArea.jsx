@@ -67,3 +67,4 @@ function InputArea({ onSend, disabled }) {
 
 export default InputArea
 
+
