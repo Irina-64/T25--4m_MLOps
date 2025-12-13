@@ -33,7 +33,13 @@ if __name__ == "__main__":
     )
 
     os.makedirs("data/split", exist_ok=True)
+    os.makedirs("data/drift", exist_ok=True)
+
     X_train.to_csv("data/split/X_train.csv", index=False)
     X_test.to_csv("data/split/X_test.csv", index=False)
     y_train.to_csv("data/split/y_train.csv", index=False)
     y_test.to_csv("data/split/y_test.csv", index=False)
+
+    sample = X_train.sample(n=5000, random_state=42)
+    sample.to_csv("data/drift/reference.csv", index=False)
+    sample.to_csv("data/drift/production.csv", index=False)

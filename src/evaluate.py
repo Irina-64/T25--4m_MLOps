@@ -5,9 +5,14 @@ import os
 import joblib
 import mlflow
 import pandas as pd
+import yaml
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-mlflow.set_tracking_uri("http://localhost:5000")
+
+def load_config(config_path="params.yaml"):
+    """Загрузка конфигурации"""
+    with open(config_path, "r") as f:
+        return yaml.safe_load(f)
 
 
 def evaluate_model(model_path, X_test_path, y_test_path, output_dir="reports"):
@@ -34,10 +39,16 @@ def evaluate_model(model_path, X_test_path, y_test_path, output_dir="reports"):
     with open(json_path, "w") as f:
         json.dump(metrics, f, indent=4)
 
+    # Логируем в MLflow
     with mlflow.start_run(run_name="baseline_evaluation") as run:
         mlflow.log_metrics(metrics)
         mlflow.log_artifact(json_path)
-        mlflow.sklearn.log_model(model, "evaluated_model")
+        # Логируем модель как артефакт (без регистрации)
+        model_artifact_path = os.path.join(output_dir, "evaluated_model")
+        os.makedirs(model_artifact_path, exist_ok=True)
+        joblib.dump(model, os.path.join(model_artifact_path, "model.pkl"))
+        mlflow.log_artifacts(model_artifact_path, artifact_path="evaluated_model")
+
         # Сохраняем run_id
         with open("mlflow_run_id.txt", "w") as f:
             f.write(run.info.run_id)
@@ -53,5 +64,12 @@ if __name__ == "__main__":
     parser.add_argument("--target_data", dest="y_test", required=True)
     parser.add_argument("--config", default="params.yaml")
     args = parser.parse_args()
+
+    config = load_config(args.config)
+    mlflow_tracking_uri = os.getenv("MLFLOW_TRACKING_URI", None)
+    if mlflow_tracking_uri:
+        mlflow.set_tracking_uri(mlflow_tracking_uri)
+    elif config["experiments"]["tracking_uri"]:
+        mlflow.set_tracking_uri(config["experiments"]["tracking_uri"])
 
     evaluate_model(args.model_path, args.X_test, args.y_test)

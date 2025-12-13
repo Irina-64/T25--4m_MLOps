@@ -108,6 +108,9 @@ if __name__ == "__main__":
     # Масштабирование числовых
     df, scaler = scale_numerical(df, config["scaling"]["numerical_cols"])
 
+    df["car_id"] = np.arange(len(df))
+    df["event_timestamp"] = pd.Timestamp("2020-01-01")  # можно фиксированную дату
+
     os.makedirs(os.path.dirname(processed_path), exist_ok=True)
     df.to_csv(processed_path, index=False, encoding="utf-8-sig")
 
