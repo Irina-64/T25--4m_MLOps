@@ -18,8 +18,9 @@
 docker build -t personality-api:lab6 .
 docker run -p 8080:8080 personality-api:lab6
 ```
-## API-test
+## Локальный API-test
 ```
+python -m uvicorn src.api:app --host 0.0.0.0 --port 8080 --reload
 curl -X POST "http://localhost:8080/predict" \
   -H "Content-Type: application/json" \
   -d '{
