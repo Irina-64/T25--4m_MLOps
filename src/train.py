@@ -35,7 +35,6 @@ class Classifier:
         self.random_state = random_state
         self.model = None
         self.scaler = StandardScaler()
-        self.feature_importance = None
         
     def load_data(self, data_path: str) -> pd.DataFrame:
         df = pd.read_csv(data_path)
@@ -152,7 +151,6 @@ class Classifier:
             'features': self.FEATURES,
             'target': self.TARGET,
             'model_type': self.model_type,
-            'feature_importance': self.feature_importance
         }
         
         features_path = Path(output_dir) / 'features_info.json'
