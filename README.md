@@ -13,8 +13,25 @@
 3. Активировать: `conda activate mlops`
 4. Установить зависимости: `pip install -r requirements.txt`
 
-## Использование
-...
+## Docker
+```
+docker build -t personality-api:lab6 .
+docker run -p 8080:8080 personality-api:lab6
+```
+## API-test
+```
+curl -X POST "http://localhost:8080/predict" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "Time_broken_spent_Alone": 4.0,
+    "Stage_fear": 0,
+    "Social_event_attendance": 4.0,
+    "Going_outside": 6.0,
+    "Drained_after_socializing": 0,
+    "Friends_circle_size": 13.0,
+    "Post_frequency": 5.0
+  }'
+```
 
 ## Лицензия
 MIT
