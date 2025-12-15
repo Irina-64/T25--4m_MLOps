@@ -3,6 +3,9 @@ import mlflow.sklearn
 import json
 import sys
 from datetime import datetime
+import os
+
+# mlflow.set_tracking_uri("sqlite:///mlflow.db")
 
 def get_best_run(experiment_name: str = "telco_churn"):
     """
@@ -47,7 +50,7 @@ def get_best_run(experiment_name: str = "telco_churn"):
 
 def register_model_in_registry(
     run_id: str = None,
-    model_name: str = "flight_delay_model",
+    model_name: str = "telco_churn_model",
     experiment_name: str = "telco_churn"
 ):
     """
@@ -163,23 +166,40 @@ def main():
     
     parser = argparse.ArgumentParser(description="Register model in MLflow Model Registry")
     parser.add_argument("--run-id", type=str, default=None, help="Run ID to register")
-    parser.add_argument("--model-name", type=str, default="flight_delay_model", help="Model name in registry")
+    parser.add_argument("--model-name", type=str, default="telco_churn_model", help="Model name in registry")
     parser.add_argument("--experiment", type=str, default="telco_churn", help="Experiment name")
     parser.add_argument("--list", action="store_true", help="List all registered models")
     parser.add_argument("--check-metrics", type=str, default=None, help="Check metrics for a run")
+    parser.add_argument("--auto", action="store_true", help="Auto-register best model")
     
     args = parser.parse_args()
     
-    # Set MLflow tracking URI
-    mlflow.set_tracking_uri("file:./mlruns")
-    
+    # Установить tracking URI перед созданием клиента
+    mlflow.set_tracking_uri("sqlite:///mlflow.db")
+
     if args.list:
         list_registered_models()
     elif args.check_metrics:
         check_model_metrics(args.check_metrics)
-    else:
+    elif args.auto:
+        # Автоматическая регистрация лучшей модели
+        print("🔍 Поиск лучшей модели для автоматической регистрации...")
+        
+        # Пытаемся прочитать run_id из файла
+        if os.path.exists("models/best_run_id.txt"):
+            with open("models/best_run_id.txt", "r") as f:
+                run_id = f.read().strip()
+            print(f"✓ Найден run_id из файла: {run_id}")
+        else:
+            # Ищем лучший run по ROC-AUC
+            best_run = get_best_run(args.experiment)
+            if not best_run:
+                print("❌ Не удалось найти лучшую модель")
+                sys.exit(1)
+            run_id = best_run.info.run_id
+        
         success = register_model_in_registry(
-            run_id=args.run_id,
+            run_id=run_id,
             model_name=args.model_name,
             experiment_name=args.experiment
         )
@@ -188,15 +208,14 @@ def main():
             print("\n" + "="*80)
             print("✅ МОДЕЛЬ УСПЕШНО ЗАРЕГИСТРИРОВАНА!")
             print("="*80)
-            print("\nДальнейшие шаги:")
-            print("1. Откройте MLflow UI: mlflow ui")
-            print("2. Перейдите в Model Registry")
-            print(f"3. Найдите модель '{args.model_name}'")
-            print("4. Добавьте описание и комментарии")
-            print("5. Переведите версию в Production при необходимости")
-            print("\n" + "="*80)
         else:
             sys.exit(1)
+    else:
+        success = register_model_in_registry(
+            run_id=args.run_id,
+            model_name=args.model_name,
+            experiment_name=args.experiment
+        )
 
 
 if __name__ == "__main__":

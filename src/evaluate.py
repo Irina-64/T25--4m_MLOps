@@ -34,6 +34,9 @@ def evaluate_model(model_path: str = None, log_to_mlflow: bool = True):
         dict: словарь с метриками оценки
     """
     
+    mlflow.set_tracking_uri("sqlite:///mlflow.db")
+    mlflow.set_experiment("telco_churn")
+
     print("=" * 80)
     print("ОЦЕНКА МОДЕЛИ")
     print("=" * 80)

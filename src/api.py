@@ -7,22 +7,33 @@ app = FastAPI()
 
 
 def _load_model():
-    # Prefer explicit models/model.joblib if present, else pick latest .joblib in models/
     model_dir = "models"
-    if os.path.exists(os.path.join(model_dir, "model.joblib")):
-        return joblib.load(os.path.join(model_dir, "model.joblib"))
-
+    
+    # Проверяем основные пути
+    possible_paths = [
+        os.path.join(model_dir, "model.joblib"),
+        os.path.join(model_dir, "telco_churn_model.joblib"),
+        os.path.join(model_dir, "logisticregression_model.joblib"),
+        os.path.join(model_dir, "randomforest_model.joblib"),
+    ]
+    
+    for model_path in possible_paths:
+        if os.path.exists(model_path):
+            print(f"📦 Загружаем модель: {model_path}")
+            return joblib.load(model_path)
+    
+    # Если ничего не нашли, ищем любую .joblib модель
     if not os.path.isdir(model_dir):
         raise FileNotFoundError(f"Model directory '{model_dir}' not found")
-
+    
     candidates = [os.path.join(model_dir, f) for f in os.listdir(model_dir) if f.endswith('.joblib')]
     if not candidates:
         raise FileNotFoundError(f"No .joblib models found in '{model_dir}'")
-
-    # pick most recently modified
+    
+    # Берем последнюю по времени изменения
     latest = max(candidates, key=os.path.getmtime)
+    print(f"📦 Загружаем последнюю модель: {latest}")
     return joblib.load(latest)
-
 
 try:
     model = _load_model()

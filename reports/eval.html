@@ -110,38 +110,38 @@
             <h1>🎯 Model Evaluation Report</h1>
             
             <div class="info-box">
-                <strong>Model Type:</strong> LogisticRegression<br>
-                <strong>Model Path:</strong> models/logisticregression_model.joblib<br>
+                <strong>Model Type:</strong> RandomForestClassifier<br>
+                <strong>Model Path:</strong> models/telco_churn_model.joblib<br>
                 <strong>Test Size:</strong> 1273 samples | 
                 <strong>Features:</strong> 34<br>
-                <strong>Generated:</strong> 2025-12-10T12:50:46.801474
+                <strong>Generated:</strong> 2025-12-15T18:18:48.449274
             </div>
             
             <h2>📊 Key Performance Metrics</h2>
             <div class="metrics-grid">
                 <div class="metric-card high">
                     <div class="metric-label">ROC-AUC</div>
-                    <div class="metric-value">0.8553</div>
+                    <div class="metric-value">0.9998</div>
                 </div>
                 <div class="metric-card high">
                     <div class="metric-label">Accuracy</div>
-                    <div class="metric-value">0.8099</div>
+                    <div class="metric-value">0.9969</div>
                 </div>
-                <div class="metric-card low">
+                <div class="metric-card high">
                     <div class="metric-label">Precision</div>
-                    <div class="metric-value">0.6960</div>
+                    <div class="metric-value">1.0000</div>
                 </div>
-                <div class="metric-card low">
+                <div class="metric-card high">
                     <div class="metric-label">Recall</div>
-                    <div class="metric-value">0.5118</div>
+                    <div class="metric-value">0.9882</div>
                 </div>
-                <div class="metric-card low">
+                <div class="metric-card high">
                     <div class="metric-label">F1-Score</div>
-                    <div class="metric-value">0.5898</div>
+                    <div class="metric-value">0.9941</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-label">Specificity</div>
-                    <div class="metric-value">0.9185</div>
+                    <div class="metric-value">1.0000</div>
                 </div>
             </div>
             
@@ -154,13 +154,13 @@
                 </tr>
                 <tr>
                     <th>Actual Negative</th>
-                    <td>857</td>
-                    <td>76</td>
+                    <td>933</td>
+                    <td>0</td>
                 </tr>
                 <tr>
                     <th>Actual Positive</th>
-                    <td>166</td>
-                    <td>174</td>
+                    <td>4</td>
+                    <td>336</td>
                 </tr>
             </table>
             
@@ -181,17 +181,17 @@
     
                 <tr>
                     <td><strong>Class 0</strong></td>
-                    <td>0.8377</td>
-                    <td>0.9185</td>
-                    <td>0.8763</td>
+                    <td>0.9957</td>
+                    <td>1.0000</td>
+                    <td>0.9979</td>
                     <td>933</td>
                 </tr>
         
                 <tr>
                     <td><strong>Class 1</strong></td>
-                    <td>0.6960</td>
-                    <td>0.5118</td>
-                    <td>0.5898</td>
+                    <td>1.0000</td>
+                    <td>0.9882</td>
+                    <td>0.9941</td>
                     <td>340</td>
                 </tr>
         
@@ -199,9 +199,9 @@
             
             <h2>💡 Key Insights</h2>
             <ul>
-                    <li>✅ Good ROC-AUC score - model shows good discrimination ability</li>
-                <li>📌 Precision (0.6960) > Recall (0.5118) - model is conservative</li>
-                <li>✅ Good Specificity (0.9185) - model correctly identifies negatives</li>
+                    <li>✅ Excellent ROC-AUC score - model has excellent discrimination ability</li>
+                <li>📌 Precision (1.0000) > Recall (0.9882) - model is conservative</li>
+                <li>✅ Good Specificity (1.0000) - model correctly identifies negatives</li>
 
             </ul>
             

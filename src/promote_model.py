@@ -4,13 +4,14 @@ import json
 import sys
 from typing import Optional, Dict
 from datetime import datetime
+import os
 
 class ModelPromoter:
     """
     Класс для автоматического продвижения версий моделей по правилам.
     """
     
-    def __init__(self, model_name: str, tracking_uri: str = "file:./mlruns"):
+    def __init__(self, model_name: str, tracking_uri: str = "sqlite:///mlflow.db"):  # ИЗМЕНЕНО
         """
         Инициализация.
         
@@ -141,7 +142,13 @@ class ModelPromoter:
         print("="*80)
         
         try:
-            registered_model = self.client.get_registered_model(self.model_name)
+            # Попытка получить модель
+            try:
+                registered_model = self.client.get_registered_model(self.model_name)
+            except Exception as e:
+                print(f"⚠️ Model '{self.model_name}' not found in registry. Maybe it's not registered yet?")
+                print(f"Error: {e}")
+                return False
             
             if not registered_model.latest_versions:
                 print(f"❌ No versions found for model {self.model_name}")
@@ -241,7 +248,8 @@ class ModelPromoter:
                 print()
             
         except Exception as e:
-            print(f"Error listing versions: {e}")
+            print(f"⚠️ Model '{self.model_name}' not found in registry. Maybe it's not registered yet?")
+            print(f"Error: {e}")
 
 
 def main():
@@ -249,8 +257,8 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(description="Auto-promote model versions based on metrics")
-    parser.add_argument("--model-name", type=str, default="flight_delay_model", help="Model name")
-    parser.add_argument("--tracking-uri", type=str, default="file:./mlruns", help="MLflow tracking URI")
+    parser.add_argument("--model-name", type=str, default="telco_churn_model", help="Model name")
+    parser.add_argument("--tracking-uri", type=str, default="sqlite:///mlflow.db", help="MLflow tracking URI")
     parser.add_argument("--auto", action="store_true", help="Auto-promote latest version")
     parser.add_argument("--version", type=int, default=None, help="Promote specific version")
     parser.add_argument("--list", action="store_true", help="List all versions")
