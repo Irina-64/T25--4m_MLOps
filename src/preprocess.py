@@ -43,8 +43,8 @@ def save_data(df: pd.DataFrame, output_path: str):
 
 
 def main():
-    input_path = "data/raw/pattern_sample.csv"
-    output_path = "data/processed/processed.csv"
+    input_path = "/opt/airflow/data/raw/pattern_sample.csv"
+    output_path = "/opt/airflow/data/processed/processed.csv"
 
     try:
         df = load_data(input_path)

@@ -160,7 +160,7 @@ class Classifier:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='data/processed/processed.csv',
+    parser.add_argument('--data', type=str, default='/opt/airflow/data/processed/processed.csv',
                        help='Путь к обработанным данным')
     parser.add_argument('--model', type=str, choices=['rf', 'lr'], default='rf',
                        help='Тип модели: rf (RandomForest), lr (LogisticRegression)')

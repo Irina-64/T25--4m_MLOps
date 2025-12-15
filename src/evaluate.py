@@ -13,9 +13,9 @@ from pathlib import Path
 
 
 def main():
-    model = joblib.load('models/classifier_model.joblib')
-    scaler = joblib.load('models/scaler.joblib')
-    data = pd.read_csv('data/processed/processed.csv')
+    model = joblib.load('/opt/airflow/models/classifier_model.joblib')
+    scaler = joblib.load('/opt/airflow/models/scaler.joblib')
+    data = pd.read_csv('/opt/airflow/data/processed/processed.csv')
     
     features = [
         'Time_broken_spent_Alone',
@@ -60,8 +60,8 @@ def main():
         'false_negatives': int(fn)
     })
     
-    Path('reports').mkdir(exist_ok=True)
-    with open('reports/eval.json', 'w') as f:
+    Path('/opt/airflow/reports').mkdir(exist_ok=True)
+    with open('/opt/airflow/reports/eval.json', 'w') as f:
         json.dump(metrics, f, indent=2)
     
 

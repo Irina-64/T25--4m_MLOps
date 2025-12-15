@@ -9,6 +9,5 @@
     "Post_frequency"
   ],
   "target": "Personality_encoded",
-  "model_type": "rf",
-  "feature_importance": null
+  "model_type": "rf"
 }
