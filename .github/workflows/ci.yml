@@ -1,6 +1,6 @@
 name: CI Pipeline
 
-on: [push, pull_request]  # Запуск при пуше и создании pull request
+on: [push, pull_request]
 
 jobs:
   test:
