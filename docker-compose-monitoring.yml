@@ -9,13 +9,10 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./prometheus/alert.rules.yml:/etc/prometheus/alert.rules.yml
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     networks:
@@ -34,43 +31,10 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
-      - ./grafana/dashboards:/etc/grafana/dashboards
     networks:
       - monitoring
     depends_on:
       - prometheus
-
-  node-exporter:
-    image: prom/node-exporter:latest
-    container_name: node-exporter
-    restart: unless-stopped
-    ports:
-      - "9100:9100"
-    command:
-      - '--path.rootfs=/host'
-    pid: host
-    volumes:
-      - '/:/host:ro,rslave'
-    networks:
-      - monitoring
-
-  # Сервис для генерации нагрузки (опционально)
-  load-generator:
-    image: alpine/curl:latest
-    container_name: load-generator
-    restart: "no"
-    command: >
-      sh -c "
-      echo 'Starting load test...' &&
-      for i in $$(seq 1 100); do
-        curl -s -X POST http://host.docker.internal:8080/predict \\
-          -H 'Content-Type: application/json' \\
-          -d '{\"SeniorCitizen\": $$((RANDOM % 2)), \"tenure\": $$((RANDOM % 72)), \"MonthlyCharges\": $$((RANDOM % 120 + 20))}' > /dev/null &
-      done &&
-      wait &&
-      echo 'Load test completed'"
-    networks:
-      - monitoring
 
 networks:
   monitoring:
