@@ -1,0 +1,29 @@
+groups:
+  - name: telco_churn_alerts
+    rules:
+      - alert: HighRequestLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High request latency on {{ $labels.endpoint }}"
+          description: "Endpoint {{ $labels.endpoint }} has 95th percentile latency above 1s (current: {{ $value }}s)"
+      
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status_code=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High error rate on {{ $labels.endpoint }}"
+          description: "Error rate is above 5% (current: {{ $value }})"
+      
+      - alert: ModelNotLoaded
+        expr: model_load_total{status="error"} > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Model failed to load"
+          description: "The ML model failed to load {{ $value }} times"
