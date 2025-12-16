@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telco-churn-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telco-churn-api
+  template:
+    metadata:
+      labels:
+        app: telco-churn-api
+    spec:
+      containers:
+        - name: api
+          image: telco-churn-api:lab10
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
