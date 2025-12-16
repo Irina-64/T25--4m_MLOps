@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-15T19:25:32.888779",
+  "timestamp": "2025-12-15T19:24:08.172132",
   "model_path": "models/telco_churn_model.joblib",
   "model_type": "RandomForestClassifier",
   "test_size": 1273,
