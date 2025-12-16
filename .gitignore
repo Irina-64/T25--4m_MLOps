@@ -201,6 +201,17 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Data
+data/processed/processed.csv
+feature_repo/data/*.csv
+feature_repo/data/*.parquet
+
+# Models
+models/
+
+# MLflow local DB
+mlflow.db
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
