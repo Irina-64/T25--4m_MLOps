@@ -33,15 +33,11 @@ mlruns/
 mlartifacts/
 
 # --- Models ---
-models/*.pkl
-models/*.joblib
-models/*.h5
+models/
 
 # --- Experiments / Reports ---
 experiments/
-reports/*.png
-reports/*.html
-reports/*.csv
+reports/
 
 # --- Logs / Temporary files ---
 logs/

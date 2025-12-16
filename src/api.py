@@ -1,12 +1,20 @@
 # noqa: B008
 import json
+import time
 from contextlib import asynccontextmanager
 from typing import Annotated
 
 import joblib
 import numpy as np
-from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request
+from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
+from prometheus_client import (
+    CONTENT_TYPE_LATEST,
+    Counter,
+    Histogram,
+    Summary,
+    generate_latest,
+)
 from pydantic import BaseModel
 
 from .tools.decoder import apply_encoders_and_scaler
@@ -117,6 +125,16 @@ async def lifespan(app: FastAPI):
     yield
 
 
+REQUEST_COUNT = Counter(
+    "request_count_total",
+    "Total number of HTTP requests",
+    ["method", "endpoint", "http_status"],
+)
+
+REQUEST_LATENCY = Histogram("request_latency_seconds", "Latency of HTTP requests in seconds", ["endpoint"])
+
+PREDICTION_DISTRIBUTION = Summary("prediction_price_distribution", "Distribution of predicted car prices")
+
 app = FastAPI(
     title="Car Price Prediction API",
     version="2.0",
@@ -124,6 +142,21 @@ app = FastAPI(
 )
 
 router = APIRouter(prefix="/api/v1", tags=["Car API"])
+
+
+@app.middleware("http")
+async def prometheus_middleware(request: Request, call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+
+    endpoint = request.url.path
+    status_code = response.status_code
+
+    REQUEST_LATENCY.labels(endpoint).observe(process_time)
+    REQUEST_COUNT.labels(request.method, endpoint, status_code).inc()
+
+    return response
 
 
 # ------------------------------
@@ -163,6 +196,13 @@ class PredictRequest(BaseModel):
 # ------------------------------
 # Эндпоинты
 # ------------------------------
+
+
+@app.get("/metrics")
+async def metrics():
+    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
+
+
 @router.get("/params")
 async def get_params_endpoint(params=Depends(get_params)):
     return JSONResponse(params)
@@ -253,6 +293,8 @@ async def predict(
             price_real = temp_real[0, price_idx]
         else:
             price_real = float(pred_scaled[0])
+
+        PREDICTION_DISTRIBUTION.observe(price_real)
 
         return JSONResponse({"predicted": float(price_real)})
 
