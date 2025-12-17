@@ -4,191 +4,152 @@ import numpy as np
 from pathlib import Path
 import joblib
 import json
-from typing import Dict, Tuple
+from datetime import datetime
+from typing import List, Dict
 
+from feast import FeatureStore
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
-from sklearn.metrics import (
-    accuracy_score,
-    precision_score,
-    recall_score,
-    roc_auc_score,
-    f1_score,
-    confusion_matrix,
-    classification_report
-)
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, classification_report
 
-import mlflow
-import mlflow.sklearn
-
-
-class Classifier:
+class PersonalityClassifier:
+    FEATURE_NAMES = ["time_broken_spent_alone","stage_fear", "social_event_attendance","going_outside","drained_after_socializing","friends_circle_size","post_frequency"]
+    TARGET_NAME = "personality_encoded"
     
-    FEATURES = ['Time_broken_spent_Alone','Stage_fear','Social_event_attendance','Going_outside','Drained_after_socializing','Friends_circle_size','Post_frequency']
-    TARGET = 'Personality_encoded'
-    
-    def __init__(self, model_type: str = 'rf', random_state: int = 42):
-        self.model_type = model_type
-        self.random_state = random_state
+    def __init__(self, feature_store_path: str = "/opt/airflow/feature_repo"):
+        self.fs = FeatureStore(repo_path=feature_store_path)
         self.model = None
         self.scaler = StandardScaler()
         
-    def load_data(self, data_path: str) -> pd.DataFrame:
-        df = pd.read_csv(data_path)
+    def load_data_from_feast(self, user_ids: List[int]) -> pd.DataFrame:
+        entity_df = pd.DataFrame({
+            "user_id": user_ids,
+            "event_timestamp": pd.to_datetime([datetime.now()] * len(user_ids))
+        })
+        feature_refs = [
+            f"personality_features:{feature}" for feature in self.FEATURE_NAMES
+        ] + [f"personality_features:{self.TARGET_NAME}"]
 
-        return df
+        training_df = self.fs.get_historical_features(
+            entity_df=entity_df,
+            features=feature_refs
+        ).to_df()
+
+        training_df.columns = [col.replace("personality_features__", "") 
+                              for col in training_df.columns]
+        
+        return training_df
     
-    def prepare_data(self, df: pd.DataFrame, test_size: float = 0.2) -> Tuple:
-        X = df[self.FEATURES].copy()
-        y = df[self.TARGET]
-
+    def prepare_data(self, df: pd.DataFrame, test_size: float = 0.2) -> tuple:
+        missing_features = [f for f in self.FEATURE_NAMES if f not in df.columns]
+        if missing_features:
+            raise ValueError(f"Отсутствуют фичи: {missing_features}")
+        
+        X = df[self.FEATURE_NAMES].copy()
+        y = df[self.TARGET_NAME]
         X_train, X_test, y_train, y_test = train_test_split(
-            X, y,
-            test_size=test_size,
-            random_state=self.random_state,
+            X, y, 
+            test_size=test_size, 
+            random_state=42,
             stratify=y
         )
-
         X_train_scaled = self.scaler.fit_transform(X_train)
         X_test_scaled = self.scaler.transform(X_test)
         
         return X_train_scaled, X_test_scaled, y_train, y_test
     
-    def train_model(self, X_train: np.ndarray, y_train: pd.Series) -> None:
-        if self.model_type == 'rf':
-            self.model = RandomForestClassifier(
-                n_estimators=150,
-                max_depth=10,
-                min_samples_split=5,
-                min_samples_leaf=2,
-                random_state=self.random_state,
-                n_jobs=-1,
-                class_weight='balanced'
-            )
-            
-        elif self.model_type == 'lr':
-            self.model = LogisticRegression(
-                max_iter=1000,
-                random_state=self.random_state,
-                solver='liblinear',
-                class_weight='balanced',
-                C=1.0
-            )
-
-        self.model.fit(X_train, y_train)
-    
-    
-    def evaluate_model(self, X_test: np.ndarray, y_test: pd.Series) -> Dict[str, float]:
+    def train(self, X_train: np.ndarray, y_train: pd.Series) -> None:
+        self.model = RandomForestClassifier(
+            n_estimators=100,
+            max_depth=10,
+            min_samples_split=5,
+            min_samples_leaf=2,
+            random_state=42,
+            class_weight='balanced',
+            n_jobs=-1
+        )
+        
+        self.model.fit(X_train, y_train)    
+   
+    def evaluate(self, X_test: np.ndarray, y_test: pd.Series) -> Dict:
         y_pred = self.model.predict(X_test)
         y_pred_proba = self.model.predict_proba(X_test)[:, 1]
         
         metrics = {
-            'accuracy': accuracy_score(y_test, y_pred),
-            'precision': precision_score(y_test, y_pred, zero_division=0),
-            'recall': recall_score(y_test, y_pred, zero_division=0),
-            'f1_score': f1_score(y_test, y_pred, zero_division=0),
-            'roc_auc': roc_auc_score(y_test, y_pred_proba)
+            'accuracy': float(accuracy_score(y_test, y_pred)),
+            'precision': float(precision_score(y_test, y_pred, zero_division=0)),
+            'recall': float(recall_score(y_test, y_pred, zero_division=0)),
+            'f1_score': float(f1_score(y_test, y_pred, zero_division=0)),
+            'roc_auc': float(roc_auc_score(y_test, y_pred_proba))
         }
         
-        report = classification_report(y_test, y_pred, output_dict=True, zero_division=0)
-        metrics['classification_report'] = report
+        report = classification_report(y_test, y_pred, output_dict=True)
+        metrics['detailed_report'] = report
         
-        cm = confusion_matrix(y_test, y_pred)
-        tn, fp, fn, tp = cm.ravel()
-        
-        metrics.update({
-            'true_negatives': int(tn),
-            'false_positives': int(fp),
-            'false_negatives': int(fn),
-            'true_positives': int(tp),
-            'confusion_matrix': cm.tolist(),
-            'specificity': tn / (tn + fp) if (tn + fp) > 0 else 0,  # TNR
-            'false_positive_rate': fp / (fp + tn) if (fp + tn) > 0 else 0,
-            'false_negative_rate': fn / (fn + tp) if (fn + tp) > 0 else 0
-        })
+        print("\n Результаты оценки:")
+        for metric, value in metrics.items():
+            if metric != 'detailed_report':
+                print(f"  {metric}: {value:.4f}")
         
         return metrics
     
-    def log_to_mlflow(self, metrics: Dict, experiment_name: str) -> None:
-        mlflow.set_experiment(experiment_name)
-    
-        with mlflow.start_run():
-            mlflow.log_param("model_type", self.model_type)
-            mlflow.log_param("features", ", ".join(self.FEATURES))
-            mlflow.log_param("random_state", self.random_state)
-            mlflow.log_param("task", "binary_classification")
-            
-            for metric in ['accuracy', 'precision', 'recall', 'f1_score', 'roc_auc']:
-                mlflow.log_metric(metric, metrics[metric])
-            
-            mlflow.log_metric("specificity", metrics['specificity'])
-            mlflow.log_dict({"confusion_matrix": metrics['confusion_matrix']}, 
-                           "confusion_matrix.json")
-            
-            mlflow.sklearn.log_model(
-                self.model,
-                "model",
-                registered_model_name=f"personality_{self.model_type}_classifier"
-            )
-    
-
-    def save_artifacts(self, metrics: Dict, output_dir: str = 'models') -> None:
+    def save_model(self, output_dir: str = "models") -> None:
         Path(output_dir).mkdir(parents=True, exist_ok=True)
-        model_path = Path(output_dir) / 'classifier_model.joblib'
-        joblib.dump(self.model, model_path)
-        
-        scaler_path = Path(output_dir) / 'scaler.joblib'
-        joblib.dump(self.scaler, scaler_path)
-        
-        metrics_path = Path(output_dir) / 'classification_metrics.json'
-        with open(metrics_path, 'w') as f:
-            json.dump(metrics, f, indent=2, default=str)
-        
-        features_info = {
-            'features': self.FEATURES,
-            'target': self.TARGET,
-            'model_type': self.model_type,
+
+        joblib.dump(self.model, f"{output_dir}/personality_model.joblib")
+        joblib.dump(self.scaler, f"{output_dir}/personality_scaler.joblib")
+
+        feature_info = {
+            'features': self.FEATURE_NAMES,
+            'target': self.TARGET_NAME,
+            'model_type': 'RandomForestClassifier',
+            'feature_store_used': True,
+            'training_date': datetime.now().isoformat()
         }
         
-        features_path = Path(output_dir) / 'features_info.json'
-        with open(features_path, 'w') as f:
-            json.dump(features_info, f, indent=2, default=str)
-
+        with open(f"{output_dir}/feature_info.json", 'w') as f:
+            json.dump(feature_info, f, indent=2)
+        
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='/opt/airflow/data/processed/processed.csv',
-                       help='Путь к обработанным данным')
-    parser.add_argument('--model', type=str, choices=['rf', 'lr'], default='rf',
-                       help='Тип модели: rf (RandomForest), lr (LogisticRegression)')
-    parser.add_argument('--test-size', type=float, default=0.2,
-                       help='Доля тестовых данных')
+    parser = argparse.ArgumentParser(description='Обучение модели личности с Feast')
+    parser.add_argument('--feature-store', type=str, default='/opt/airflow/feature_repo',
+                       help='Путь к Feast Feature Store')
+    parser.add_argument('--num-users', type=int, default=100,
+                       help='Количество пользователей для загрузки')
     parser.add_argument('--output-dir', type=str, default='models',
                        help='Директория для сохранения модели')
-    parser.add_argument('--experiment-name', type=str, 
-                       default='personality_binary_classification',
-                       help='Название эксперимента в MLflow')
+    parser.add_argument('--test-size', type=float, default=0.2,
+                       help='Доля тестовых данных')
     
-    args = parser.parse_args()
-    classifier = Classifier(model_type=args.model)
+    args = parser.parse_args()  
+
+    classifier = PersonalityClassifier(args.feature_store)
     
     try:
-        df = classifier.load_data(args.data)
+        user_ids = list(range(1, args.num_users + 1))
+        df = classifier.load_data_from_feast(user_ids)
+
         X_train, X_test, y_train, y_test = classifier.prepare_data(
             df, test_size=args.test_size
         )
-        classifier.train_model(X_train, y_train)
-        metrics = classifier.evaluate_model(X_test, y_test)
-        classifier.log_to_mlflow(metrics, args.experiment_name)
-        classifier.save_artifacts(metrics, args.output_dir)
 
+        classifier.train(X_train, y_train)
+
+        metrics = classifier.evaluate(X_test, y_test)
+        classifier.save_model(args.output_dir)
+        metrics_path = f"{args.output_dir}/feast_training_metrics.json"
+        with open(metrics_path, 'w') as f:
+            json.dump(metrics, f, indent=2, default=str)
+        
+        print(f"\n Обучение завершено!")
+        print(f"   Модель: {args.output_dir}/personality_model.joblib")
+        print(f"   Метрики: {metrics_path}")
+        
     except Exception as e:
-        print(f"\n Ошибка: {str(e)}")
+        print(f"❌ Ошибка: {str(e)}")
         raise
-
 
 if __name__ == "__main__":
     main()
