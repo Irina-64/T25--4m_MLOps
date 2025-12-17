@@ -7,3 +7,5 @@ joblib
 pytest
 httpx
 mlflow 
+shap
+lightgbm
