@@ -46,7 +46,7 @@ spec:
           done
           
           echo ""
-          echo "✅ Тестирование завершено"
+          echo "Тестирование завершено"
       restartPolicy: Never
   backoffLimit: 0
   activeDeadlineSeconds: 60
