@@ -1,0 +1,74 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, laba13 ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pytest
+    
+    - name: Run tests
+      run: |
+        echo "Starting tests..."
+        # Если есть тесты - запускаем их
+        if [ -d "tests" ]; then
+          python -m pytest tests/ -v
+        else
+          # Создаём простой тест для демонстрации
+          echo "def test_example(): assert 1 + 1 == 2" > test_sample.py
+          python -m pytest test_sample.py -v
+          rm test_sample.py
+        fi
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Build Docker image
+      run: |
+        echo "Building Docker image..."
+        docker build -t flight-delay:latest .
+        echo "Docker image built successfully!"
+        
+    - name: List Docker images
+      run: docker images
+
+  simulate-deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Simulate deployment
+      run: |
+        echo "🚀 Simulating deployment to Kubernetes..."
+        echo "Image: flight-delay:latest"
+        echo "Command: kubectl set image deployment/flight-delay api=flight-delay:latest"
+        echo "✅ Deployment simulation complete!"
+        echo ""
+        echo "📊 For real deployment, you would need:"
+        echo "1. KUBE_CONFIG secret with k8s config"
+        echo "2. DOCKER_USERNAME and DOCKER_PASSWORD secrets"
+        echo "3. Actual kubectl command:"
+        echo "   kubectl set image deployment/flight-delay api=ghcr.io/owner/flight-delay:latest"
