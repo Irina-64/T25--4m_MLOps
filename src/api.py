@@ -1,9 +1,18 @@
 import joblib
 import numpy as np
 import pandas as pd
+import os
+import time
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
+
+START_TIME = time.time()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
 
 class PersonalityFeatures(BaseModel):
     Time_broken_spent_Alone: float
@@ -17,7 +26,11 @@ class PersonalityFeatures(BaseModel):
 class BatchPredictionRequest(BaseModel):
     samples: List[PersonalityFeatures]
 
-app = FastAPI(title="Personality Classifier API", version="1.0.0")
+app = FastAPI(
+    title="Personality Classifier API", 
+    version="1.0.0",
+    lifespan=lifespan
+)
 
 try:
     model = joblib.load("models/classifier_model.joblib")
@@ -47,8 +60,13 @@ async def health_check():
     return {
         "status": "healthy",
         "model_loaded": model is not None,
-        "scaler_loaded": scaler is not None
+        "scaler_loaded": scaler is not None,
+        "uptime_seconds": round(time.time() - START_TIME, 2),
+        "timestamp": pd.Timestamp.now().isoformat(),
+        "service": "personality-classifier-api",
+        "environment": os.getenv("ENVIRONMENT", "development")
     }
+
 
 @app.get("/model_info")
 async def model_info():

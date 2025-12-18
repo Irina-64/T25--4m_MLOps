@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: load-test
+spec:
+  template:
+    spec:
+      containers:
+      - name: test
+        image: curlimages/curl:latest
+        command: ["/bin/sh"]
+        args:
+        - -c
+        - |
+          # Ждем немного, чтобы сервис был точно готов
+          sleep 5
+          
+          echo "=== Тестирование Personality API ==="
+          
+          # Получаем IP сервиса
+          SERVICE_IP=$(host personality-api-service | grep 'address' | awk '{print $NF}')
+          echo "IP сервиса: $SERVICE_IP"
+          
+          # Простой тест - 5 запросов
+          for i in 1 2 3 4 5; do
+            echo ""
+            echo "Запрос #$i:"
+            
+            curl -X POST "http://personality-api-service.default.svc.cluster.local:8080/predict" \
+              -H "Content-Type: application/json" \
+              -d '{
+                "Time_broken_spent_Alone": 4.0,
+                "Stage_fear": 0,
+                "Social_event_attendance": 4.0,
+                "Going_outside": 6.0,
+                "Drained_after_socializing": 0,
+                "Friends_circle_size": 13.0,
+                "Post_frequency": 5.0
+              }' \
+              -s \
+              -w "Статус: %{http_code}, Время: %{time_total}s\n" \
+              -o /dev/null \
+              --max-time 5
+            
+            sleep 1
+          done
+          
+          echo ""
+          echo "✅ Тестирование завершено"
+      restartPolicy: Never
+  backoffLimit: 0
+  activeDeadlineSeconds: 60
