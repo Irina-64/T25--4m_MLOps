@@ -47,10 +47,9 @@ cd .\Airflow
 ```
 docker compose up -d
 ```
-Переходим в UI по ссылке: `http://localhost:8081` и входим по логину:`airflow` и паролю: `airflow`
-
-Переходим в DAGs и ищем `feast_personality_pipeline` - написанный dag, который через BashOperator запускает `preprocess.py`, `train.py`, `evaluate.py`, и сохраняет отчет в `/opt/airflow/reports/feast_integration_report.txt`
-Запускаем через `Trigger`, и, если все проходит без ошибок и метрики показывают значения выше порога, то `status_dag = Success`
+  1.Переходим в UI по ссылке: `http://localhost:8081` и входим по логину:`airflow` и паролю: `airflow`
+  2.Переходим в DAGs и ищем `feast_personality_pipeline` - написанный dag, который через BashOperator запускает `preprocess.py`, `train.py`, `evaluate.py`, и сохраняет отчет в `/opt/airflow/reports/feast_integration_report.txt`.
+  3.Запускаем через `Trigger`, и, если все проходит без ошибок и метрики показывают значения выше порога, то `status_dag = Success`
 
 
 ## Лицензия
