@@ -187,7 +187,7 @@ async def predict(features: PersonalityFeatures):
         }
     
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Ошибка предсказания: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Ошибка предсказания:{str(e)}")
 
 @app.post("/predict_batch")
 async def predict_batch(request: BatchPredictionRequest):
