@@ -35,8 +35,8 @@ curl -X POST "http://localhost:8080/predict" \
 ```
 
 ## Airflow pipeline/Feature_store(Feast)
-Мы добавили оркестрацию пайплайна preprocess '>> feast_materialize_task >> train_with_feast >> evaluate >> save_report'
-вместе с хранилищем 'feast' для признаков. 'feature_repo' содержит конфигурацию 'feature_store.yaml' вместе с описанием entity, featureView - 'definitions.py'. Использовали формат parquet для датасета.
+Мы добавили оркестрацию пайплайна preprocess `>> feast_materialize_task >> train_with_feast >> evaluate >> save_report`
+вместе с хранилищем `feast` для признаков. `feature_repo` содержит конфигурацию `feature_store.yaml` вместе с описанием entity, featureView - `definitions.py`. Использовали формат parquet для датасета.
 
 # Старт
 Переходим в папку с докером
@@ -47,9 +47,9 @@ cd .\Airflow
 ```
 docker compose up -d
 ```
-Переходим в UI по ссылке: 'http://localhost:8081' и входим по логину:'airflow' и паролю: 'airflow'
-Переходим в DAGs и ищем 'feast_personality_pipeline' - написанный dag, который через BashOperator запускает 'preprocess.py', 'train.py', 'evaluate.py', и сохраняет отчет в '/opt/airflow/reports/feast_integration_report.txt'
-Запускаем через 'Trigger', и, если все проходит без ошибок и метрики показывают значения выше порога, то 'status_dag = Success'
+Переходим в UI по ссылке: `http://localhost:8081` и входим по логину:`airflow` и паролю: `airflow`
+Переходим в DAGs и ищем `feast_personality_pipeline` - написанный dag, который через BashOperator запускает `preprocess.py`, `train.py`, `evaluate.py`, и сохраняет отчет в `/opt/airflow/reports/feast_integration_report.txt`
+Запускаем через `Trigger`, и, если все проходит без ошибок и метрики показывают значения выше порога, то `status_dag = Success`
 
 
 ## Лицензия
