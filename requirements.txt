@@ -14,6 +14,6 @@ feast==0.38.0
 email-validator>=2.0.0
 protobuf>=4.24.0
 grpcio<1.50.0
-sqlalchemy<2.0.0
+sqlalchemy<=2.0.0
 prometheus-client==0.20.0
 starlette==0.36.3
