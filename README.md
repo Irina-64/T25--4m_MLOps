@@ -52,5 +52,58 @@ docker compose up -d
 3. Запускаем через `Trigger`, и, если все проходит без ошибок и метрики показывают значения выше порога, то `status_dag = Success`
 
 
+# Monitoring with Prometheus and Grafana
+Внедрили prometheus_clien в api.py с основными метриками: `REQUEST_COUNT`, `REQUEST_LATENCY`, `PREDICTION_DISTRIBUTION` и кастомными метриками: `MODEL_LOADED` - статус загрузки модели, `UPTIME` - времы работы API, `REQUEST_IN_PROGRESS` - активные запросы
+
+## Архитектура 
+
+┌─────────────┐     Метрики    ┌─────────────┐     Запросы    ┌─────────────┐
+│   API       │──────────────▶│ Prometheus   │◀───────────────│   Grafana   │
+│  (FastAPI)  │    /metrics    │   :9090     │    Dashboard   │    :3000    │
+└─────────────┘                └─────────────┘                └─────────────┘
+
+## Быстрый старт
+
+1. Сборка и запуск всех сервисов:
+```
+docker-compose -f docker-compose-monitoring.yml up -d
+```
+2. Проверка работы компонентов:
+```
+curl http://localhost:8080/health
+curl http://localhost:8080/metrics
+```
+
+Prometheus (сбор метрик):
+- Веб-интерфейс: http://localhost:9090
+- Проверка targets: http://localhost:9090/targets
+Grafana (визуализация):
+- Веб-интерфейс: http://localhost:3000
+- Логин: admin
+- Пароль: admin
+
+3. Настройка Grafana
+Добавление источника данных:
+- Откройте `http://localhost:3000`
+- Configuration → Data Sources → Add data source
+- Выберите Prometheus
+- URL: `http://prometheus:9090`
+- Save & Test (должно быть "Data source is working")
+Импорт dashboard:
+- Create → Import 
+- Загрузите `grafana-dashboard.json`
+- Выберите Prometheus как источник данных
+
+4. Запуск скрипта для нагрузки тестирования:
+```
+cd .\grafana\provisioning\dashboards\
+python generate_load.py
+```
+5. Мониторинг метрик 
+- Откройте `http://localhost:3000`
+- `Configuration` → `Data Sources` → `Dashboards` → `Personality API Monitoring`
+- Просматривайте `Requests per second` и `Request Latency (95th percentile)` с течением времени
+
+
 ## Лицензия
 MIT
