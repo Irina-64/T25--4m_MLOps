@@ -1,4 +1,5 @@
 import joblib
+import uvicorn
 import numpy as np
 import pandas as pd
 import os
@@ -7,12 +8,73 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
+from prometheus_client import Counter, Histogram, Summary, Gauge, generate_latest, REGISTRY, CONTENT_TYPE_LATEST
+from starlette.responses import Response
+from starlette.middleware.base import BaseHTTPMiddleware
+import asyncio
+
+
+REQUEST_COUNT = Counter(
+    'personality_api_requests_total',
+    'Total number of requests',
+    ['method', 'endpoint', 'status']
+)
+
+REQUEST_LATENCY = Histogram(
+    'personality_api_request_duration_seconds',
+    'Request latency in seconds',
+    ['method', 'endpoint'],
+    buckets=[0.1, 0.5, 1.0, 2.0, 5.0]
+)
+
+PREDICTION_PROBABILITY = Summary(
+    'personality_api_prediction_probability',
+    'Prediction probability distribution',
+    ['personality_type']
+)
+
+PREDICTION_DISTRIBUTION = Histogram(
+    'personality_api_prediction_distribution',
+    'Detailed prediction distribution',
+    ['personality_type'],
+    buckets=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+)
+
+MODEL_LOADED = Gauge('personality_api_model_loaded', 'Model loaded status')
+UPTIME = Gauge('personality_api_uptime_seconds', 'API uptime in seconds')
+REQUEST_IN_PROGRESS = Gauge('personality_api_requests_in_progress', 'Requests in progress')
+
+class MetricsMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        method = request.method
+        endpoint = request.url.path
+        REQUEST_IN_PROGRESS.inc()
+        
+        try:
+            start_time = time.time()
+            response = await call_next(request)
+            request_time = time.time() - start_time
+
+            REQUEST_COUNT.labels(method=method, endpoint=endpoint, status=response.status_code).inc()
+            REQUEST_LATENCY.labels(method=method, endpoint=endpoint).observe(request_time)
+            
+            return response
+        except Exception as e:
+            REQUEST_COUNT.labels(method=method, endpoint=endpoint, status=500).inc()
+            raise e
+        finally:
+            REQUEST_IN_PROGRESS.dec()
 
 START_TIME = time.time()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    if model is not None and scaler is not None:
+        MODEL_LOADED.set(1)
+    else:
+        MODEL_LOADED.set(0)
     yield
+
 
 class PersonalityFeatures(BaseModel):
     Time_broken_spent_Alone: float
@@ -32,15 +94,22 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+app.add_middleware(MetricsMiddleware)
+
 try:
     model = joblib.load("models/classifier_model.joblib")
     scaler = joblib.load("models/scaler.joblib")
+    MODEL_LOADED.set(1)
 except Exception as e:
+    print(f"Ошибка загрузки модели: {e}")
     model = None
     scaler = None
+    MODEL_LOADED.set(0)
+
 
 @app.get("/")
 async def root():
+    UPTIME.set(time.time() - START_TIME)
     return {
         "message": "Personality Classifier API",
         "version": "1.0.0",
@@ -48,15 +117,20 @@ async def root():
             "/predict": "POST - предсказание для одного примера",
             "/predict_batch": "POST - предсказание для нескольких примеров",
             "/health": "GET - проверка здоровья API",
-            "/model_info": "GET - информация о модели"
+            "/model_info": "GET - информация о модели",
+            "/metrics": "GET - Prometheus метрики"
         }
     }
 
 @app.get("/health")
 async def health_check():
+    UPTIME.set(time.time() - START_TIME)
+    
     if model is None or scaler is None:
+        MODEL_LOADED.set(0)
         raise HTTPException(status_code=503, detail="Модель не загружена")
 
+    MODEL_LOADED.set(1)
     return {
         "status": "healthy",
         "model_loaded": model is not None,
@@ -67,9 +141,17 @@ async def health_check():
         "environment": os.getenv("ENVIRONMENT", "development")
     }
 
+@app.get("/metrics")
+async def metrics():
+    UPTIME.set(time.time() - START_TIME)
+    return Response(
+        content=generate_latest(REGISTRY),
+        media_type=CONTENT_TYPE_LATEST
+    )
 
 @app.get("/model_info")
 async def model_info():
+    UPTIME.set(time.time() - START_TIME)
     if model is None:
         raise HTTPException(status_code=503, detail="Модель не загружена")
     
@@ -81,6 +163,8 @@ async def model_info():
 
 @app.post("/predict")
 async def predict(features: PersonalityFeatures):
+    UPTIME.set(time.time() - START_TIME)
+    
     if model is None or scaler is None:
         raise HTTPException(status_code=503, detail="Модель не загружена")
     
@@ -90,6 +174,10 @@ async def predict(features: PersonalityFeatures):
 
         probability = model.predict_proba(data_scaled)[0][1]
         prediction = int(model.predict(data_scaled)[0])
+
+        personality_type = "extrovert" if prediction == 1 else "introvert"
+        PREDICTION_PROBABILITY.labels(personality_type=personality_type).observe(probability)
+        PREDICTION_DISTRIBUTION.labels(personality_type=personality_type).observe(probability)
         
         return {
             "probability_extrovert": float(probability),
@@ -103,6 +191,8 @@ async def predict(features: PersonalityFeatures):
 
 @app.post("/predict_batch")
 async def predict_batch(request: BatchPredictionRequest):
+    UPTIME.set(time.time() - START_TIME)
+    
     if model is None or scaler is None:
         raise HTTPException(status_code=503, detail="Модель не загружена")
     
@@ -115,6 +205,11 @@ async def predict_batch(request: BatchPredictionRequest):
         
         results = []
         for i, (prob, pred) in enumerate(zip(probabilities, predictions)):
+            personality_type = "extrovert" if pred == 1 else "introvert"
+
+            PREDICTION_PROBABILITY.labels(personality_type=personality_type).observe(prob)
+            PREDICTION_DISTRIBUTION.labels(personality_type=personality_type).observe(prob)
+            
             results.append({
                 "sample_id": i,
                 "probability_extrovert": float(prob),
@@ -129,3 +224,6 @@ async def predict_batch(request: BatchPredictionRequest):
     
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Ошибка предсказания: {str(e)}")
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8080)
