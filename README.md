@@ -56,12 +56,12 @@ docker compose up -d
 Внедрили prometheus_clien в api.py с основными метриками: `REQUEST_COUNT`, `REQUEST_LATENCY`, `PREDICTION_DISTRIBUTION` и кастомными метриками: `MODEL_LOADED` - статус загрузки модели, `UPTIME` - времы работы API, `REQUEST_IN_PROGRESS` - активные запросы
 
 ## Архитектура 
-
+```
 ┌─────────────┐     Метрики    ┌─────────────┐     Запросы    ┌─────────────┐
 │   API       │──────────────▶│ Prometheus   │◀───────────────│   Grafana   │
 │  (FastAPI)  │    /metrics    │   :9090     │    Dashboard   │    :3000    │
 └─────────────┘                └─────────────┘                └─────────────┘
-
+```
 ## Быстрый старт
 
 1. Сборка и запуск всех сервисов:
