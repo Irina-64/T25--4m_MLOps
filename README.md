@@ -82,7 +82,7 @@ Grafana (визуализация):
 - Логин: admin
 - Пароль: admin
 
-3. Настройка Grafana
+### 3. Настройка Grafana
 Добавление источника данных:
 - Откройте `http://localhost:3000`
 - Configuration → Data Sources → Add data source
