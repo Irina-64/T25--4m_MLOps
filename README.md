@@ -35,8 +35,8 @@ curl -X POST "http://localhost:8080/predict" \
 ```
 
 ## Airflow pipeline/Feature_store(Feast)
-Мы добавили оркестрацию пайплайна preprocess >> feast_materialize_task >> train_with_feast >> evaluate >> save_report
-вместе с хранилищем feast для признаков. feature_repo содержит конфигурацию feature_store.yaml вместе с описанием entity, featureView - definitions.py. Использовали формат parquet для датасета.
+Мы добавили оркестрацию пайплайна preprocess '>> feast_materialize_task >> train_with_feast >> evaluate >> save_report'
+вместе с хранилищем 'feast' для признаков. 'feature_repo' содержит конфигурацию 'feature_store.yaml' вместе с описанием entity, featureView - 'definitions.py'. Использовали формат parquet для датасета.
 
 # Старт
 Переходим в папку с докером
