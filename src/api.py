@@ -4,10 +4,13 @@ import os
 import time
 from pathlib import Path
 from typing import Optional
+from contextlib import asynccontextmanager
 
 import joblib
 import pandas as pd
 from fastapi import FastAPI, Request, Response
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from prometheus_client import (
     CONTENT_TYPE_LATEST,
@@ -86,8 +89,7 @@ try:
     SIMULATED_LATENCY_SEC = float(os.environ.get("SIMULATED_LATENCY_SEC", "0"))
 except ValueError:
     SIMULATED_LATENCY_SEC = 0.0
-
-app = FastAPI(title="SMS Spam API (Lab6)")
+STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 _model = None
 _model_path: Optional[Path] = None
@@ -128,11 +130,24 @@ class PredictOut(BaseModel):
     proba_spam: float
     model_path: Optional[str] = None
 
-@app.on_event("startup")
-def startup_event() -> None:
-    # Для локального запуска MODEL_DIR может быть относительным и должен существовать
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: выполняется при запуске приложения
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
     load_model()
+    yield
+    # Shutdown: здесь можно добавить код очистки ресурсов при необходимости
+
+app = FastAPI(title="SMS Spam API (Lab6)", lifespan=lifespan)
+
+if STATIC_DIR.exists():
+    # Раздаём небольшую React-страницу без сборки
+    app.mount("/ui", StaticFiles(directory=STATIC_DIR, html=True), name="ui")
+
+
+@app.get("/")
+def root() -> RedirectResponse:
+    return RedirectResponse(url="/ui/")
 
 @app.middleware("http")
 async def metrics_middleware(request: Request, call_next):
