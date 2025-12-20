@@ -7,6 +7,7 @@ import time
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from datetime import datetime
 from typing import List
 from prometheus_client import Counter, Histogram, Summary, Gauge, generate_latest, REGISTRY, CONTENT_TYPE_LATEST
 from starlette.responses import Response
@@ -175,6 +176,20 @@ async def predict(features: PersonalityFeatures):
         probability = model.predict_proba(data_scaled)[0][1]
         prediction = int(model.predict(data_scaled)[0])
 
+        log_entry = {
+            'timestamp': datetime.now().isoformat(),
+            **{k.lower(): v for k, v in features.dict().items()},
+            'prediction': prediction,
+            'probability': probability
+        }
+
+        log_dir = '/opt/airflow/data/production_logs'
+        os.makedirs(log_dir, exist_ok=True)
+
+        log_df = pd.DataFrame([log_entry])
+        log_path = os.path.join(log_dir, 'predictions.csv')
+        log_df.to_csv(log_path, mode='a', header=not os.path.exists(log_path), index=False)
+
         personality_type = "extrovert" if prediction == 1 else "introvert"
         PREDICTION_PROBABILITY.labels(personality_type=personality_type).observe(probability)
         PREDICTION_DISTRIBUTION.labels(personality_type=personality_type).observe(probability)
@@ -204,11 +219,21 @@ async def predict_batch(request: BatchPredictionRequest):
         predictions = model.predict(data_scaled)
         
         results = []
+        log_entries = []
+        
         for i, (prob, pred) in enumerate(zip(probabilities, predictions)):
             personality_type = "extrovert" if pred == 1 else "introvert"
 
             PREDICTION_PROBABILITY.labels(personality_type=personality_type).observe(prob)
             PREDICTION_DISTRIBUTION.labels(personality_type=personality_type).observe(prob)
+            
+            log_entry = {
+                'timestamp': datetime.now().isoformat(),
+                **{k.lower(): v for k, v in request.samples[i].model_dump().items()},
+                'prediction': int(pred),
+                'probability': float(prob)
+            }
+            log_entries.append(log_entry)
             
             results.append({
                 "sample_id": i,
@@ -216,6 +241,13 @@ async def predict_batch(request: BatchPredictionRequest):
                 "prediction": int(pred),
                 "personality": "Extrovert" if pred == 1 else "Introvert"
             })
+        
+        if log_entries:
+            log_dir = '/opt/airflow/data/production_logs'
+            os.makedirs(log_dir, exist_ok=True)
+            log_df = pd.DataFrame(log_entries)
+            log_path = os.path.join(log_dir, 'predictions.csv')
+            log_df.to_csv(log_path, mode='a', header=not os.path.exists(log_path), index=False)
         
         return {
             "count": len(results),

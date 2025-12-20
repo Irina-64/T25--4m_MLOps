@@ -11,5 +11,5 @@
   "target": "personality_encoded",
   "model_type": "RandomForestClassifier",
   "feature_store_used": true,
-  "training_date": "2025-12-17T14:44:30.471786"
+  "training_date": "2025-12-20T16:50:50.840643"
 }

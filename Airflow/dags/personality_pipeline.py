@@ -3,7 +3,6 @@ from airflow import DAG
 from feast import FeatureStore, Entity, FeatureView
 from airflow.providers.standard.operators.bash import BashOperator
 from airflow.providers.standard.operators.python import PythonOperator
-import definitions
 import subprocess
 import traceback
 import sqlite3
@@ -12,6 +11,9 @@ import os
 
 def feast_materialize(**context):
     feast_repo_path = "/opt/airflow/feature_repo"
+
+    if feast_repo_path not in sys.path:
+        sys.path.insert(0, feast_repo_path)
 
     if not os.path.exists(feast_repo_path):
         raise FileNotFoundError(f"Feature repo not found: {feast_repo_path}")
@@ -22,7 +24,8 @@ def feast_materialize(**context):
             raise FileNotFoundError(f"definitions.py not found in {feast_repo_path}")
         
         sys.path.insert(0, feast_repo_path)
-        try:        
+        try:
+            import definitions        
             if hasattr(definitions, 'personality_features'):
                 print(f" Найден FeatureView: personality_features")
             else:

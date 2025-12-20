@@ -1,17 +1,21 @@
 import argparse
 import pandas as pd
 import numpy as np
-from pathlib import Path
 import joblib
+import pickle
 import json
+import os
+
 from datetime import datetime
 from typing import List, Dict
 
+from pathlib import Path
 from feast import FeatureStore
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, classification_report
+
 
 class PersonalityClassifier:
     FEATURE_NAMES = ["time_broken_spent_alone","stage_fear", "social_event_attendance","going_outside","drained_after_socializing","friends_circle_size","post_frequency"]
@@ -139,6 +143,14 @@ def main():
 
         metrics = classifier.evaluate(X_test, y_test)
         classifier.save_model(args.output_dir)
+
+        reference_path = '/opt/airflow/data/processed/train_reference.pkl'
+        os.makedirs(os.path.dirname(reference_path), exist_ok=True)
+
+        with open(reference_path, 'wb') as f:
+            pickle.dump(df[classifier.FEATURE_NAMES], f)
+        
+
         metrics_path = f"{args.output_dir}/feast_training_metrics.json"
         with open(metrics_path, 'w') as f:
             json.dump(metrics, f, indent=2, default=str)
@@ -146,9 +158,10 @@ def main():
         print(f"\n Обучение завершено!")
         print(f"   Модель: {args.output_dir}/personality_model.joblib")
         print(f"   Метрики: {metrics_path}")
+        print(f"Эталонные данные для дрейфа сохранены: {reference_path}")
         
     except Exception as e:
-        print(f"❌ Ошибка: {str(e)}")
+        print(f"Ошибка: {str(e)}")
         raise
 
 if __name__ == "__main__":
