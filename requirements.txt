@@ -5,3 +5,5 @@ gymnasium
 numpy
 pydantic
 mlflow
+pytest
+pytest-cov

@@ -12,7 +12,6 @@ if repo_root not in sys.path:
 
 from env.durak_env import DurakEnv
 from Core.agents import RLAgent
-from Core.demo import play_demo_game
 from src.preprocess import state_to_tensor
 
 # ------------------ Конфигурация ------------------
