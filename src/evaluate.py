@@ -14,27 +14,63 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import train_test_split
 
-data_path = "data/processed/processed.csv"
-model_path = "models/model.joblib"
-report_dir = "reports"
-os.makedirs(report_dir, exist_ok=True)
+DATA_PATH = "data/processed/processed.csv"
+MODEL_PATH = "models/model.joblib"
+FEATURES_PATH = "models/feature_names.json"
+REPORT_DIR = "reports"
 
-df = pd.read_csv(data_path)
+os.makedirs(REPORT_DIR, exist_ok=True)
+
+
+df = pd.read_csv(DATA_PATH)
+
 if "target" not in df.columns:
-    raise ValueError("Колонка 'target' не найдена в processed.csv")
+    raise ValueError("❌ Колонка 'target' не найдена")
 
-X = df.drop(columns=["target"])
 y = df["target"]
+
+DROP_COLS = ["target", "fight_id", "_R_key", "_B_key"]
+X = df.drop(columns=[c for c in DROP_COLS if c in df.columns])
+
+
+X = X.replace([float("inf"), float("-inf")], 0)
+
+for col in X.columns:
+    if X[col].dtype == "bool":
+        X[col] = X[col].astype(int)
+
+for col in X.columns:
+    if X[col].dtype == "object":
+        try:
+            X[col] = X[col].astype(float)
+        except:
+            X = X.drop(columns=[col])
+
+X = X.fillna(0)
+
+
+with open(FEATURES_PATH) as f:
+    train_features = json.load(f)
+
+
+for col in train_features:
+    if col not in X.columns:
+        X[col] = 0.0
+
+
+X = X[train_features]
+
+
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
+    X, y, test_size=0.2, stratify=y, random_state=42
 )
 
-model = joblib.load(model_path)
+
+model = joblib.load(MODEL_PATH)
+
 
 y_pred = model.predict(X_test)
-y_proba = (
-    model.predict_proba(X_test)[:, 1] if hasattr(model, "predict_proba") else y_pred
-)
+y_proba = model.predict_proba(X_test)[:, 1]
 
 metrics = {
     "roc_auc": float(roc_auc_score(y_test, y_proba)),
@@ -44,27 +80,30 @@ metrics = {
     "confusion_matrix": confusion_matrix(y_test, y_pred).tolist(),
 }
 
-report_path = os.path.join(report_dir, "eval.json")
+
+report_path = os.path.join(REPORT_DIR, "eval.json")
 with open(report_path, "w") as f:
     json.dump(metrics, f, indent=4)
 
-print(f"\n✅ Отчёт сохранён в: {report_path}")
+print("\n✅ Evaluation report:")
 print(json.dumps(metrics, indent=4))
+
 
 mlflow.set_experiment("ufc_winner_prediction")
 
-with mlflow.start_run(run_name="model_evaluation") as run:
-    for key, val in metrics.items():
-        if isinstance(val, (int, float)):
-            mlflow.log_metric(key, val)
+with mlflow.start_run(run_name="model_evaluation"):
+    for k, v in metrics.items():
+        if isinstance(v, (int, float)):
+            mlflow.log_metric(k, v)
 
     mlflow.log_artifact(report_path)
-
     mlflow.sklearn.log_model(
-        model, artifact_path="model", registered_model_name="ufc_winner_model"
+        model,
+        artifact_path="model",
+        registered_model_name="ufc_winner_model",
     )
 
 client = MlflowClient()
 latest = client.get_latest_versions("ufc_winner_model", stages=["None"])[0]
 
-print(f"🎯 Модель успешно зарегистрирована! Версия: {latest.version}")
+print(f"\n🎯 Model registered. Version: {latest.version}")

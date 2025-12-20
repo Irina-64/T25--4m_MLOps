@@ -57,4 +57,89 @@ http://localhost:8080 логин/пароль : admin
 
 ✅ Все таски в Airflow зелёные.
 
+### ⚡ Feature Store (Feast)
+1. Каталог: feature_repo/
+2.	Entity: fight_id, признаки: fighter_stats, recent_wins, fight_history, win_ratio
+3.	Модель обучается на фичах из offline store Feast
+4.	Материализация:
+cd feature_repo
+feast apply
+feast materialize 2020-01-01 2025-12-31
+
+## ☸️ Деплой в Kubernetes (Minikube)
+
+Деплой API в локальный кластер (Minikube). Образ собираем прямо в Docker внутри Minikube, чтобы не пушить в Registry.
+
+### Шаги
+
+1. Запустить кластер и переключить Docker на Minikube:
+   ```bash
+   minikube start
+   minikube addons enable metrics-server   # нужно для HPA
+   eval $(minikube docker-env)
+   ```
+2. Собрать образ (использует существующий `Dockerfile`; модель уже лежит в `model_store/` внутри образа):
+   ```bash
+   docker build -t ufc-pred .
+   ```
+3. Применить манифесты:
+   ```bash
+   kubectl apply -f k8s/
+   kubectl get pods,svc
+   ```
+4. Проверить доступность сервиса:
+   ```bash
+   curl -X POST http://127.0.0.1:65272/predict \
+   -H "Content-Type: application/json" \
+   -d '{"carrier":"AA","dep_hour":9,"distance":500}'
+   ```
+5. Масштабирование:
+   ```bash
+   # принудительно
+   kubectl scale --replicas=3 deployment/ufc-api
+   # автоматически по CPU (понадобятся метрики)
+   kubectl get hpa
+   ```
+
+Манифесты в `k8s/`: Deployment с образом `ufc-pred`, Service `ufc-api-svc` (NodePort 30080), HPA `ufc-pred-hpa` с порогом 50% CPU. Контейнер читает модель из `/app/models/model.joblib` (копируется в образ при сборке).
+
+## 📊 Monitoring (Prometheus + Grafana)
+
+API инструментирован через `prometheus_client` и отдаёт `/metrics`. Кастомные метрики: `Средняя вероятность победы`, `P95 latency`, `Requests / second`.
+
+## 💯 CI/CD до кластера
+
+Готов GitHub Actions workflow `.github/workflows/deploy.yml`: на push в `main` прогоняет тесты, собирает Docker-образ, пушит в GHCR и обновляет образ в Kubernetes.
+
+Минимальные секреты:
+- `KUBE_CONFIG_DATA` — base64 от kubeconfig с доступом к кластеру (создайте `cat ~/.kube/config | base64 -w0`).
+- Registry использует встроенный `GITHUB_TOKEN` (`packages: write`), поэтому дополнительных секретов для GHCR не нужно. Сделайте пакет публичным один раз через UI GHCR или `imagePullSecret`, чтобы кластер мог тянуть образ.
+
+Основные шаги pipeline:
+1. `pytest -q`
+2. `docker build -t ghcr.io/<owner>/ufc-api:{sha|latest} .`
+3. `docker push` обоих тегов в GHCR
+4. `kubectl set image deployment/ufc-api ufc-api=ghcr.io/<owner>/ufc-api:latest && kubectl rollout status`
+
+Проверка: пушьте в feature-ветку → PR → merge в `main`; в логах Actions увидите публикацию образа и успешный rollout деплоймента `ufc-api`.
+
+### 🎓  Docker Compose (API + Prometheus + Grafana)
+
+1. Поднять стек:  
+   `docker compose -f docker-compose.yaml up --build -d`  
+2. Проверка API/метрик: `curl http://localhost:8080/health`, `curl http://localhost:8080/metrics | head`.
+3. Prometheus UI: http://localhost:9090 — таргет `ufc-api` должен быть `UP`;
+4. Grafana UI: http://localhost:3000 (admin/admin). Datasource и дашборд подтягиваются автоматически из `grafana/provisioning/`.
+
+
+### Остановка
+
+```
+docker compose -f docker-compose.yaml down -v
+```
+
+
+
+
+
 

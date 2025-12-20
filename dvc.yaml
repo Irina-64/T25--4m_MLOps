@@ -8,7 +8,5 @@ stages:
     - data/raw/Fstats.csv
     - src/preprocess.py
     outs:
-    - data/processed/events_processed.csv
-    - data/processed/fighters_processed.csv
-    - data/processed/fights_processed.csv
-    - data/processed/fstats_processed.csv
+      - data/processed/processed.csv
+      - data/processed/fighters_profiles.parquet

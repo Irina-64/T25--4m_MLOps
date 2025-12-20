@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ufc-pred
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ufc-pred
+  template:
+    metadata:
+      labels:
+        app: ufc-pred
+    spec:
+      containers:
+        - name: ufc-pred-api
+          image: ghcr.io/KillRegin/ufc-pred:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
