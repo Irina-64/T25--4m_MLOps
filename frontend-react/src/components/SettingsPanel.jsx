@@ -66,3 +66,7 @@ function SettingsPanel({ settings, setSettings, onClose }) {
 
 export default SettingsPanel
 
+
+
+
+
