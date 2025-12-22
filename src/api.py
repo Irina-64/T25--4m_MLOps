@@ -12,6 +12,7 @@ from typing import List
 from prometheus_client import Counter, Histogram, Summary, Gauge, generate_latest, REGISTRY, CONTENT_TYPE_LATEST
 from starlette.responses import Response
 from starlette.middleware.base import BaseHTTPMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 import asyncio
 
 
@@ -93,6 +94,14 @@ app = FastAPI(
     title="Personality Classifier API", 
     version="1.0.0",
     lifespan=lifespan
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.add_middleware(MetricsMiddleware)
