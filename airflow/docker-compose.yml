@@ -1,0 +1,62 @@
+# airflow\docker-compose.yml
+version: '3.8'
+
+services:
+  airflow:
+    build:
+      context: ..
+      dockerfile: airflow/Dockerfile
+    container_name: airflow
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    volumes:
+      - ./airflow_data:/opt/airflow
+      - ./dags:/opt/airflow/dags
+      - ../src:/opt/airflow/src
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ../Core/__init__.py:/opt/airflow/Core/__init__.py
+      - ../Core/demo.py:/opt/airflow/Core/demo.py
+      - ../Core/agents.py:/opt/airflow/Core/agents.py
+      - ../Core/core.py:/opt/airflow/Core/core.py
+      - ../Core/reward_system.py:/opt/airflow/Core/reward_system.py
+      - ../Core/replay_logger.py:/opt/airflow/Core/replay_logger.py
+      - ../env/durak_env.py:/opt/airflow/env/durak_env.py
+    ports:
+      - "8080:8080"
+    command: >
+      bash -c "
+      airflow db init &&
+      airflow users create
+        --username admin
+        --password admin
+        --firstname admin
+        --lastname admin
+        --role Admin
+        --email admin@example.com &&
+      airflow webserver & airflow scheduler
+      "
+
+  airflow-scheduler:
+    build:
+      context: ..
+      dockerfile: airflow/Dockerfile
+    restart: always
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    volumes:
+      - ./airflow_data:/opt/airflow
+      - ./dags:/opt/airflow/dags
+      - ../src:/opt/airflow/src
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - ../Core/__init__.py:/opt/airflow/Core/__init__.py
+      - ../Core/demo.py:/opt/airflow/Core/demo.py
+      - ../Core/agents.py:/opt/airflow/Core/agents.py
+      - ../Core/core.py:/opt/airflow/Core/core.py
+      - ../Core/reward_system.py:/opt/airflow/Core/reward_system.py
+      - ../Core/replay_logger.py:/opt/airflow/Core/replay_logger.py
+      - ../env/durak_env.py:/opt/airflow/env/durak_env.py
+    command: scheduler
