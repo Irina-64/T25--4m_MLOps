@@ -34,6 +34,20 @@ curl -X POST "http://localhost:8080/predict" \
   }'
 ```
 
+
+# Api + UI
+1. Запускаем api.py:
+```
+python .\src\api.py
+```
+2. Запускаем порт для UI
+```
+python -m http.server 8000
+```
+3. Переходим по ссылке `http://localhost:8000`
+
+
+
 # Airflow pipeline/Feature_store(Feast)
 Мы добавили оркестрацию пайплайна preprocess `>> feast_materialize_task >> train_with_feast >> evaluate >> save_report`
 вместе с хранилищем `feast` для признаков. `feature_repo` содержит конфигурацию `feature_store.yaml` вместе с описанием entity, featureView - `definitions.py`. Использовали формат parquet для датасета.
