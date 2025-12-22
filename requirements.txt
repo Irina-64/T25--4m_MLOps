@@ -1,6 +1,5 @@
 fastapi
 uvicorn
-torch==2.2.0+cpu
 gymnasium
 numpy
 pydantic
