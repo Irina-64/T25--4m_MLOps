@@ -7,3 +7,4 @@ mlflow
 pytest
 pytest-cov
 httpx
+torch
