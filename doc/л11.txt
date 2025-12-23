@@ -1,0 +1,21 @@
+metrics.txt - файл с локальными отчетами
+python_gc_objects_collected_total — сколько объектов Python было собрано сборщиком мусора.
+python_gc_objects_collected_total{generation="0"} 8051.0
+python_gc_objects_collected_total{generation="1"} 866.0
+python_gc_objects_collected_total{generation="2"} 173.0
+
+python_gc_objects_uncollectable_total — объекты, которые не удалось собрать. 
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+
+python_gc_collections_total — сколько раз запускался сборщик мусора. 
+python_gc_collections_total{generation="0"} 632.0
+python_gc_collections_total{generation="1"} 57.0
+python_gc_collections_total{generation="2"} 5.0
+
+rl_steps_total 2210.0 — всего шагов RL-агента сделано.
+rl_actions_total{action="attack"} 881.0 — сколько раз агент сделал ход "attack".
+rl_actions_total{action="pass"} 928.0 — сколько раз агент "pass".
+rl_actions_total{action="add"} 401.0 — сколько раз агент "add".
+rl_wins_total 13.0 — сколько раз RL победил.

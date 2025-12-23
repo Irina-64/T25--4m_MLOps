@@ -15,103 +15,94 @@ CARD_RANK_REWARD = {
 }
 
 # коэффициенты комбо
-COMBO_MULTIPLIER = 1.2  # за повторные успешные атаки
-PAIR_BONUS = 1.5        # пара одинаковых карт
-TRIPLE_BONUS = 2.0       # тройка одинаковых карт
-QUAD_BONUS = 2.5         # четверка одинаковых карт
-POGON_BONUS = 5.0        # “на погоны” – пара шестерок в конце
+COMBO_MULTIPLIER = 1.2
+PAIR_BONUS = 1.5
+TRIPLE_BONUS = 2.0
+QUAD_BONUS = 2.5
+POGON_BONUS = 5.0
 
-# штраф за попытку сделать недопустимый ход
 ILLEGAL_MOVE_PENALTY = -3
 
 class RewardSystem:
     def __init__(self):
-        # хранение статистики для комбо внутри игры
         self.last_attacks_success = defaultdict(int)
+
     def compute_reward(self, game, pid, action, state_before, state_after):
-        """Публичный метод для использования агентом и тестами"""
         return self._reward(game, pid, action, state_before, state_after)
 
     def _reward(self, game, pid, action, state_before, state_after):
-        """
-        Внутренний метод вычисления награды.
-        Публичный метод compute_reward просто его вызывает.
-        """
-        reward = 0
+        reward = 0.0
 
-        # проверяем на попытку недопустимого хода
+        # --- Проверка легальности действия ---
         if not self.is_action_legal(action, state_before):
             return ILLEGAL_MOVE_PENALTY
 
-        hand_size_before = state_before["hand_sizes"][pid]
-        hand_size_after = state_after["hand_sizes"][pid]
+        hand_before = state_before["hand_sizes"][pid]
+        hand_after = state_after["hand_sizes"][pid]
 
-        # выиграл или проиграл
-        if game.finished:
-            if pid in game.winner_ids:
-                reward += 100
-                if self.is_pogon(state_after["hand_history"].get(pid, [])):
-                    reward += POGON_BONUS
-            else:
-                reward -= 100
+        # --- базовый reward за любое легальное действие ---
+        reward += 2.0
 
-        # уменьшение руки (выкидывание карт)
-        cards_played = hand_size_before - hand_size_after
+        # --- уменьшение руки ---
+        cards_played = hand_before - hand_after
         if cards_played > 0:
             if action[0] in ["attack", "add"]:
                 card_values = action[1] if isinstance(action[1], list) else [action[1]]
                 for c in card_values:
-                    reward += CARD_RANK_REWARD.get(str(c.rank), 0)
+                    c_str = str(c) if hasattr(c, '__repr__') else c
+                    rank = ''.join(filter(str.isalnum, c_str))  # извлекаем ранг
+                    reward += CARD_RANK_REWARD.get(rank, 0)
             elif action[0] == "defend":
-                reward += 1  # базовый бонус за успешную защиту
+                reward += 1.0
 
-        # бонус за атаки подряд
-        if action[0] == "attack":
-            defender = state_before["defender"]
-            if state_after["hand_sizes"][defender] > state_before["hand_sizes"][defender]:
-                self.last_attacks_success[pid] += 1
-                reward *= COMBO_MULTIPLIER ** (self.last_attacks_success[pid] - 1)
-            else:
-                self.last_attacks_success[pid] = 0
-
-        # бонус за пары/тройки/четверки
-        if action[0] == "attack" and isinstance(action[1], list) and len(action[1]) > 1:
-            count = len(action[1])
-            if count == 2:
-                reward *= PAIR_BONUS
-            elif count == 3:
-                reward *= TRIPLE_BONUS
-            elif count == 4:
-                reward *= QUAD_BONUS
-
-        # бонус за создание трудностей оппоненту
+        # --- успешная атака (противник взял) ---
         if action[0] == "attack":
             defender = state_before["defender"]
             delta = state_after["hand_sizes"][defender] - state_before["hand_sizes"][defender]
             if delta > 0:
-                for c in action[1] if isinstance(action[1], list) else [action[1]]:
-                    rank_val = getattr(c, "rank_val", 0)
-                    reward += rank_val * 0.1
+                self.last_attacks_success[pid] += 1
+                reward += 2.0
+                reward *= COMBO_MULTIPLIER ** (self.last_attacks_success[pid] - 1)
+            else:
+                self.last_attacks_success[pid] = 0
+
+        # --- бонус за пары/тройки/четверки ---
+        if action[0] == "attack" and isinstance(action[1], list):
+            count = len(action[1])
+            if count == 2:
+                reward += PAIR_BONUS
+            elif count == 3:
+                reward += TRIPLE_BONUS
+            elif count == 4:
+                reward += QUAD_BONUS
+
+        # --- победа / поражение ---
+        if game.finished:
+            if pid in game.winner_ids:
+                reward += 100
+                hand_hist = state_after.get("hand_history", {}).get(pid, [])
+                if self.is_pogon(hand_hist):
+                    reward += POGON_BONUS
+            else:
+                reward -= 100
 
         return reward
 
     def is_action_legal(self, action, state):
-        """Простейшая проверка легальности хода. Можно расширять."""
         hand = state.get("your_hand", [])
+        # Преобразуем все элементы hand к строке
+        hand = [str(c) for c in hand]
 
         if action[0] in ["attack", "add"]:
-            card = action[1] if isinstance(action[1], list) else action[1]
-            for c in card if isinstance(card, list) else [card]:
-                if c not in hand:
-                    return False
+            cards = action[1] if isinstance(action[1], list) else [action[1]]
+            cards = [str(c) for c in cards]
+            return all(c in hand for c in cards)
         elif action[0] == "defend":
-            card = action[2]
-            if card not in hand:
-                return False
+            card = str(action[2])
+            return card in hand
         return True
 
     def is_pogon(self, hand_history):
-        """Проверяем, были ли последние две выкинутые карты – пара шестерок"""
         if len(hand_history) < 2:
             return False
-        return all(c.rank == "6" for c in hand_history[-2:])
+        return all(str(c).startswith("6") for c in hand_history[-2:])
