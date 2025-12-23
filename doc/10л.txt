@@ -1,0 +1,235 @@
+Лабораторная работа №10 — Деплой в Kubernetes (Minikube)
+Проект: RL-агент для карточной игры «Дурак»
+
+
+
+ Используемые инструменты
+
+Minikube v1.37.0
+
+Docker Desktop (для сборки образа и интеграции с Minikube)
+
+kubectl (для управления кластером)
+
+PowerShell (для запросов к FastAPI)
+
+FastAPI / Uvicorn — REST API для RL-агента
+
+Python 3.11, зависимости из requirements.txt
+
+3️⃣ Описание проекта
+
+Проект реализует RL-агента для карточной игры «Дурак»:
+
+/reset — сброс игры
+
+/step — сделать ход (POST, параметр {"action":"take"} и т.д.)
+
+/legal_actions — получить список доступных ходов для игрока
+
+Код находится в папках:
+
+src/Api.py — FastAPI
+
+env/durak_env.py — среда игры
+
+Core/agents.py, Core/core.py — логика RL-агента и игры
+
+Dockerfile — образ Python с проектом
+
+4️⃣ Шаги выполнения лабораторной
+4.1 Установка Minikube и Docker
+
+Установлен Minikube (minikube version)
+
+Установлен Docker Desktop
+
+Проверено состояние Docker:
+
+docker info
+
+4.2 Сборка Docker-образа и интеграция с Minikube
+# Перейти в директорию с проектом и Dockerfile
+cd "C:\Users\ilua2\OneDrive\Рабочий_стол\ХЛАМ\Программирование\T25--4m_MLOps"
+
+# Сборка образа
+docker build -t durak-rl-api:lab10 .
+
+# Загружаем образ в Minikube
+minikube image load durak-rl-api:lab10
+
+4.3 Создание манифестов Kubernetes
+
+deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: durak-rl-api
+  labels:
+    app: durak-rl-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: durak-rl-api
+  template:
+    metadata:
+      labels:
+        app: durak-rl-api
+    spec:
+      containers:
+        - name: durak-rl-api
+          image: durak-rl-api:lab10
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+
+
+service.yaml (NodePort)
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: durak-rl-api
+spec:
+  type: NodePort
+  selector:
+    app: durak-rl-api
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+
+
+hpa.yaml (HorizontalPodAutoscaler)
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: durak-rl-api-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: durak-rl-api
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+
+4.4 Применение манифестов
+kubectl apply -f k8s/
+kubectl get pods,svc
+
+
+Проверено, что Pod Running
+
+NodePort сервис доступен:
+
+minikube service durak-rl-api --url
+# например, http://127.0.0.1:51587
+
+4.5 Проверка FastAPI
+# Сброс игры
+Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/reset"
+
+# Сделать ход
+Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/step" -Method POST -ContentType "application/json" -Body '{"action":"take"}'
+
+# Легальные действия
+Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/legal_actions"
+
+
+Всё работает: состояние игры, ходы и легальные действия корректны
+
+4.6 Проверка HorizontalPodAutoscaler
+
+Смотрим текущее состояние HPA:
+
+kubectl get hpa
+
+
+Генерируем нагрузку для увеличения CPU:
+
+for ($i=0; $i -lt 200; $i++) { 
+    Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/reset" 
+}
+
+
+Подписка на Pods:
+
+kubectl get pods -w
+
+
+При росте нагрузки HPA увеличивает число Pod’ов до MAXPODS
+
+После снижения нагрузки — количество Pods возвращается к MINPODS
+
+5️⃣ Итоги
+
+Развернут локальный Kubernetes-кластер с Minikube
+
+Создан Docker-образ с FastAPI RL-агентом
+
+Настроен Deployment, NodePort Service и HPA
+
+Проверены все эндпоинты /reset, /step, /legal_actions
+
+Подтверждено, что HPA корректно масштабирует Pods при нагрузке
+
+💡 Лабораторная выполнена полностью.
+
+Инструкция по запуску API через Kubernetes на вашей машине
+
+Открыть PowerShell
+
+Перейти в директорию проекта с Dockerfile:
+
+cd "C:\Users\ilua2\OneDrive\Рабочий_стол\ХЛАМ\Программирование\T25--4m_MLOps"
+
+
+Запустить Minikube:
+
+minikube start
+
+
+Построить Docker-образ и загрузить в Minikube:
+
+docker build -t durak-rl-api:lab10 .
+minikube image load durak-rl-api:lab10
+
+
+Применить манифесты:
+
+kubectl apply -f k8s/
+
+
+Проверить Pods и сервис:
+
+kubectl get pods,svc
+minikube service durak-rl-api --url
+
+
+Взаимодействовать с FastAPI:
+
+# сброс игры
+Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/reset"
+
+# сделать ход
+Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/step" -Method POST -ContentType "application/json" -Body '{"action":"take"}'
+
+# легальные действия
+Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/legal_actions"
+
+
+Проверка HPA и масштабирование:
+
+kubectl get hpa
+for ($i=0; $i -lt 200; $i++) { Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/reset" }
+kubectl get pods -w
