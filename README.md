@@ -1,8 +1,11 @@
 =======
 # 🚂 Train Delay Prediction — End-to-End MLOps Pipeline
 
-**Проект по MLOps команды №6**
-**Team 6:** Meksiner, BookWormDevid, Le666Ly
+**Проект по MLOps команды 6**
+
+**Git, CleanCode, feature engineering** BookWormDevid
+**ML, Training, AI sloptometry** Meksiner
+**Datasets, Frontend, Presentation** Le666Ly
 
 End-to-end MLOps pipeline для предсказания задержки поездов с полным CI/CD, мониторингом и детекцией дрифта.
 
