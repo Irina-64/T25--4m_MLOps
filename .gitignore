@@ -208,3 +208,5 @@ __marimo__/
 
 # DVC remote storage
 dvc_remote/
+mlruns/
+models/
