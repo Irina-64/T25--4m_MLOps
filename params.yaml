@@ -1,0 +1,42 @@
+data:
+  raw: "data/raw/delays.csv"
+  processed: "data/processed/delays.csv"
+  split: "data/split"
+  target_column: "delay"
+
+experiments:
+  experiment_name: "TrainDelayPrediction"
+  tracking_uri: "http://localhost:5000"
+
+mlflow:
+  model_name: "delays_sequential"
+  json_path: "reports/eval.json"
+
+preprocess:
+  handle_missing: true
+  remove_outliers: false
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+  target_encoder_smoothing: 0.3
+
+encoding:
+  categorical_cols:
+    - carrier
+    - connection
+    - name
+    - arrival
+    - id_main
+
+scaling:
+  numerical_cols:
+    - year
+    - month
+    - day
+    - dayofweek
+    - season
+    - is_holiday
+    - is_weekend
+    - season
+    - hour_sin
+    - hour_cos

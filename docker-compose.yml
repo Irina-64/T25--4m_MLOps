@@ -1,0 +1,13 @@
+services:
+  train_delay:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: "python src/api.py"
+    ports:
+      - "8000:8000"
+    volumes:
+      - uv-cache:/root/.cache/uv
+volumes:
+  uv-cache:
