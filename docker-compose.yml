@@ -58,3 +58,35 @@ services:
     depends_on:
       - airflow-init
     restart: always
+
+      # ============== MONITORING SERVICES ==============
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus-lab11
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    restart: unless-stopped
+    networks:
+      - default  # Важно: чтобы был в той же сети
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana-lab11
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/datasources:/etc/grafana/provisioning/datasources
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+volumes:
+  grafana_data:  # Добавьте эту строку в раздел volumes, если его нет

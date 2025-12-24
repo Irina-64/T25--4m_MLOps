@@ -13,56 +13,51 @@ import asyncio
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = FastAPI(
-    title="Currency Direction Prediction API", 
-    description="API для предсказания направления изменения курса валют",
-    version="1.0"
-)
-
 # ==================== PROMETHEUS METRICS ====================
 # Для лабораторной 11
 try:
     from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
-    
+    from prometheus_client import make_asgi_app  # ← ДОБАВЛЕНО
+
     # Метрики
     REQUEST_COUNT = Counter(
         'currency_api_requests_total',
         'Total number of HTTP requests to the API',
         ['method', 'endpoint', 'http_status']
     )
-    
+
     REQUEST_LATENCY = Histogram(
         'currency_api_request_duration_seconds',
         'Histogram of request processing latency in seconds',
         ['method', 'endpoint'],
         buckets=[0.01, 0.05, 0.1, 0.3, 0.5, 1.0, 2.0, 5.0]
     )
-    
+
     PREDICTION_DISTRIBUTION = Histogram(
         'currency_api_prediction_probability',
         'Distribution of predicted probability values (delay_prob)',
         buckets=[0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     )
-    
+
     ERROR_COUNT = Counter(
         'currency_api_errors_total',
         'Total number of errors encountered',
         ['error_type']
     )
-    
+
     PREDICTION_COUNT = Counter(
         'currency_api_predictions_total',
         'Total number of predictions made',
         ['prediction_class']
     )
-    
+
     PROMETHEUS_AVAILABLE = True
     logger.info("Prometheus клиент доступен")
-    
+
 except ImportError:
     PROMETHEUS_AVAILABLE = False
     logger.warning("Prometheus клиент не установлен. Метрики недоступны.")
-    
+
     # Заглушки для метрик
     class DummyMetric:
         def labels(self, **kwargs):
@@ -71,9 +66,21 @@ except ImportError:
             pass
         def observe(self, value):
             pass
-    
+
     REQUEST_COUNT = REQUEST_LATENCY = PREDICTION_DISTRIBUTION = DummyMetric()
     ERROR_COUNT = PREDICTION_COUNT = DummyMetric()
+
+# ==================== FASTAPI APP ====================
+app = FastAPI(
+    title="Currency Direction Prediction API", 
+    description="API для предсказания направления изменения курса валют",
+    version="1.0"
+)
+
+# ДОБАВЛЯЕМ METRICS APP ЕСЛИ PROMETHEUS ДОСТУПЕН
+if PROMETHEUS_AVAILABLE:
+    metrics_app = make_asgi_app()
+    app.mount("/metrics", metrics_app)
 
 # ==================== МОДЕЛИ ====================
 model = None
@@ -81,7 +88,6 @@ scaler = None
 feature_names = None
 
 def load_models():
-
     """Загрузка моделей и артефактов"""
     global model, scaler, feature_names
     try:
@@ -103,7 +109,6 @@ def load_models():
         scaler = joblib.load("models/scaler.joblib")
         feature_names = joblib.load("models/feature_names.joblib")
 
-
         logger.info(f"Модели загружены. Признаков: {len(feature_names)}")
         return True
 
@@ -113,40 +118,37 @@ def load_models():
             ERROR_COUNT.labels(error_type="model_load_error").inc()
         return False
 
-
-
 # Загружаем модели при старте
 load_models()
-
 
 # ==================== MIDDLEWARE ДЛЯ МЕТРИК ====================
 @app.middleware("http")
 async def metrics_middleware(request, call_next):
     if request.url.path == "/metrics":
         return await call_next(request)
-    
+
     start_time = time.time()
     method = request.method
     endpoint = request.url.path
-    
+
     try:
         response = await call_next(request)
         latency = time.time() - start_time
-        
+
         if PROMETHEUS_AVAILABLE:
             REQUEST_COUNT.labels(
                 method=method,
                 endpoint=endpoint,
                 http_status=response.status_code
             ).inc()
-            
+
             REQUEST_LATENCY.labels(
                 method=method,
                 endpoint=endpoint
             ).observe(latency)
-        
+
         return response
-        
+
     except Exception as e:
         if PROMETHEUS_AVAILABLE:
             ERROR_COUNT.labels(error_type="middleware_error").inc()
@@ -187,16 +189,12 @@ class PredictionInput(BaseModel):
     USD_RUB_change_3: float
 
 @app.get("/")
-
-
 async def read_root():
     """Главная страница API"""
     return {
         "message": "Currency Direction Prediction API",
         "version": "1.0",
         "status": "running",
-
-
         "model_loaded": model is not None,
         "prometheus_available": PROMETHEUS_AVAILABLE,
         "metrics_endpoint": "/metrics",
@@ -209,7 +207,6 @@ async def read_root():
     }
 
 @app.get("/health")
-
 async def health_check():
     """Проверка здоровья сервиса"""
     return {
@@ -219,25 +216,27 @@ async def health_check():
         "service": "Currency Prediction API"
     }
 
-@app.get("/metrics")
-async def get_metrics():
-    """Эндпоинт для сбора метрик Prometheus"""
-    if not PROMETHEUS_AVAILABLE:
-        raise HTTPException(
-            status_code=501,
-            detail="Prometheus клиент не установлен. Установите: pip install prometheus-client"
-        )
-    
-    from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
-    
-    return Response(
-        content=generate_latest(),
-        media_type=CONTENT_TYPE_LATEST
-    )
+
+# @app.get("/metrics")
+# async def get_metrics():
+#     """Эндпоинт для сбора метрик Prometheus"""
+#     if not PROMETHEUS_AVAILABLE:
+#         raise HTTPException(
+#             status_code=501,
+#             detail="Prometheus клиент не установлен. Установите: pip install prometheus-client"
+#         )
+
+
+
+#     from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
+
+
+#     return Response(
+#         content=generate_latest(),
+#         media_type=CONTENT_TYPE_LATEST
+#     )
 
 @app.post("/predict")
-
-
 async def predict(input_data: PredictionInput):
     """
     Предсказание направления изменения курса USD/RUB
@@ -247,14 +246,12 @@ async def predict(input_data: PredictionInput):
         if PROMETHEUS_AVAILABLE:
             ERROR_COUNT.labels(error_type="service_unavailable").inc()
         raise HTTPException(
-
-
             status_code=503,
             detail="Сервис временно недоступен. Модели не загружены."
         )
 
     start_time = time.time()
-    
+
     try:
         # Конвертируем входные данные в DataFrame
         input_dict = input_data.dict()
@@ -275,18 +272,16 @@ async def predict(input_data: PredictionInput):
         # Логируем метрики предсказания
         if PROMETHEUS_AVAILABLE:
             PREDICTION_DISTRIBUTION.observe(delay_prob)
-            
+
             # Определяем класс предсказания
             prediction_class = "rise" if delay_prob > 0.5 else "fall"
             PREDICTION_COUNT.labels(prediction_class=prediction_class).inc()
-        
+
         processing_time = time.time() - start_time
-        
+
         return {
             "delay_prob": delay_prob,
             "prediction": "rise" if delay_prob > 0.5 else "fall",
-
-
             "confidence": delay_prob if delay_prob > 0.5 else 1 - delay_prob,
             "features_used": len(feature_names),
             "model_loaded": True,
@@ -297,16 +292,14 @@ async def predict(input_data: PredictionInput):
     except Exception as e:
         error_type = type(e).__name__
         logger.error(f"Ошибка при предсказании: {e}")
-        
+
         if PROMETHEUS_AVAILABLE:
             ERROR_COUNT.labels(error_type=error_type).inc()
-        
 
         raise HTTPException(
             status_code=500,
             detail=f"Ошибка при обработке запроса: {str(e)}"
         )
-
 
 # Тестовый эндпоинт для проверки
 @app.get("/test")
@@ -323,9 +316,6 @@ def run_server():
     """Функция запуска сервера"""
     import uvicorn
 
-
-
-
     print("=" * 60)
     print("ЗАПУСК CURRENCY PREDICTION API")
     print("=" * 60)
@@ -338,7 +328,7 @@ def run_server():
     print("=" * 60)
     print("Нажмите Ctrl+C для остановки сервера")
     print("=" * 60)
-    
+
     # Проверяем загрузку моделей
     if model is None:
         print("ВНИМАНИЕ: Модели не загружены!")
@@ -356,5 +346,4 @@ def run_server():
     )
 
 if __name__ == "__main__":
-    # Этот код выполняется ТОЛЬКО при прямом запуске python src/api.py
     run_server()

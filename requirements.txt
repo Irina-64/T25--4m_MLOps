@@ -23,5 +23,5 @@ SQLAlchemy
 protobuf
 feast
 email-validator
-prometheus-clientstarlette
+prometheus-client
 starlette
