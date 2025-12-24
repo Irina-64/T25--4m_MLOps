@@ -1,0 +1,27 @@
+artifact_path: /home/cipher/Documents/VS_code/T25--4m_MLOp/mlruns/1/models/m-5e9f6661bd324b1b8c6b9e51d07fa5fa/artifacts
+flavors:
+  keras:
+    data: data
+    keras_backend: tensorflow
+    keras_version: 3.13.0
+    save_exported_model: false
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.keras
+    python_version: 3.12.12
+is_signature_from_type_hint: false
+mlflow_version: 3.8.0
+model_id: m-5e9f6661bd324b1b8c6b9e51d07fa5fa
+model_size_bytes: 430200
+model_uuid: m-5e9f6661bd324b1b8c6b9e51d07fa5fa
+prompts: null
+run_id: db126bccc27a4de0a0a7a1d8984482f1
+signature:
+  inputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float32", "shape": [-1, 13]}}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float32", "shape": [-1,
+    1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-12-23 21:33:39.811399'

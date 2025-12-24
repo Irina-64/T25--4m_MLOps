@@ -1,0 +1,140 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/raw/delays.csv
+      hash: md5
+      md5: b8b4e794d8c64c5281113b81181e2c6d
+      size: 454865112
+    - path: params.yaml
+      hash: md5
+      md5: 4009476d7329975c4baf91f64e00e3ba
+      size: 708
+    - path: src/preprocess.py
+      hash: md5
+      md5: e7ced281672e3de9d0916d6935d041fd
+      size: 4358
+    params:
+      params.yaml:
+        encoding:
+          categorical_cols:
+          - carrier
+          - connection
+          - name
+          - arrival
+          - id_main
+        preprocess:
+          handle_missing: true
+          remove_outliers: false
+          test_size: 0.2
+          val_size: 0.2
+          random_state: 42
+          target_encoder_smoothing: 0.3
+        scaling:
+          numerical_cols:
+          - year
+          - month
+          - day
+          - dayofweek
+          - season
+          - is_holiday
+          - is_weekend
+          - season
+          - hour_sin
+          - hour_cos
+    outs:
+    - path: data/processed/delays.csv
+      hash: md5
+      md5: a688e15a8e8587a68ebb23c2a37318f6
+      size: 536895833
+  split:
+    cmd: python src/split_data.py --config params.yaml
+    deps:
+    - path: data/processed/delays.csv
+      hash: md5
+      md5: a688e15a8e8587a68ebb23c2a37318f6
+      size: 536895833
+    - path: params.yaml
+      hash: md5
+      md5: 4009476d7329975c4baf91f64e00e3ba
+      size: 708
+    - path: src/split_data.py
+      hash: md5
+      md5: 23f0526b0c76a3e9c9649460f9c983c0
+      size: 1250
+    params:
+      params.yaml:
+        preprocess.random_state: 42
+        preprocess.test_size: 0.2
+        preprocess.val_size: 0.2
+    outs:
+    - path: data/split/test.csv
+      hash: md5
+      md5: c0ba65aeb92e3fe2e99d932f6687e5fe
+      size: 107194967
+    - path: data/split/train.csv
+      hash: md5
+      md5: b29a0ae8a77bca51277c5e557a67f060
+      size: 321545936
+    - path: data/split/val.csv
+      hash: md5
+      md5: 4051b7825a5db0844f1a66a6cd23b1c1
+      size: 107168215
+  train_baseline:
+    cmd: python src/train.py --config params.yaml
+    deps:
+    - path: data/split/test.csv
+      hash: md5
+      md5: c0ba65aeb92e3fe2e99d932f6687e5fe
+      size: 107194967
+    - path: data/split/train.csv
+      hash: md5
+      md5: b29a0ae8a77bca51277c5e557a67f060
+      size: 321545936
+    - path: data/split/val.csv
+      hash: md5
+      md5: 4051b7825a5db0844f1a66a6cd23b1c1
+      size: 107168215
+    - path: params.yaml
+      hash: md5
+      md5: 4009476d7329975c4baf91f64e00e3ba
+      size: 708
+    - path: src/train.py
+      hash: md5
+      md5: 5ee9e06f2f44da0456de4eaa2ae3c993
+      size: 7358
+    outs:
+    - path: models/TrainDelayPrediction.keras
+      hash: md5
+      md5: 37f17fdfb81d5a781f1aa672e477e057
+      size: 425388
+  evaluate_baseline:
+    cmd: python src/evaluate.py --model_path models/TrainDelayPrediction.pkl
+      --config params.yaml
+    deps:
+    - path: data/split/train.csv
+      hash: md5
+      md5: b29a0ae8a77bca51277c5e557a67f060
+      size: 321545936
+    - path: data/split/val.csv
+      hash: md5
+      md5: 4051b7825a5db0844f1a66a6cd23b1c1
+      size: 107168215
+    - path: models/TrainDelayPrediction.keras
+      hash: md5
+      md5: 37f17fdfb81d5a781f1aa672e477e057
+      size: 425388
+    - path: params.yaml
+      hash: md5
+      md5: 4009476d7329975c4baf91f64e00e3ba
+      size: 708
+    - path: src/evaluate.py
+      hash: md5
+      md5: 7899a3c0bb72366f27e04a311f957483
+      size: 7898
+    outs:
+    - path: reports/eval.json
+      hash: md5
+      md5: 1609f62aa4101873683ecee595c39d13
+      size: 239

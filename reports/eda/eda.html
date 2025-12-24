@@ -1,0 +1,71 @@
+
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>EDA-отчёт по задержкам поездов</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 30px; line-height: 1.5; }
+            h1 { color: #2c3e50; }
+            h2 { color: #34495e; border-bottom: 2px solid #eee; padding-bottom: 6px; }
+            figure { margin: 20px 0; }
+            figcaption { text-align: center; font-size: 0.9em; color: #555; }
+            table { border-collapse: collapse; margin: 10px 0; }
+            th, td { border: 1px solid #ccc; padding: 5px 10px; }
+            th { background-color: #f0f0f0; }
+            pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        </style>
+    </head>
+    <body>
+        <h1>EDA-отчёт по задержкам поездов</h1>
+
+        <h2>Обзор датасета</h2>
+        <p><strong>Размер:</strong> (3718170, 10)</p>
+        <p><strong>Колонки:</strong> datetime, id, carrier, date, connection, arrival, delay, name, delay_log_signed, hour</p>
+
+        <h2>Графики</h2>
+
+        <figure>
+            <img src="delay_distribution.png" alt="delay_distribution.png">
+            <figcaption>Delay Distribution</figcaption>
+        </figure>
+
+
+        <figure>
+            <img src="delay_by_hour.png" alt="delay_by_hour.png">
+            <figcaption>Delay By Hour</figcaption>
+        </figure>
+
+
+        <figure>
+            <img src="avg_delay_by_carrier.png" alt="avg_delay_by_carrier.png">
+            <figcaption>Avg Delay By Carrier</figcaption>
+        </figure>
+
+
+        <figure>
+            <img src="correlation_matrix.png" alt="correlation_matrix.png">
+            <figcaption>Correlation Matrix</figcaption>
+        </figure>
+
+
+        <figure>
+            <img src="avg_delay_by_hour.png" alt="avg_delay_by_hour.png">
+            <figcaption>Avg Delay By Hour</figcaption>
+        </figure>
+
+
+        <h2>Статистика задержек</h2>
+        <pre>count    3.718170e+06
+mean     2.750361e+00
+std      1.446366e+01
+min      0.000000e+00
+50%      0.000000e+00
+75%      0.000000e+00
+90%      4.000000e+00
+95%      1.200000e+01
+max      1.425000e+03</pre>
+
+        <p><em>Сгенерировано 2025-12-24 15:37:59</em></p>
+    </body>
+    </html>
