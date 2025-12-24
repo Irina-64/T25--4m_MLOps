@@ -1,72 +1,15 @@
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split, cross_val_score, TimeSeriesSplit
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, roc_auc_score, classification_report, confusion_matrix
-from sklearn.preprocessing import StandardScaler
 import joblib
 import mlflow
 import mlflow.sklearn
+import sys
 import os
 from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
 
-def prepare_features(data):
-#Создание признаков для временных рядов валют
-    data = data.copy()
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-    # Сортируем по дате
-    data = data.sort_values('date').reset_index(drop=True)
-
-    # Создаем целевую переменную - направление изменения USD_RUB на следующий день
-    data['USD_RUB_target'] = (data['USD_RUB'].shift(-1) > data['USD_RUB']).astype(int)
-
-    # Создаем признаки БЕЗ утечки данных - используем только исторические данные
-    # Лаги (значения из предыдущих дней)
-    for lag in [1, 2, 3, 5, 7]:
-        data[f'USD_RUB_lag_{lag}'] = data['USD_RUB'].shift(lag)
-        data[f'EUR_RUB_lag_{lag}'] = data['EUR_RUB'].shift(lag)
-        data[f'GBP_RUB_lag_{lag}'] = data['GBP_RUB'].shift(lag)
-
-    # Исторические скользящие средние (только по прошлым данным)
-    for window in [3, 5, 7]:
-        data[f'USD_RUB_MA_{window}'] = data['USD_RUB'].shift(1).rolling(window=window, min_periods=1).mean()
-        data[f'EUR_RUB_MA_{window}'] = data['EUR_RUB'].shift(1).rolling(window=window, min_periods=1).mean()
-        data[f'GBP_RUB_MA_{window}'] = data['GBP_RUB'].shift(1).rolling(window=window, min_periods=1).mean()
-
-    # Разности (изменения за предыдущие периоды)
-    data['USD_RUB_change_1'] = data['USD_RUB'] - data['USD_RUB'].shift(1)
-    data['USD_RUB_change_3'] = data['USD_RUB'] - data['USD_RUB'].shift(3)
-
-    # Удаляем строки с пропусками (из-за лагов)
-    data = data.dropna()
-
-    return data
-
-
-def get_feature_names():
-    """
-    Возвращает список всех признаков, используемых в модели
-    """
-    base_features = ['USD_RUB', 'EUR_RUB', 'GBP_RUB', 'day_of_week', 'is_weekend']
-    
-    lag_features = []
-    for lag in [1, 2, 3, 5, 7]:
-        for currency in ['USD_RUB', 'EUR_RUB', 'GBP_RUB']:
-            lag_features.append(f'{currency}_lag_{lag}')
-    
-    ma_features = []
-    for window in [3, 5, 7]:
-        for currency in ['USD_RUB', 'EUR_RUB', 'GBP_RUB']:
-            ma_features.append(f'{currency}_MA_{window}')
-    
-    change_features = ['USD_RUB_change_1', 'USD_RUB_change_3']
-    
-    all_features = base_features + lag_features + ma_features + change_features
-    return [f for f in all_features if f not in ['date', 'USD_RUB_target']]
-
+from src.preprocess import prepare_features, get_feature_names
 
 def main():
     # Создаем директорию для моделей если нет
@@ -99,7 +42,10 @@ def main():
     print(f"Используется {len(feature_columns)} числовых признаков")
     print(f"Распределение классов: {y.value_counts().to_dict()}")
 
-        # Разделяем на train/test с учетом временного порядка
+    # Для временных рядов используем специальное разделение
+    tscv = TimeSeriesSplit(n_splits=5)
+
+    # Разделяем на train/test с учетом временного порядка
     train_size = int(0.8 * len(data))
     X_train = X.iloc[:train_size]
     X_test = X.iloc[train_size:]
@@ -118,8 +64,6 @@ def main():
     mlflow.set_experiment("flight_delay")
 
     # Обучаем модели с более реалистичными параметрами
-
-
     models = {
         "RandomForest": RandomForestClassifier(
             n_estimators=100,
@@ -181,6 +125,7 @@ def main():
             mlflow.log_metric("cv_roc_auc_std", cv_scores.std())
             mlflow.log_metric("train_size", len(X_train))
             mlflow.log_metric("test_size", len(X_test))
+
             # Логируем модель в MLflow
             mlflow.sklearn.log_model(
                 sk_model=model,
