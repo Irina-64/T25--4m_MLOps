@@ -1,6 +1,8 @@
 =======
 # 🚂 Train Delay Prediction — End-to-End MLOps Pipeline
 
+## Выполнено в формате хакатона (4 дня со старта до конца работы)
+
 **Проект по MLOps команды 6**
 
 **Git, CleanCode, feature engineering** BookWormDevid
