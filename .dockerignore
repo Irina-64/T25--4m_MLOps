@@ -1,0 +1,28 @@
+# Исключить логи и кеш Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Исключить логи и данные Airflow
+airflow/logs/
+airflow/airflow.db
+
+# Исключить директории с данными и DVC
+data/
+dvc_remote/
+.dvc/
+
+# Исключить виртуальные окружения и IDE
+.venv/
+venv/
+env/
+.idea/
+.vscode/
+
+# Исключить системные файлы и большие артефакты
+.DS_Store
+Thumbs.db
+*.log
+*.sqlite
+*.joblib  # Если не хотите копировать модели при каждой сборке
