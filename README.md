@@ -1,18 +1,27 @@
-=======
-# 🚂 Train Delay Prediction — End-to-End MLOps Pipeline
+# 🚂 Train Delay Prediction — End-to-End* MLOps Pipeline
 
-## Выполнено в формате хакатона (4 дня со старта до конца работы)
+---
 
 **Проект по MLOps команды 6**
 
-**Git, CleanCode, feature engineering** BookWormDevid
+### BookWormDevid
 
-**ML, Training, AI sloptometry** Meksiner
+**Git, CleanCode, feature engineering** 
 
-**Datasets, Frontend, Presentation** Le666Ly
+### Meksiner
 
-End-to-end MLOps pipeline для предсказания задержки поездов с полным CI/CD, мониторингом и детекцией дрифта.
+**ML, Training, AI sloptometry** 
 
+### Le666Ly
+
+**Datasets, Frontend, Presentation** 
+
+---
+
+End-to-end MLOps pipeline для предсказания задержки поездов с полным* CI/CD, мониторингом* и детекцией* дрифта*.
+### Выполнено в формате хакатона (4 дня с создания структуры проекта до конца работы) 
+(с 20.12.2024 23:50 по 25.12.2024 00:00)
+  
 ---
 
 ## Быстрый старт
@@ -123,7 +132,7 @@ float(delay)
 
 ---
 
-## 🔄 MLOps Pipeline (E2E)
+## 🔄 MLOps Pipeline (E2E*)
 
 1. **Сбор данных**
    - Исторические данные поездов
