@@ -216,3 +216,6 @@ models/
 airflow/logs/
 
 tt.py
+
+prepare_for_feast.py
+data/processed/processed_for_feast.csv

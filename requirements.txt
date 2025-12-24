@@ -21,3 +21,5 @@ apache-airflow
 apache-airflow-providers-postgres
 SQLAlchemy
 protobuf
+feast
+email-validator
