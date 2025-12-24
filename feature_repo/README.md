@@ -3,7 +3,7 @@
 Эта папка демонстрирует минимальный репозиторий фич Feast для лабораторной работы.
 
 ## Структура
-
+```
 feature_repo/
 ├── feature_store.yaml
 ├── data/
@@ -12,7 +12,7 @@ feature_repo/
 │   ├── __init__.py
 │   ├── entity.py
 │   └── feature_views.py
-
+```
 ## Быстрый старт
 
 1. Установите Feast:
