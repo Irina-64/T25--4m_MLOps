@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: currency-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: currency-api
+  template:
+    metadata:
+      labels:
+        app: currency-api
+    spec:
+      containers:
+      - name: currency-api
+        image: currency-api:lab10
+        imagePullPolicy: Never  # Ключевое изменение!
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
