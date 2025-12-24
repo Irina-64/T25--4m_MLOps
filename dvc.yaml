@@ -6,6 +6,7 @@ stages:
     - src/preprocess.py
     outs:
     - data/processed/processed.csv
+    
   train:
     cmd: python src/train.py
     deps:
@@ -16,3 +17,16 @@ stages:
     - models/feature_names.joblib
     - models/random_forest_model.joblib
     - models/scaler.joblib
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - data/processed/processed.csv
+    - models/best_model.joblib
+    - models/feature_names.joblib
+    - models/scaler.joblib
+    - src/evaluate.py
+    outs:
+    - reports/eval.html
+    - reports/eval.json
+    - reports/eval_plots.png
