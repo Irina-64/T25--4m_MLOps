@@ -15,3 +15,9 @@ pytest
 pytest-cov
 requests
 httpx
+httpx
+seaborn
+apache-airflow
+apache-airflow-providers-postgres
+SQLAlchemy
+protobuf
