@@ -1,0 +1,6 @@
+# feature_repo/feature_store.yaml
+project: currency_prediction  # ← это имя
+registry: data/registry.db
+provider: local
+type: sqlite
+path: data/online_store.db
