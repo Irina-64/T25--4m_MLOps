@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-delay
+  labels:
+    app: flight-delay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flight-delay
+  template:
+    metadata:
+      labels:
+        app: flight-delay
+    spec:
+      containers:
+        - name: flight-delay
+          # образ из задания ЛР10, собирается локально через Minikube/KIND
+          image: flight-delay-api:lab10
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+
