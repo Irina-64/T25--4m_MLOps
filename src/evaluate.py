@@ -36,7 +36,7 @@ with open(base_dir / "params.yaml") as f:
 
 train_dataset = Path(config["data"]["split"]) / "train.csv"
 val_dataset = Path(config["data"]["split"]) / "val.csv"
-model_path = base_dir / "models" / "TrainDelayPrediction.keras"
+model_path = base_dir / "models" / "TrainDelayPredictionm.keras"
 artifacts_dir = Path("reports")
 artifacts_dir.mkdir(parents=True, exist_ok=True)
 
