@@ -73,14 +73,23 @@ class DurakEnv(gym.Env):
             if legal:
                 rl_act = self.agent.act(self.game.get_state(pid), legal)
                 rl_act = self.agent.filter_illegal_actions(rl_act, self.game.players[pid].hand)
+
+                # Сохраняем state_before
+                state_before = self.game.get_state(pid)
+
                 self.game.step(pid, rl_act)
 
-        state = state_to_tensor(self.game.get_state(0))
-        reward = 0.0
-        done = self.game.finished
-        info = self._get_info()
-        return state, reward, done, False, info
+                # state_after после хода
+                state_after = self.game.get_state(pid)
 
+                # Вычисляем reward
+                reward = self.agent.reward_system.compute_reward(
+                    self.game, pid, rl_act, state_before, state_after
+        )
+            state = state_to_tensor(self.game.get_state(0))
+            done = self.game.finished
+            info = self._get_info()
+            return state, reward, done, False, info
     def _get_info(self):
         return {
             "your_hand": [str(c) for c in self.game.players[0].hand],

@@ -1,0 +1,84 @@
+# HELP python_gc_objects_collected_total Objects collected during gc
+# TYPE python_gc_objects_collected_total counter
+python_gc_objects_collected_total{generation="0"} 8051.0
+python_gc_objects_collected_total{generation="1"} 866.0
+python_gc_objects_collected_total{generation="2"} 173.0
+# HELP python_gc_objects_uncollectable_total Uncollectable objects found during GC
+# TYPE python_gc_objects_uncollectable_total counter
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+# HELP python_gc_collections_total Number of times this generation was collected
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 632.0
+python_gc_collections_total{generation="1"} 57.0
+python_gc_collections_total{generation="2"} 5.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="12",patchlevel="2",version="3.12.2"} 1.0
+# HELP rl_steps_total Total RL steps executed
+# TYPE rl_steps_total counter
+rl_steps_total 2210.0
+# HELP rl_steps_created Total RL steps executed
+# TYPE rl_steps_created gauge
+rl_steps_created 1.7665014283303099e+09
+# HELP rl_actions_total Total actions by type
+# TYPE rl_actions_total counter
+rl_actions_total{action="attack"} 881.0
+rl_actions_total{action="pass"} 928.0
+rl_actions_total{action="add"} 401.0
+# HELP rl_actions_created Total actions by type
+# TYPE rl_actions_created gauge
+rl_actions_created{action="attack"} 1.7665014296595297e+09
+rl_actions_created{action="pass"} 1.7665014297464893e+09
+rl_actions_created{action="add"} 1.766501429921337e+09
+# HELP rl_step_latency Latency of RL agent decision
+# TYPE rl_step_latency histogram
+rl_step_latency_bucket{le="0.005"} 2114.0
+rl_step_latency_bucket{le="0.01"} 2185.0
+rl_step_latency_bucket{le="0.025"} 2210.0
+rl_step_latency_bucket{le="0.05"} 2210.0
+rl_step_latency_bucket{le="0.075"} 2210.0
+rl_step_latency_bucket{le="0.1"} 2210.0
+rl_step_latency_bucket{le="0.25"} 2210.0
+rl_step_latency_bucket{le="0.5"} 2210.0
+rl_step_latency_bucket{le="0.75"} 2210.0
+rl_step_latency_bucket{le="1.0"} 2210.0
+rl_step_latency_bucket{le="2.5"} 2210.0
+rl_step_latency_bucket{le="5.0"} 2210.0
+rl_step_latency_bucket{le="7.5"} 2210.0
+rl_step_latency_bucket{le="10.0"} 2210.0
+rl_step_latency_bucket{le="+Inf"} 2210.0
+rl_step_latency_count 2210.0
+rl_step_latency_sum 1.3909296989440918
+# HELP rl_step_latency_created Latency of RL agent decision
+# TYPE rl_step_latency_created gauge
+rl_step_latency_created 1.7665014283303099e+09
+# HELP rl_reward Reward per step
+# TYPE rl_reward histogram
+rl_reward_bucket{le="0.005"} 0.0
+rl_reward_bucket{le="0.01"} 0.0
+rl_reward_bucket{le="0.025"} 0.0
+rl_reward_bucket{le="0.05"} 0.0
+rl_reward_bucket{le="0.075"} 0.0
+rl_reward_bucket{le="0.1"} 0.0
+rl_reward_bucket{le="0.25"} 0.0
+rl_reward_bucket{le="0.5"} 0.0
+rl_reward_bucket{le="0.75"} 0.0
+rl_reward_bucket{le="1.0"} 0.0
+rl_reward_bucket{le="2.5"} 2210.0
+rl_reward_bucket{le="5.0"} 2210.0
+rl_reward_bucket{le="7.5"} 2210.0
+rl_reward_bucket{le="10.0"} 2210.0
+rl_reward_bucket{le="+Inf"} 2210.0
+rl_reward_count 2210.0
+rl_reward_sum 4420.0
+# HELP rl_reward_created Reward per step
+# TYPE rl_reward_created gauge
+rl_reward_created 1.7665014283303099e+09
+# HELP rl_wins_total Total RL wins
+# TYPE rl_wins_total counter
+rl_wins_total 13.0
+# HELP rl_wins_created Total RL wins
+# TYPE rl_wins_created gauge
+rl_wins_created 1.7665014283303099e+09
