@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест личности</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --bg-gradient: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
+  --card-bg: #ffffff;
+  --text-main: #1f2937;
+  --text-secondary: #6b7280;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 🔵 Progress bar */
+.progress-container {
+  width: 100%;
+  height: 6px;
+  background: #f3f4f6;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--primary);
+  border-radius: 10px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 🎞 Animation Container */
+.question-wrapper {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 25px 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* 🔢 Range Inputs */
+.input-group {
+  margin-bottom: 10px;
+}
+
+.range-value {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  margin-top: -10px;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.4);
+  transition: transform 0.1s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: #e5e7eb;
+  border-radius: 2px;
+}
+
+/* 🔽 Select Inputs */
+select {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background-color: white;
+  color: var(--text-main);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 20px;
+  transition: border-color 0.2s;
+}
+
+select:focus {
+  border-color: var(--primary);
+}
+
+/* 🔘 Buttons */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+#prevBtn {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+#prevBtn:hover {
+  color: var(--text-main);
+  background: #f3f4f6;
+}
+
+#nextBtn {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+#nextBtn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* 🟢 Result */
+.result {
+  display: none;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.result h2 {
+  color: var(--primary);
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.result p {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.result-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Loader for fun */
+.loading {
+  display: none;
+  text-align: center;
+  color: var(--text-secondary);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="progress-container">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <div class="question-wrapper" id="wrapper">
+    <h2 id="question">Loading...</h2>
+    <div id="input-area" class="input-group"></div>
+  </div>
+
+  <div class="loading" id="loading">
+    <p>Анализируем ответы...</p>
+  </div>
+
+  <div class="result" id="result">
+    <span class="result-icon">✨</span>
+    <h2 id="result-title"></h2>
+    <p id="result-desc"></p>
+    <button onclick="location.reload()" style="margin-top: 20px; width: 100%; background: #f3f4f6; color: var(--text-main);">Пройти заново</button>
+  </div>
+
+  <div class="buttons" id="btnContainer">
+    <button onclick="prev()" id="prevBtn">Назад</button>
+    <button onclick="next()" id="nextBtn">Далее</button>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  { text: "Сколько времени вы предпочитаете проводить в одиночестве?", type: "range", min: 0, max: 10, field: "Time_broken_spent_Alone" },
+  { text: "Вы боитесь выступать перед людьми?", type: "select", options: [{label:"Да, боюсь",value:1},{label:"Нет, мне комфортно",value:0}], field: "Stage_fear" },
+  { text: "Как часто вы посещаете социальные мероприятия?", type: "range", min: 0, max: 10, field: "Social_event_attendance" },
+  { text: "Как часто вы выходите из дома без конкретной цели?", type: "range", min: 0, max: 10, field: "Going_outside" },
+  { text: "Вы чувствуете усталость после общения?", type: "select", options: [{label:"Да, часто",value:1},{label:"Нет, наоборот заряжаюсь",value:0}], field: "Drained_after_socializing" },
+  { text: "Сколько у вас близких друзей?", type: "range", min: 0, max: 20, field: "Friends_circle_size" },
+  { text: "Как часто вы публикуете посты в соцсетях?", type: "range", min: 0, max: 10, field: "Post_frequency" }
+];
+
+let current = 0;
+const answers = {};
+
+render();
+
+function render() {
+  const wrapper = document.getElementById("wrapper");
+  wrapper.classList.add("hidden");
+
+  setTimeout(() => {
+    const q = questions[current];
+    document.getElementById("question").innerText = q.text;
+
+    const area = document.getElementById("input-area");
+    area.innerHTML = "";
+
+    if (q.type === "range") {
+      const valueLabel = document.createElement("div");
+      valueLabel.className = "range-value";
+      
+      const input = document.createElement("input");
+      input.type = "range";
+      input.min = q.min;
+      input.max = q.max;
+      input.value = answers[q.field] ?? Math.round((q.min + q.max) / 2);
+      
+      // Formatting based on question type could be added here
+      valueLabel.innerText = input.value;
+
+      input.oninput = () => {
+        valueLabel.innerText = input.value;
+        answers[q.field] = Number(input.value);
+      };
+
+      answers[q.field] ??= Number(input.value);
+
+      area.appendChild(valueLabel);
+      area.appendChild(input);
+    }
+
+    if (q.type === "select") {
+      const select = document.createElement("select");
+      q.options.forEach(opt => {
+        const o = document.createElement("option");
+        o.value = opt.value;
+        o.text = opt.label;
+        select.appendChild(o);
+      });
+      select.value = answers[q.field] ?? q.options[0].value;
+      select.onchange = () => answers[q.field] = Number(select.value);
+      answers[q.field] ??= Number(select.value);
+      area.appendChild(select);
+    }
+
+    // Logic for buttons visibility
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    prevBtn.style.visibility = current === 0 ? "hidden" : "visible";
+    nextBtn.innerText = current === questions.length - 1 ? "Узнать результат" : "Далее";
+
+    // Progress Bar
+    const progress = (current / (questions.length - 1)) * 100;
+    document.getElementById("progressFill").style.width = progress + "%";
+
+    wrapper.classList.remove("hidden");
+  }, 300);
+}
+
+function next() {
+  if (current < questions.length - 1) {
+    current++;
+    render();
+  } else {
+    send();
+  }
+}
+
+function prev() {
+  if (current > 0) {
+    current--;
+    render();
+  }
+}
+
+async function send() {
+  // UI changes
+  document.getElementById("btnContainer").style.display = "none";
+  document.getElementById("wrapper").style.display = "none";
+  document.getElementById("progressFill").style.width = "100%";
+  
+  const loading = document.getElementById("loading");
+  loading.style.display = "block";
+
+  try {
+    const response = await fetch("http://localhost:8080/predict", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(answers)
+    });
+
+    if (!response.ok) throw new Error("Ошибка сети");
+
+    const res = await response.json();
+
+    loading.style.display = "none";
+    const result = document.getElementById("result");
+    result.style.display = "block";
+    
+    document.getElementById("result-title").innerText = res.personality;
+    
+    // Calculate percentage correctly
+    const probability = (100 - res.probability_extrovert * 100).toFixed(1);
+    document.getElementById("result-desc").innerText = `Уверенность алгоритма: ${probability}%`;
+
+  } catch (error) {
+    loading.style.display = "none";
+    alert("Не удалось получить результат от сервера. Проверьте консоль.");
+    console.error(error);
+    // Restore UI if needed or show error state
+  }
+}
+</script>
+
+</body>
+</html>

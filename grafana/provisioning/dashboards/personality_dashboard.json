@@ -1,0 +1,203 @@
+{
+  "title": "Personality API Dashboard",
+  "uid": "personality-api-dashboard",
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timezone": "browser",
+  "refresh": "5s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Requests Rate (last 1m)",
+      "type": "graph",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "targets": [
+        {
+          "expr": "sum(rate(personality_api_requests_total[1m])) by (status)",
+          "legendFormat": "{{status}}",
+          "refId": "A"
+        }
+      ],
+      "yaxes": [
+        {"format": "reqps", "min": 0},
+        {"format": "short"}
+      ],
+      "lines": true,
+      "linewidth": 2,
+      "fill": 1,
+      "fillGradient": 5
+    },
+    {
+      "id": 2,
+      "title": "Request Latency (95th percentile)",
+      "type": "graph",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, rate(personality_api_request_duration_seconds_bucket[1m]))",
+          "legendFormat": "p95",
+          "refId": "A"
+        },
+        {
+          "expr": "histogram_quantile(0.50, rate(personality_api_request_duration_seconds_bucket[1m]))",
+          "legendFormat": "p50",
+          "refId": "B"
+        }
+      ],
+      "yaxes": [
+        {"format": "s", "min": 0},
+        {"format": "short"}
+      ],
+      "lines": true,
+      "linewidth": 2
+    },
+    {
+      "id": 3,
+      "title": "Total Requests (5m)",
+      "type": "stat",
+      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 8},
+      "targets": [
+        {
+          "expr": "sum(increase(personality_api_requests_total[5m]))",
+          "refId": "A",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "colorMode": "value",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null}
+            ]
+          }
+        }
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": ["last"]
+        }
+      }
+    },
+    {
+      "id": 4,
+      "title": "Error Rate",
+      "type": "stat",
+      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 8},
+      "targets": [
+        {
+          "expr": "sum(rate(personality_api_requests_total{status=~'5..'}[5m])) / sum(rate(personality_api_requests_total[5m])) * 100",
+          "legendFormat": "Error Rate",
+          "refId": "A",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "colorMode": "thresholds",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "yellow", "value": 1},
+              {"color": "red", "value": 5}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "title": "Uptime",
+      "type": "stat",
+      "gridPos": {"h": 6, "w": 6, "x": 12, "y": 8},
+      "targets": [
+        {
+          "expr": "personality_api_uptime_seconds",
+          "legendFormat": "Uptime",
+          "refId": "A",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "colorMode": "value"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "title": "Active Requests",
+      "type": "stat",
+      "gridPos": {"h": 6, "w": 6, "x": 18, "y": 8},
+      "targets": [
+        {
+          "expr": "personality_api_requests_in_progress",
+          "legendFormat": "In Progress",
+          "refId": "A",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "colorMode": "value"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "title": "Personality Distribution",
+      "type": "bargauge",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 14},
+      "targets": [
+        {
+          "expr": "sum(rate(personality_api_prediction_probability_count{personality_type='extrovert'}[5m]))",
+          "legendFormat": "Extrovert Predictions",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(rate(personality_api_prediction_probability_count{personality_type='introvert'}[5m]))",
+          "legendFormat": "Introvert Predictions",
+          "refId": "B"
+        }
+      ],
+      "options": {
+        "orientation": "horizontal",
+        "displayMode": "gradient",
+        "showUnfilled": true
+      }
+    },
+    {
+      "id": 8,
+      "title": "Requests by Method",
+      "type": "piechart",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 14},
+      "targets": [
+        {
+          "expr": "sum(rate(personality_api_requests_total[5m])) by (method)",
+          "format": "time_series",
+          "instant": true,
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "pieType": "pie",
+        "displayLabels": ["name", "value", "percent"]
+      }
+    }
+  ],
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": []
+  }
+}

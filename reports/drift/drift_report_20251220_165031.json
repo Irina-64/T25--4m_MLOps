@@ -1,0 +1,50 @@
+{
+  "timestamp": "2025-12-20T16:50:31.609486",
+  "reference_data_shape": [
+    1000,
+    8
+  ],
+  "production_data_shape": [
+    50,
+    7
+  ],
+  "drift_results": {
+    "time_broken_spent_alone": {
+      "psi": 0.1529047652749808,
+      "threshold": 0.1,
+      "exceeds_threshold": true
+    },
+    "stage_fear": {
+      "psi": 0.0,
+      "threshold": 0.1,
+      "exceeds_threshold": false
+    },
+    "social_event_attendance": {
+      "psi": 0.13328818023974626,
+      "threshold": 0.1,
+      "exceeds_threshold": true
+    },
+    "going_outside": {
+      "psi": 0.43340646237236014,
+      "threshold": 0.1,
+      "exceeds_threshold": true
+    },
+    "drained_after_socializing": {
+      "psi": 0.0,
+      "threshold": 0.1,
+      "exceeds_threshold": false
+    },
+    "friends_circle_size": {
+      "psi": 0.2651216545868639,
+      "threshold": 0.1,
+      "exceeds_threshold": true
+    },
+    "post_frequency": {
+      "psi": 0.25936801315866154,
+      "threshold": 0.1,
+      "exceeds_threshold": true
+    }
+  },
+  "drift_detected": true,
+  "threshold": 0.1
+}

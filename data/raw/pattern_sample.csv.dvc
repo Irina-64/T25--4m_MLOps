@@ -1,0 +1,5 @@
+outs:
+- md5: 245ae198ec8e91826fd03fbbf947acb3
+  size: 115127
+  hash: md5
+  path: flights_sample.csv
