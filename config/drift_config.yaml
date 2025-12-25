@@ -1,0 +1,20 @@
+# config/drift_config.yaml
+drift_thresholds:
+  psi_threshold: 0.15      # Порог для PSI
+  ks_pvalue_threshold: 0.05 # Порог p-value для KS теста
+  metrics_drift_threshold: 0.05 # Порог для дрейфа метрик
+  
+monitoring:
+  check_interval_days: 1   # Как часто проверять дрейф
+  production_window_days: 7 # За сколько дней собирать прод данные
+  min_samples: 50          # Минимальное количество образцов для анализа
+  
+alerts:
+  enabled: true
+  email_notifications: false
+  slack_webhook: ""
+  
+retraining:
+  auto_trigger: true
+  validation_required: true
+  promotion_strategy: "performance_based"  # performance_based или canary
