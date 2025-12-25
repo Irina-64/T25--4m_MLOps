@@ -14,4 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # команда по умолчанию
-CMD ["bash"]
+# CMD для FastAPI
+CMD ["uvicorn", "src.Api:app", "--host", "0.0.0.0", "--port", "8000"]
+

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: durak-rl-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: durak-rl-api
+  template:
+    metadata:
+      labels:
+        app: durak-rl-api
+    spec:
+      containers:
+      - name: durak-rl-api
+        image: durak-rl-api:lab10
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "500m"
