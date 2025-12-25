@@ -1,4 +1,4 @@
-import pandas as pd
+﻿import pandas as pd
 import numpy as np
 import json
 import joblib
@@ -12,71 +12,21 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime
 import os
+import sys
 
-def prepare_features(data):
-    """
-    Создание признаков для временных рядов валют (такая же функция как в train.py)
-    """
-    data = data.copy()
-    
-    # Сортируем по дате
-    data = data.sort_values('date').reset_index(drop=True)
-    
-    # Создаем целевую переменную - направление изменения USD_RUB на следующий день
-    data['USD_RUB_target'] = (data['USD_RUB'].shift(-1) > data['USD_RUB']).astype(int)
-    
-    # Создаем признаки БЕЗ утечки данных - используем только исторические данные
-    # Лаги (значения из предыдущих дней)
-    for lag in [1, 2, 3, 5, 7]:
-        data[f'USD_RUB_lag_{lag}'] = data['USD_RUB'].shift(lag)
-        data[f'EUR_RUB_lag_{lag}'] = data['EUR_RUB'].shift(lag)
-        data[f'GBP_RUB_lag_{lag}'] = data['GBP_RUB'].shift(lag)
-    
-    # Исторические скользящие средние (только по прошлым данным)
-    for window in [3, 5, 7]:
-        data[f'USD_RUB_MA_{window}'] = data['USD_RUB'].shift(1).rolling(window=window, min_periods=1).mean()
-        data[f'EUR_RUB_MA_{window}'] = data['EUR_RUB'].shift(1).rolling(window=window, min_periods=1).mean()
-        data[f'GBP_RUB_MA_{window}'] = data['GBP_RUB'].shift(1).rolling(window=window, min_periods=1).mean()
-    
-    # Разности (изменения за предыдущие периоды)
-    data['USD_RUB_change_1'] = data['USD_RUB'] - data['USD_RUB'].shift(1)
-    data['USD_RUB_change_3'] = data['USD_RUB'] - data['USD_RUB'].shift(3)
-    
-    # Удаляем строки с пропусками (из-за лагов)
-    data = data.dropna()
-    
-    return data
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-def get_feature_names():
-    """
-    Возвращает список всех признаков, используемых в модели (такая же функция как в train.py)
-    """
-    base_features = ['USD_RUB', 'EUR_RUB', 'GBP_RUB', 'day_of_week', 'is_weekend']
-    
-    lag_features = []
-    for lag in [1, 2, 3, 5, 7]:
-        for currency in ['USD_RUB', 'EUR_RUB', 'GBP_RUB']:
-            lag_features.append(f'{currency}_lag_{lag}')
-    
-    ma_features = []
-    for window in [3, 5, 7]:
-        for currency in ['USD_RUB', 'EUR_RUB', 'GBP_RUB']:
-            ma_features.append(f'{currency}_MA_{window}')
-    
-    change_features = ['USD_RUB_change_1', 'USD_RUB_change_3']
-    
-    all_features = base_features + lag_features + ma_features + change_features
-    return [f for f in all_features if f not in ['date', 'USD_RUB_target']]
+from src.preprocess import prepare_features, get_feature_names
 
 def load_test_data():
     """Загрузка и подготовка тестовых данных"""
     # Загружаем обработанные данные
     data = pd.read_csv('data/processed/processed.csv')
     data['date'] = pd.to_datetime(data['date'])
-    
+
     # Применяем ту же подготовку признаков, что и при обучении
     data = prepare_features(data)
-    
+
     # Получаем имена признаков
     try:
         feature_names = joblib.load('models/feature_names.joblib')
@@ -84,43 +34,43 @@ def load_test_data():
         # Если файл не существует, используем функцию для получения имен
         feature_names = get_feature_names()
         print("Использованы сгенерированные имена признаков")
-    
+
     # Проверяем, что все признаки существуют
     missing_features = [f for f in feature_names if f not in data.columns]
     if missing_features:
         print(f"Предупреждение: отсутствуют признаки: {missing_features}")
         # Используем только существующие признаки
         feature_names = [f for f in feature_names if f in data.columns]
-    
+
     # Проверяем наличие целевой переменной
     if 'USD_RUB_target' not in data.columns:
         raise KeyError("Целевая переменная 'USD_RUB_target' не найдена в данных")
-    
+
     # Используем те же признаки
     X = data[feature_names]
     y = data['USD_RUB_target']
-    
+
     # Берем последние 20% данных как тестовую выборку
     test_size = int(0.2 * len(data))
     X_test = X.iloc[-test_size:]
     y_test = y.iloc[-test_size:]
-    
+
     print(f"Тестовая выборка: {X_test.shape}")
     print(f"Признаки: {len(feature_names)}")
-    
+
     # Масштабируем
     scaler = joblib.load('models/scaler.joblib')
     X_test_scaled = scaler.transform(X_test)
-    
+
     return X_test_scaled, y_test, feature_names
 
 def generate_evaluation_report(model, X_test, y_test, model_name):
     """Генерация отчета с метриками"""
-    
+
     # Предсказания
     y_pred = model.predict(X_test)
     y_pred_proba = model.predict_proba(X_test)[:, 1]
-    
+
     # Вычисление метрик
     metrics = {
         'model_name': model_name,
@@ -140,7 +90,7 @@ def generate_evaluation_report(model, X_test, y_test, model_name):
             'class_1_ratio': float(sum(y_test == 1) / len(y_test))
         }
     }
-    
+
     # Confusion matrix
     cm = confusion_matrix(y_test, y_pred)
     metrics['confusion_matrix'] = {
@@ -149,11 +99,11 @@ def generate_evaluation_report(model, X_test, y_test, model_name):
         'false_negative': int(cm[1, 0]),
         'true_positive': int(cm[1, 1])
     }
-    
+
     # Classification report
     report = classification_report(y_test, y_pred, output_dict=True, zero_division=0)
     metrics['classification_report'] = report
-    
+
     return metrics, y_pred, y_pred_proba
 
 def save_json_report(metrics, output_path):
@@ -165,10 +115,10 @@ def save_json_report(metrics, output_path):
 def save_html_report(metrics, y_test, y_pred_proba, output_path):
     """Сохранение отчета в HTML с визуализациями"""
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    
+
     # Создаем визуализации
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 10))
-    
+
     # 1. Confusion Matrix
     cm = np.array([
         [metrics['confusion_matrix']['true_negative'], metrics['confusion_matrix']['false_positive']],
@@ -178,7 +128,7 @@ def save_html_report(metrics, y_test, y_pred_proba, output_path):
     ax1.set_title('Confusion Matrix')
     ax1.set_xlabel('Predicted')
     ax1.set_ylabel('Actual')
-    
+
     # 2. ROC Curve
     from sklearn.metrics import roc_curve
     fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
@@ -188,7 +138,7 @@ def save_html_report(metrics, y_test, y_pred_proba, output_path):
     ax2.set_ylabel('True Positive Rate')
     ax2.set_title('ROC Curve')
     ax2.legend()
-    
+
     # 3. Class Distribution
     classes = ['Class 0', 'Class 1']
     counts = [metrics['class_distribution']['class_0_count'], 
@@ -196,7 +146,7 @@ def save_html_report(metrics, y_test, y_pred_proba, output_path):
     ax3.bar(classes, counts, color=['skyblue', 'lightcoral'])
     ax3.set_title('Class Distribution')
     ax3.set_ylabel('Count')
-    
+
     # 4. Metrics Comparison
     metric_names = ['Accuracy', 'Precision', 'Recall', 'F1-Score']
     metric_values = [
@@ -209,11 +159,11 @@ def save_html_report(metrics, y_test, y_pred_proba, output_path):
     ax4.set_title('Model Metrics')
     ax4.set_ylabel('Score')
     ax4.set_ylim(0, 1)
-    
+
     plt.tight_layout()
     plt.savefig(output_path.replace('.html', '_plots.png'), dpi=300, bbox_inches='tight')
     plt.close()
-    
+
     # Создаем HTML отчет
     html_content = f"""
     <!DOCTYPE html>
@@ -258,64 +208,64 @@ def save_html_report(metrics, y_test, y_pred_proba, output_path):
     </body>
     </html>
     """
-    
+
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
 
 def main():
     """Основная функция оценки"""
     print("=== Model Evaluation ===")
-    
+
     # Создаем директорию для отчетов
     os.makedirs('reports', exist_ok=True)
-    
+
     try:
         # Загружаем тестовые данные
         print("Loading test data...")
         X_test, y_test, feature_names = load_test_data()
         print(f"Test set size: {X_test.shape}")
-        
+
         # Загружаем лучшую модель
         print("Loading best model...")
         model = joblib.load('models/best_model.joblib')
         model_name = type(model).__name__
         print(f"Model: {model_name}")
-        
+
         # Генерируем отчет
         print("Generating evaluation report...")
         metrics, y_pred, y_pred_proba = generate_evaluation_report(model, X_test, y_test, model_name)
-        
+
         # Сохраняем отчеты
         save_json_report(metrics, 'reports/eval.json')
         save_html_report(metrics, y_test, y_pred_proba, 'reports/eval.html')
-        
+
         # Логируем в MLflow
         print("Logging to MLflow...")
         mlflow.set_experiment("flight_delay")
-        
+
         with mlflow.start_run(run_name="evaluation"):
             # Логируем метрики
             for metric_name, metric_value in metrics['metrics'].items():
                 mlflow.log_metric(f"eval_{metric_name}", metric_value)
-            
+
             # Логируем отчеты как артефакты
             mlflow.log_artifact('reports/eval.json', artifact_path="evaluation")
             mlflow.log_artifact('reports/eval.html', artifact_path="evaluation")
             if os.path.exists('reports/eval_plots.png'):
                 mlflow.log_artifact('reports/eval_plots.png', artifact_path="evaluation")
-            
+
             # Логируем модель
             mlflow.sklearn.log_model(model, "evaluated_model")
-        
+
         print("=== Evaluation Complete ===")
         print(f"JSON report saved: reports/eval.json")
         print(f"HTML report saved: reports/eval.html")
-        
+
         # Выводим основные метрики
         print("\n=== Key Metrics ===")
         for metric, value in metrics['metrics'].items():
             print(f"{metric}: {value:.3f}")
-            
+
     except Exception as e:
         print(f"Error during evaluation: {e}")
         import traceback

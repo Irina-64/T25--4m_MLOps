@@ -11,3 +11,7 @@ seaborn
 fastapi
 uvicorn
 pydantic
+pytest
+pytest-cov
+requests
+httpx
