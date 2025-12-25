@@ -1,0 +1,8 @@
+project: durak_rl
+registry: data/registry.db
+provider: local
+
+offline_store:
+  type: file
+
+entity_key_serialization_version: 2
