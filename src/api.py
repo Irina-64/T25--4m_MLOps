@@ -5,7 +5,7 @@ import pandas as pd
 import uvicorn
 from fastapi import FastAPI, HTTPException
 
-from wrapper_classes import InferenceDelay, PredictRequest
+from .wrapper_classes import InferenceDelay, PredictRequest
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "4"
