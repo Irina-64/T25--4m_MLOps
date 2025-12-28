@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: currency-api-deployment
+  labels:
+    app: currency-api
+    version: lab10
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: currency-api
+  template:
+    metadata:
+      labels:
+        app: currency-api
+        version: lab10
+    spec:
+      containers:
+      - name: currency-api
+        image: currency-api:lab10
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: MLFLOW_TRACKING_URI
+          value: "http://mlflow-service:5000"
+        - name: MODEL_PATH
+          value: "/app/models"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 20
+---
+# Конфигурация для моделей (ConfigMap)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: currency-api-config
+data:
+  log_level: "INFO"
+  model_files: "best_model.joblib,scaler.joblib,feature_names.joblib"
