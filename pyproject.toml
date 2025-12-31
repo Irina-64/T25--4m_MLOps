@@ -1,0 +1,90 @@
+[project]
+name = "t25-4m-mlop"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "apache-airflow>=3.1.5",
+    "category-encoders>=2.9.0",
+    "dvc>=3.65.0",
+    "fastapi>=0.117.1",
+    "feast>=0.47.0",
+    "holidays>=0.87",
+    "joblib>=1.5.3",
+    "matplotlib>=3.10.8",
+    "mlflow>=3.4.0",
+    "numpy>=1.26.4",
+    "pandas>=2.3.3",
+    "prometheus-client>=0.23.1",
+    "seaborn>=0.13.2",
+    "uvicorn>=0.40.0",
+    "tensorflow>=2.18.1",
+    "pytest>=9.0.2",
+]
+
+[dependency-groups]
+dev = [
+    "black>=25.12.0",
+    "isort>=7.0.0",
+    "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
+    "ruff>=0.14.9",
+    "pandas-stubs>=2.3.3.251201",
+    "types-seaborn>=0.13.2.20251214",
+    "types-pyyaml>=6.0.12.20250915",
+    "types-tensorflow>=2.18.0.20251008",
+    "types-protobuf>=6.32.1.20251210",
+    "git-filter-repo>=2.47.0",
+    "types-requests>=2.32.4.20250913",
+    "pip>=25.3",
+]
+docker = [
+    "fastapi>=0.117.1",
+    "joblib>=1.5.3",
+    "numpy>=1.26.4",
+    "pandas>=2.3.3",
+    "pydantic>=2.12.5",
+    "tensorflow>=2.18.1",
+    "uvicorn>=0.40.0",
+]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+strict_optional = true
+plugins = []
+exclude = [
+  "data/",
+  "models/",
+  "notebooks/",
+]
+
+[mypy."mlflow.*"]
+ignore_errors = true
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # bugbear
+    "UP", # pyupgrade
+]
+ignore = ["E501"]
