@@ -205,3 +205,21 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# DVC remote storage
+dvc_remote/
+mlruns/
+models/
+
+
+# Airflow logs
+airflow/logs/
+
+tt.py
+
+prepare_for_feast.py
+data/processed/processed_for_feast.csv
+
+# .gitignore
+minikube.exe
+minikube-linux-amd64
